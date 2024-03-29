@@ -9,27 +9,33 @@ def make_request():
     global session
     # Crear un objeto de sesión
     
+    # Mensaje a enviar
+    mensaje = 'Hola, este es un mensaje enviado desde el cliente Python.'
+
+    # Crear el cuerpo de la solicitud POST con el mensaje
+    payload = {'mensaje': mensaje}  
+    
     # Realizar una solicitud GET al servidor
-    response = session.get(SERVER_URL)
+    response = session.post(SERVER_URL, data=payload)
+
+    # Imprimir la respuesta del servidor
+    print("Respuesta del servidor:")
+    print(response.text)
+    
+     # Mensaje a enviar
+    mensaje = 'Hola, este es el segundo mensaje enviado desde el cliente Python.'
+
+    # Crear el cuerpo de la solicitud POST con el mensaje
+    payload = {'mensaje': mensaje}  
+    
+    # Realizar una solicitud GET al servidor
+    response = session.post(SERVER_URL, data=payload)
 
     # Imprimir la respuesta del servidor
     print("Respuesta del servidor:")
     print(response.text)
 
- 
-    # Realizar una nueva solicitud GET al servidor para verificar que mantiene la sesión
-    response = session.get(SERVER_URL)
 
-    # Imprimir la respuesta del servidor
-    print("\nRespuesta del servidor (segunda solicitud):")
-    print(response.text)
-
-     # Realizar una nueva solicitud GET al servidor para verificar que mantiene la sesión
-    response = session.get(SERVER_URL)
-
-    # Imprimir la respuesta del servidor
-    print("\nRespuesta del servidor (tercera solicitud):")
-    print(response.text)
 
 if __name__ == '__main__':
     # Realizar una solicitud al servidor Flask
