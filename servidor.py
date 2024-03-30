@@ -1,6 +1,7 @@
 from flask import Flask, session, request
 import uuid
 
+
 app = Flask(__name__)
 app.secret_key = 'tu_clave_secreta'
 
@@ -59,6 +60,29 @@ def index():
         mensajes = estado.get('mensajes', [])
 
         return 'ID de usuario: {}. Mensajes del cliente: {}'.format(user_id, mensajes)
+
+
+@app.route('/subir_mp3', methods=['POST'])
+def subir_mp3():
+    # Verificar si se envió un archivo de audio
+    if 'mp3_file' not in request.files:
+        return 'No se ha enviado ningún archivo MP3.'
+    
+    mp3 = request.files['mp3_file']
+
+    # Verificar si se seleccionó un archivo
+    if mp3.filename == '':
+        return 'No se ha seleccionado ningún archivo MP3.'
+    
+    # Guardar el archivo MP3 en el servidor
+    mp3.save('archivo_recibido.mp3')
+
+    return 'El archivo MP3 ha sido recibido correctamente.'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
