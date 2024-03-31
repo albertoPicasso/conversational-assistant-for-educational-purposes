@@ -64,6 +64,12 @@ def index():
 
 @app.route('/subir_mp3', methods=['POST'])
 def subir_mp3():
+    # Obtener o generar un identificador de sesión para el cliente
+    if 'user_id' not in session:
+        session['user_id'] = str(uuid.uuid4())  # Genera un UUID único
+
+    user_id = session['user_id']
+
     # Verificar si se envió un archivo de audio
     if 'mp3_file' not in request.files:
         return 'No se ha enviado ningún archivo MP3.'
@@ -77,12 +83,12 @@ def subir_mp3():
     # Guardar el archivo MP3 en el servidor
     mp3.save('archivo_recibido.mp3')
 
-    return 'El archivo MP3 ha sido recibido correctamente.'
+    print(user_id)
+
+    return 'El archivo MP3 ha sido recibido correctamente. Usuario: {}'.format(user_id)
 
 if __name__ == '__main__':
     app.run(debug=True)
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True)

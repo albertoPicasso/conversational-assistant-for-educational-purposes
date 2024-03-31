@@ -5,10 +5,17 @@ import queue
 import os 
 import pyaudio
 import wave
+import requests
 
 
+#server = Servidor()
 
-server = Servidor()
+# URL del servidor Flask
+SERVER_URL = 'http://localhost:5000'
+
+# Crear un objeto de sesión para mantener la sesión entre solicitudes
+session = requests.Session()
+
 
 #Set audio parameters 
 FORMAT = pyaudio.paInt16    # Audio Data format (16 bits)
@@ -30,7 +37,7 @@ p = pyaudio.PyAudio()
 frames = []
 
 #Audio name
-filename = "Entrada.mp3"
+filename = "Entrada.wav"
 
 #Queue for threads communication
 q = queue.Queue()
@@ -76,8 +83,9 @@ def on_release(key):
             q.put(True)
             # Wait to stop saving audio
             sem.acquire()
-            name = server.launch(filename)
-            playAudio(name)
+            #name = server.launch(filename)
+            #playAudio(name)
+            send_wav()
             recording = False
             sem2.release()
         except Exception as e:
@@ -156,7 +164,16 @@ def playAudio(audio):
 
 
 
+def send_wav():
+    global session
+    url_servidor = SERVER_URL + "/subir_mp3"
 
+    with open(filename, 'rb') as archivo:
+        archivos = {'mp3_file': (filename, archivo, 'audio/mp3')}
+        respuesta = session.post(url_servidor, files=archivos)
+
+    print(respuesta.text)
+    
 
 
 # Set the listener
