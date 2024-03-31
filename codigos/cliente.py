@@ -8,7 +8,7 @@ import wave
 import requests
 
 
-#server = Servidor()
+server = Servidor()
 
 # URL del servidor Flask
 SERVER_URL = 'http://localhost:5000'
@@ -83,9 +83,9 @@ def on_release(key):
             q.put(True)
             # Wait to stop saving audio
             sem.acquire()
-            #name = server.launch(filename)
-            #playAudio(name)
-            send_wav()
+            name = server.launch(filename)
+            playAudio(name)
+            #send_wav()
             recording = False
             sem2.release()
         except Exception as e:
@@ -175,10 +175,19 @@ def send_wav():
     print(respuesta.text)
     
 
+def register_user():
+    global session
+    # Realizar una solicitud POST al servidor
+    response = session.get(SERVER_URL)
+
+    # Imprimir la respuesta del servidor
+    print("Respuesta del servidor:")
+    print(response.text)
 
 # Set the listener
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     os.system("clear")
+    register_user()
     print("Listo!")
     listener.join() 
  
