@@ -169,7 +169,7 @@ def send_wav():
     url_servidor = SERVER_URL + "/subir_mp3"
 
     with open(filename, 'rb') as archivo:
-        archivos = {'mp3_file': (filename, archivo, 'audio/mp3')}
+        archivos = {'wav_file': (filename, archivo, 'audio/mp3')}
         respuesta = session.post(url_servidor, files=archivos)
 
     print(respuesta.text)

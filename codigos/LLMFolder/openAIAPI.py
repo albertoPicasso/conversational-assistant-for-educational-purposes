@@ -32,8 +32,14 @@ class OpenAIAPI(LlmInterface):
         Returns:
             str : The LLM response
         """
+        # Create messages array to make a request with format ["role": rolemessage , "content": contentmessage }]
+        request_messages = []
+        for message in chat: 
+            request_messages.append({"role": message[0], "content": message[1]})
+        
+        #ask model
         chat_completion = self.client.chat.completions.create(
-            messages= chat,
+            messages= request_messages,
             model=self.model,
         )
 
