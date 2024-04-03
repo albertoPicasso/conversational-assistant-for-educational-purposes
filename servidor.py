@@ -1,4 +1,4 @@
-from flask import Flask, session, request
+from flask import Flask, session, request, send_file
 import uuid
 from codigos.STTFolder.localWhisper import LocalWhisper
 from codigos.STTFolder.remoteWhisper import RemoteWhisper
@@ -7,6 +7,7 @@ from codigos.TTSFolder.coquiTTS import CoquiTTS
 from codigos.TTSFolder.openAITTS import OpenAITTS
 import os
 from openai import OpenAI
+from pydub import AudioSegment
 
 class Servidor:
     def __init__(self):
@@ -33,7 +34,7 @@ class Servidor:
         #TTS
         #self.TTS = OpenAITTS("onyx")
 
-
+#--------------------------------------------------------------------------------·
         ##Local services
         ##STT
         self.modelSize = "small"
@@ -104,12 +105,12 @@ class Servidor:
         if 'wav_file' not in request.files:
             return 'No se ha enviado ningún archivo Wav.'
         
-        mp3 = request.files['wav_file']
+        wav = request.files['wav_file']
 
-        if mp3.filename == '':
+        if wav.filename == '':
             return 'No se ha seleccionado ningún archivo wav.'
         
-        mp3.save(filename)
+        wav.save(filename)
         #Trasncribe
         text = self.STT.transcribe(filename)
         state = session['estado']
@@ -122,9 +123,11 @@ class Servidor:
         response = self.LLM.request_to_llm(messages_list)
         state = self.addMessageToChat(response, "assistant", state )
         outname = self.TTS.speak(response)
-        print(response)
+        
+        return send_file(outname, mimetype="application/octet-stream")
+        
 
-        return 'El archivo MP3 ha sido recibido correctamente. Usuario: {}'.format(user_id)
+        #return 'El archivo MP3 ha sido recibido correctamente. Usuario: {}'.format(user_id)
 
     def run(self, debug=False):
         self.app.run(debug=debug)

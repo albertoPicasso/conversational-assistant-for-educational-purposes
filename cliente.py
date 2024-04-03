@@ -84,8 +84,8 @@ def on_release(key):
             # Wait to stop saving audio
             sem.acquire()
             #name = server.launch(filename)
-            #playAudio(name)
-            send_wav()
+            name = send_wav()
+            playAudio(name)
             recording = False
             sem2.release()
         except Exception as e:
@@ -167,12 +167,15 @@ def playAudio(audio):
 def send_wav():
     global session
     url_servidor = SERVER_URL + "/subir_mp3"
+    audioname = "AudioEnCliente.wav"
 
     with open(filename, 'rb') as archivo:
         archivos = {'wav_file': (filename, archivo, 'audio/mp3')}
         respuesta = session.post(url_servidor, files=archivos)
+        with open(audioname, 'wb') as archivo_local:
+            archivo_local.write(respuesta.content)
 
-    print(respuesta.text)
+    return audioname
     
 
 def register_user():

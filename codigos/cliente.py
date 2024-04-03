@@ -187,7 +187,7 @@ def register_user():
 # Set the listener
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     os.system("clear")
-    register_user()
+    #register_user()
     print("Listo!")
     listener.join() 
  

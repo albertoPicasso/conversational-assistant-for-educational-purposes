@@ -34,9 +34,10 @@ class Servidor:
         self.STT = LocalWhisper(self.modelSize)
         
         ##LLM
-        #self.client = OpenAI(base_url="http://192.168.1.135:1234/v1", api_key="lm-studio") 
-        #self.model = "local-model"
-
+        self.client = OpenAI(base_url="http://192.168.0.13:1234/v1", api_key="lm-studio") 
+        self.model = "local-model"
+        #self.LLM = OpenAIAPI(self.client, self.model)
+        
         #TTS
         self.TTS = CoquiTTS("tts_models/es/css10/vits")
          
@@ -49,8 +50,8 @@ class Servidor:
 
         self.addMessageToChat(text, "user")
 
-        request_mesagges = self.addMessagesToPetition()
-        response = self.LLM.request_to_llm(request_mesagges)
+        ##request_mesagges = self.addMessagesToPetition()
+        response = self.LLM.request_to_llm(self.chat)
         self.addMessageToChat(response, "assistant" )
         os.system("clear")
         self.printAllChat()
