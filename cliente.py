@@ -166,31 +166,63 @@ def playAudio(audio):
 
 def send_wav():
     global session
-    url_servidor = SERVER_URL + "/subir_mp3"
+    url_servidor = SERVER_URL + "/upload_wav"
     audioname = "AudioEnCliente.wav"
-
-    with open(filename, 'rb') as archivo:
-        archivos = {'wav_file': (filename, archivo, 'audio/mp3')}
-        respuesta = session.post(url_servidor, files=archivos)
-        with open(audioname, 'wb') as archivo_local:
-            archivo_local.write(respuesta.content)
-
-    return audioname
+    try:
+        with open(filename, 'rb') as archivo:
+            file = {'wav_file': (filename, archivo, 'audio/mp3')}
+            response = session.post(url_servidor, files=file)
+            
+            if response.status_code == 200:
+                print('Success')
+                with open(audioname, 'wb') as archivo_local:
+                    archivo_local.write(response.content)
+                    return audioname
+            elif response.status_code == 401:
+                print('User should be registered')
+            elif response.status_code == 404:
+                print('No audio wav received or selected')
+            elif response.status_code == 500:
+                print('Internal server error')
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+    return None
     
 
 def register_user():
+    '''
+    Attempts to connect to the server 3 times, if unsuccessful, it returns False.
+    '''
     global session
-    # Realizar una solicitud POST al servidor
-    response = session.get(SERVER_URL)
+    flag = False
+    counter = 0
 
-    # Imprimir la respuesta del servidor
-    print("Respuesta del servidor:")
-    print(response.text)
+    while (counter < 3):
+        try:
+            response = session.get(SERVER_URL)
+            if response.status_code == 200:
+                print("Register Success:")
+                print(response.text)
+                return True
+            elif response.status_code == 500:
+                    print('Unable to register')
+                    print('Retrying to establish connection: {}/2'.format(counter))
+                    counter += 1 
+        except requests.exceptions.ConnectionError:
+            print("Unable to connect.")
+            print('Retrying to establish connection: {}/2'.format(counter))
+            counter += 1 
+
+    return False
 
 # Set the listener
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     os.system("clear")
-    register_user()
+    registerSuccess = register_user()
+    
+    if registerSuccess is False: 
+        exit (-1)
+        
     print("Listo!")
     listener.join() 
  

@@ -14,15 +14,15 @@ class Servidor:
         ##Server configs
         self.app = Flask(__name__)
         self.app.secret_key = 'tu_clave_secreta'
-        self.app.add_url_rule('/', 'index', self.index, methods=['GET', 'POST'])
-        self.app.add_url_rule('/subir_mp3', 'subir_mp3', self.subir_mp3, methods=['POST'])
-        
+        ## Adding rules
+        self.app.add_url_rule('/', 'register_user', self.register_user, methods=['GET'])
+        self.app.add_url_rule('/upload_wav', 'upload_wav', self.upload_wav, methods=['POST'])
+        self.app.add_url_rule('/ping', 'ping', self.ping, methods=['GET'])
         ## Server variables
         self.systemMessage = "asistente tan simpatico "#"You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 3 questions. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Not everyone can be a B2. Look the tenses, the complexiti of the phrases. Please be more accurate Speak every time in spanish."
 
         ##Interface Configs
-
-        #Online services
+#--------------------REMOTE------------------------------------------·#
         self.client = OpenAI(api_key=os.getenv("OPENAIKEY"), base_url="https://api.openai.com/v1")
         ##STT        
         #self.STT = RemoteWhisper("whisper-1", self.client)
@@ -34,8 +34,7 @@ class Servidor:
         #TTS
         #self.TTS = OpenAITTS("onyx")
 
-#--------------------------------------------------------------------------------·
-        ##Local services
+#--------------------LOCAL------------------------------------------·#
         ##STT
         self.modelSize = "small"
         self.STT = LocalWhisper(self.modelSize)
@@ -47,90 +46,93 @@ class Servidor:
         #TTS
         self.TTS = CoquiTTS("tts_models/es/css10/vits")
 
-    def index(self):
-        '''
-        if request.method == 'POST':
 
-            mensaje = request.form['mensaje']
-
+    def register_user(self):
+        try:
+            # Give a user_id if user is not registered
             if 'user_id' not in session:
                 session['user_id'] = str(uuid.uuid4())
             user_id = session['user_id']
-
-            if 'estado' not in session:
-                session['estado'] = {}
-            estado = session['estado']
-
-            if 'mensajes' not in estado:
-                estado['mensajes'] = []
-            estado['mensajes'].append(mensaje)
             
-            session['estado'] = estado
-
-            lista_mensajes = estado['mensajes']
-            print('Lista de mensajes del cliente (ID {}):'.format(user_id))
-            for mensaje in lista_mensajes:
-                print(mensaje)
-
-            return 'Mensaje almacenado correctamente.'
-        '''
-        if request.method == 'GET':
-
-            if 'user_id' not in session:
-                session['user_id'] = str(uuid.uuid4())
-            user_id = session['user_id']
-
+            # Create a "estado" variable in session object
             if 'estado' not in session:
                 session['estado'] = {}
             state = session['estado']
 
+            # Create a "mensajes" array in estado
             if 'mensajes' not in state:
                 state['mensajes'] = []
 
+            # Add system message to user chat
             state = self.addMessageToChat(self.systemMessage, "system", state)
 
+            # Save state in session
             session['estado'] = state
-            mensajes = state.get('mensajes', [])
 
-            return 'ID de usuario: {}. Mensajes del cliente: {}'.format(user_id, mensajes)
+            return 'User {} registered successfully.'.format(user_id), 200
 
-    def subir_mp3(self):
+        except Exception as e:
+            # Manejo de excepciones genérico
+            return 'Error registering user: {}'.format(str(e)), 500
 
-        filename = 'EntradaServer.wav'
+  
+    def upload_wav(self):
+        # Check if user is authenticated
         if 'user_id' not in session:
-            return 'Mensaje enviado y añadido a la conversación', 200
-        
+            return 'User not registered', 401
+
+        # Get user ID
         user_id = session['user_id']
-        ##
+
+        # Check if a WAV file is provided in the request
         if 'wav_file' not in request.files:
-            return 'No se ha enviado ningún archivo Wav.'
-        
+            return 'No file sent', 404
+
+        # Get the sent WAV file
         wav = request.files['wav_file']
 
+        # Check if a WAV file is selected
         if wav.filename == '':
-            return 'No se ha seleccionado ningún archivo wav.'
-        
+            return 'No WAV selected.', 404
+
+        # Save the received file on the server
+        filename = 'EntradaServer.wav'
         wav.save(filename)
-        #Trasncribe
-        text = self.STT.transcribe(filename)
-        state = session['estado']
 
-        ##In a server chat is estado
-        state = self.addMessageToChat(text, "user", state)
-        session['estado'] = state
-        self.printAllChat(state)
-        messages_list = state['mensajes']
-        response = self.LLM.request_to_llm(messages_list)
-        state = self.addMessageToChat(response, "assistant", state )
-        outname = self.TTS.speak(response)
-        
-        return send_file(outname, mimetype="application/octet-stream")
-        
+        try:
+            # Transcribe the WAV file
+            text = self.STT.transcribe(filename)
 
-        #return 'El archivo MP3 ha sido recibido correctamente. Usuario: {}'.format(user_id)
+            # Get session state
+            state = session.get('estado', {})
 
+            # Add user message to chat
+            state = self.addMessageToChat(text, "user", state)
+
+            # Ask to language model
+            messages_list = state['mensajes']
+            response = self.LLM.request_to_llm(messages_list)
+
+            # Add assistant response to chat
+            state = self.addMessageToChat(response, "assistant", state)
+
+            # Generate audio WAV
+            outname = self.TTS.speak(response)
+
+            # Update session state
+            session['estado'] = state
+
+            # Return the audio file
+            return send_file(outname, mimetype="application/octet-stream")
+
+        except Exception as e:
+            # Handle unexpected errors
+            return f"An error occurred: {str(e)}", 500
+      
+    
     def run(self, debug=False):
         self.app.run(debug=debug)
+
 
     ## # Add new messages to session['mensajes'] whit format [role,message]
     def addMessageToChat(self, message, role, state):
@@ -140,8 +142,7 @@ class Servidor:
         - role (str): The role of the participant sending the message (e.g., 'user', 'assistant', etc.).
         - chat (list): The conversation history to which the message will be added.
         - state (session): The state of this client on server
-        Returns:
-        None
+        Returns: modified state
         """
         message_entry = [role, message]
         state['mensajes'].append(message_entry)
@@ -161,8 +162,8 @@ class Servidor:
         for mensaje in lista_mensajes:
             print(mensaje)
 
-    def sayHI(self): 
-        print("Hi from server")
+    def ping(self): 
+        return "pong"
 
 if __name__ == '__main__':
     servidor = Servidor()
