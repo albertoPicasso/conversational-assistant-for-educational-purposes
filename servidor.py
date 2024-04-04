@@ -7,7 +7,6 @@ from codigos.TTSFolder.coquiTTS import CoquiTTS
 from codigos.TTSFolder.openAITTS import OpenAITTS
 import os
 from openai import OpenAI
-from pydub import AudioSegment
 
 class Servidor:
     def __init__(self):
@@ -68,6 +67,8 @@ class Servidor:
 
             # Save state in session
             session['estado'] = state
+            
+            self.createUserDirectory(user_id)
 
             return 'User {} registered successfully.'.format(user_id), 200
 
@@ -95,13 +96,14 @@ class Servidor:
         if wav.filename == '':
             return 'No WAV selected.', 404
 
-        # Save the received file on the server
-        filename = 'EntradaServer.wav'
-        wav.save(filename)
+        # Save the received file in client folder in server
+        filename = 'inputServ.wav'
+        path = os.path.join(os.getcwd(), user_id, filename)
+        wav.save(path)
 
         try:
             # Transcribe the WAV file
-            text = self.STT.transcribe(filename)
+            text = self.STT.transcribe(path)
 
             # Get session state
             state = session.get('estado', {})
@@ -117,7 +119,8 @@ class Servidor:
             state = self.addMessageToChat(response, "assistant", state)
 
             # Generate audio WAV
-            outname = self.TTS.speak(response)
+            outname = self.TTS.speak(response, user_id)
+            #self.printAllChat(state)
 
             # Update session state
             session['estado'] = state
@@ -131,7 +134,7 @@ class Servidor:
       
     
     def run(self, debug=False):
-        self.app.run(debug=debug)
+        self.app.run(debug=debug,host='0.0.0.0', port=5000)
 
 
     ## # Add new messages to session['mensajes'] whit format [role,message]
@@ -164,6 +167,17 @@ class Servidor:
 
     def ping(self): 
         return "pong"
+    
+    def createUserDirectory(self, name):
+    
+        #Path to new directory / folder
+        path_to_directory = os.path.join(os.getcwd(), name)
+
+        #Create directory
+        
+        os.mkdir(path_to_directory)
+        print(f"The directory'{name}' has been created successfully")
+        
 
 if __name__ == '__main__':
     servidor = Servidor()

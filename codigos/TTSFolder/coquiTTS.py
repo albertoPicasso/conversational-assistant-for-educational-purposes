@@ -1,6 +1,7 @@
 from .ttsInterface import TtsInterface
 import torch
 from TTS.api import TTS
+import os 
 
 ## CoquiTTS Implementation for Text-to-Speech (TTS)
 
@@ -28,7 +29,7 @@ class CoquiTTS(TtsInterface):
         self.model = model
         self.TTS = TTS(model_name=self.model).to(self.device)
 
-    def speak(self, text: str) -> str:
+    def speak(self, text: str, uid: str) -> str:
         """
         Converts text to speech using the Coqui TTS model and saves the audio to a file.
 
@@ -41,9 +42,9 @@ class CoquiTTS(TtsInterface):
 
         # Define the output filename
         name = "salida.wav"  # "salida" means "output" in Spanish
-
+        path = os.path.join(os.getcwd(), uid, name)
         # Perform text-to-speech synthesis and save audio
-        self.TTS.tts_to_file(text=text, file_path=name, speed=1.2, split_sentences=False)
+        self.TTS.tts_to_file(text=text, file_path=path, speed=1.2, split_sentences=False)
 
         # Return the filename of the generated audio
-        return name
+        return path

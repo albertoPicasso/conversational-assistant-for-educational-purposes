@@ -1,4 +1,3 @@
-from servidor import Servidor
 from pynput import keyboard 
 import threading
 import queue
@@ -11,7 +10,7 @@ import requests
 #server = Servidor()
 
 # URL del servidor Flask
-SERVER_URL = 'http://localhost:5000'
+SERVER_URL = 'http://192.168.0.16:5000'
 
 # Crear un objeto de sesión para mantener la sesión entre solicitudes
 session = requests.Session()
@@ -37,7 +36,7 @@ p = pyaudio.PyAudio()
 frames = []
 
 #Audio name
-filename = "Entrada.wav"
+filename = "input.wav"
 
 #Queue for threads communication
 q = queue.Queue()
@@ -85,11 +84,15 @@ def on_release(key):
             sem.acquire()
             #name = server.launch(filename)
             name = send_wav()
+            if (name == 'fail'):
+                print("Error en la recepcion del audio")
+                exit (-1)
             playAudio(name)
             recording = False
             sem2.release()
         except Exception as e:
             print(f"Ocurrió un error soltando la tecla: {e}")
+            pass
 
 def audioRecord(): 
     global recording
@@ -118,10 +121,6 @@ def audioRecord():
         except queue.Empty:
             pass
     
-
-
-
-
 def openStream(): 
     global stream
     try:
@@ -167,7 +166,7 @@ def playAudio(audio):
 def send_wav():
     global session
     url_servidor = SERVER_URL + "/upload_wav"
-    audioname = "AudioEnCliente.wav"
+    audioname = "outputClient.wav"
     try:
         with open(filename, 'rb') as archivo:
             file = {'wav_file': (filename, archivo, 'audio/mp3')}
@@ -175,6 +174,7 @@ def send_wav():
             
             if response.status_code == 200:
                 print('Success')
+                #Save received audio
                 with open(audioname, 'wb') as archivo_local:
                     archivo_local.write(response.content)
                     return audioname
@@ -184,9 +184,10 @@ def send_wav():
                 print('No audio wav received or selected')
             elif response.status_code == 500:
                 print('Internal server error')
+                print(response.text)
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-    return None
+        return "fail"
     
 
 def register_user():
@@ -206,6 +207,7 @@ def register_user():
                 return True
             elif response.status_code == 500:
                     print('Unable to register')
+                    print(response.text)
                     print('Retrying to establish connection: {}/2'.format(counter))
                     counter += 1 
         except requests.exceptions.ConnectionError:
@@ -215,11 +217,20 @@ def register_user():
 
     return False
 
+def clear_screen():
+    if os.name == 'posix':  # Para sistemas Unix/Linux
+        os.system('clear')
+    elif os.name == 'nt':  # Para Windows
+        os.system('cls')
+    else:
+        # Sistema operativo no compatible
+        pass 
+
 # Set the listener
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
-    os.system("clear")
-    registerSuccess = register_user()
-    
+    clear_screen()
+
+    registerSuccess = register_user()    
     if registerSuccess is False: 
         exit (-1)
         
