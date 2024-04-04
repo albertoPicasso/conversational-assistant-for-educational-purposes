@@ -36,11 +36,12 @@ class OpenAIAPI(LlmInterface):
         request_messages = []
         for message in chat: 
             request_messages.append({"role": message[0], "content": message[1]})
-        
+
         #ask model
         chat_completion = self.client.chat.completions.create(
             messages= request_messages,
             model=self.model,
         )
-
+        # if the request fail throw an exception and will be catched at the top funcion
+        #Docu here --- https://platform.openai.com/docs/guides/error-codes
         return chat_completion.choices[0].message.content

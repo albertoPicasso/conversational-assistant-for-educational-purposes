@@ -32,6 +32,10 @@ class RemoteWhisper(AudioInterface):
         Returns:
             str: The transcribed text from the audio file.
         """
+
+        # if the request fail throw an exception and will be catched at the top funcion
+        #Docu here --- https://platform.openai.com/docs/guides/error-codes
+        
         audio_file= open(filename ,"rb")
 
         transcription = self.client.audio.transcriptions.create(

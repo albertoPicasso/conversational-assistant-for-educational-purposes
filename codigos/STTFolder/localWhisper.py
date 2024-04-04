@@ -35,11 +35,14 @@ class LocalWhisper(AudioInterface):
         Returns:
             str: The transcribed text from the audio file.
         """
+        
+        #If something flails trhow an exception that will be catched a top level
         # Load the Whisper model onto the chosen device (CPU or GPU)
         model = whisper.load_model(self.model, self.device)
 
         # Transcribe the audio file
         result = model.transcribe(audio=filename)
+        
 
         # Return the transcribed text
         return result["text"]

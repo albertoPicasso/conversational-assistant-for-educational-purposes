@@ -17,6 +17,7 @@ class Servidor:
         self.app.add_url_rule('/', 'register_user', self.register_user, methods=['GET'])
         self.app.add_url_rule('/upload_wav', 'upload_wav', self.upload_wav, methods=['POST'])
         self.app.add_url_rule('/ping', 'ping', self.ping, methods=['GET'])
+        self.app.add_url_rule('/logout', 'logout', self.logout, methods=['GET'])
         ## Server variables
         self.systemMessage = "asistente tan simpatico "#"You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 3 questions. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Not everyone can be a B2. Look the tenses, the complexiti of the phrases. Please be more accurate Speak every time in spanish."
 
@@ -78,30 +79,30 @@ class Servidor:
 
   
     def upload_wav(self):
-        # Check if user is authenticated
-        if 'user_id' not in session:
-            return 'User not registered', 401
-
-        # Get user ID
-        user_id = session['user_id']
-
-        # Check if a WAV file is provided in the request
-        if 'wav_file' not in request.files:
-            return 'No file sent', 404
-
-        # Get the sent WAV file
-        wav = request.files['wav_file']
-
-        # Check if a WAV file is selected
-        if wav.filename == '':
-            return 'No WAV selected.', 404
-
-        # Save the received file in client folder in server
-        filename = 'inputServ.wav'
-        path = os.path.join(os.getcwd(), user_id, filename)
-        wav.save(path)
-
         try:
+            # Check if user is authenticated
+            if 'user_id' not in session:
+                return 'User not registered', 401
+
+            # Get user ID
+            user_id = session['user_id']
+
+            # Check if a WAV file is provided in the request
+            if 'wav_file' not in request.files:
+                return 'No file sent', 404
+
+            # Get the sent WAV file
+            wav = request.files['wav_file']
+
+            # Check if a WAV file is selected
+            if wav.filename == '':
+                return 'No WAV selected.', 404
+
+            # Save the received file in client folder in server
+            filename = 'inputServ.wav'
+            path = os.path.join(os.getcwd(), user_id, filename)
+            wav.save(path)
+
             # Transcribe the WAV file
             text = self.STT.transcribe(path)
 
@@ -133,6 +134,24 @@ class Servidor:
             return f"An error occurred: {str(e)}", 500
       
     
+    def logout(self):
+       
+        try:
+            if 'user_id' in session:
+                user_id = session['user_id']
+                session.pop('user_id')
+            
+            # Remove client directory 
+            os.system(f'rm -rf {user_id}')
+            print(f"Carpeta {user_id} y su contenido han sido eliminados exitosamente.")
+            return 'Logout successfully.', 200
+                
+        except Exception as e:
+            print(f"Error al intentar borrar la carpeta {user_id}: {e}")
+            return f"An error occurred: {str(e)}", 500
+
+
+        
     def run(self, debug=False):
         self.app.run(debug=debug,host='0.0.0.0', port=5000)
 
@@ -174,7 +193,6 @@ class Servidor:
         path_to_directory = os.path.join(os.getcwd(), name)
 
         #Create directory
-        
         os.mkdir(path_to_directory)
         print(f"The directory'{name}' has been created successfully")
         

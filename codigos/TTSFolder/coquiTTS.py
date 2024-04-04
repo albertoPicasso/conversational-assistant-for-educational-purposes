@@ -39,9 +39,9 @@ class CoquiTTS(TtsInterface):
         Returns:
             str: The filename of the generated audio file.
         """
-
+        # if the request fail throw an exception and will be catched at the top funcion
         # Define the output filename
-        name = "salida.wav"  # "salida" means "output" in Spanish
+        name = "output.wav"  
         path = os.path.join(os.getcwd(), uid, name)
         # Perform text-to-speech synthesis and save audio
         self.TTS.tts_to_file(text=text, file_path=path, speed=1.2, split_sentences=False)
