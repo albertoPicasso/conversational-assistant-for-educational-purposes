@@ -1,10 +1,10 @@
 from flask import Flask, session, request, send_file
 import uuid
-from codigos.STTFolder.localWhisper import LocalWhisper
-from codigos.STTFolder.remoteWhisper import RemoteWhisper
-from codigos.LLMFolder.openAIAPI import OpenAIAPI
-from codigos.TTSFolder.coquiTTS import CoquiTTS
-from codigos.TTSFolder.openAITTS import OpenAITTS
+from STTFolder.localWhisper import LocalWhisper
+from STTFolder.remoteWhisper import RemoteWhisper
+from LLMFolder.openAIAPI import OpenAIAPI
+from TTSFolder.coquiTTS import CoquiTTS
+from TTSFolder.openAITTS import OpenAITTS
 import os
 from openai import OpenAI
 
