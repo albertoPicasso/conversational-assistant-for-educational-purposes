@@ -5,15 +5,21 @@ import os
 import pyaudio
 import wave
 import requests
+from server_requests import Server_requests 
+
 
 
 #server = Servidor()
 
-# URL del servidor Flask
+# Object needed to request to server
 SERVER_URL = 'http://192.168.0.16:5000'
-
-# Crear un objeto de sesión para mantener la sesión entre solicitudes
 session = requests.Session()
+
+
+#Object to serverRequest
+sr = Server_requests(SERVER_URL, session)
+
+
 
 
 #Set audio parameters 
@@ -65,7 +71,7 @@ def on_press(key):
     
     if key == keyboard.KeyCode.from_char('s'): 
         try:
-            logout()
+            sr.logout()
             listener.stop()
             p.terminate
             exit(0)   
@@ -84,7 +90,7 @@ def on_release(key):
             # Wait to stop saving audio
             sem.acquire()
             #name = server.launch(filename)
-            name = send_wav()
+            name = sr.send_wav(filename)
             if (name == 'fail'):
                 print("Error en la recepcion del audio")
                 exit (-1)
@@ -96,77 +102,6 @@ def on_release(key):
             pass
 
 
-
-
-
-def register_user():
-    '''
-    Attempts to connect to the server 3 times, if unsuccessful, it returns False.
-    '''
-    global session
-    flag = False
-    counter = 0
-
-    while (counter < 3):
-        try:
-            response = session.get(SERVER_URL)
-            if response.status_code == 200:
-                print("Register Success:")
-                print(response.text)
-                return True
-            elif response.status_code == 500:
-                    print('Unable to register')
-                    print(response.text)
-                    print('Retrying to establish connection: {}/2'.format(counter))
-                    counter += 1 
-        except requests.exceptions.ConnectionError:
-            print("Unable to connect.")
-            print('Retrying to establish connection: {}/2'.format(counter))
-            counter += 1 
-
-    return False
-
-def send_wav():
-    global session
-    url_servidor = SERVER_URL + "/upload_wav"
-    audioname = "outputClient.wav"
-    try:
-        with open(filename, 'rb') as archivo:
-            file = {'wav_file': (filename, archivo, 'audio/mp3')}
-            response = session.post(url_servidor, files=file)
-            
-            if response.status_code == 200:
-                print('Success')
-                #Save received audio
-                with open(audioname, 'wb') as archivo_local:
-                    archivo_local.write(response.content)
-                    return audioname
-            elif response.status_code == 401:
-                print('User should be registered')
-            elif response.status_code == 404:
-                print('No audio wav received or selected')
-            elif response.status_code == 500:
-                print('Internal server error')
-                print(response.text)
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
-        return "fail"
-    
-
-def logout():
-    global session
-    url_servidor = SERVER_URL + "/logout"
-    try:
-        # Realiza la petición para hacer logout
-        response = session.get(url_servidor)
-        
-        # Verifica el código de estado de la respuesta
-        if response.status_code == 200:
-            return "Logout exitoso. Código de estado: 200"
-        else:
-            return f"Error en el logout. Código de estado: {response.status_code}"
-    except requests.RequestException as e:
-        return f"Error al realizar la petición: {e}"
 
 ##AUDIO
 def audioRecord(): 
@@ -254,7 +189,7 @@ def clear_screen():
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     clear_screen()
 
-    registerSuccess = register_user()    
+    registerSuccess = sr.register_user()    
     if registerSuccess is False: 
         exit (-1)
         
