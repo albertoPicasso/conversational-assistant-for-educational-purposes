@@ -1,18 +1,23 @@
 from flask import Flask, session, request, send_file
 import uuid
+import os
+from openai import OpenAI
+import signal
+
 from STTFolder.localWhisper import LocalWhisper
 from STTFolder.remoteWhisper import RemoteWhisper
 from LLMFolder.openAIAPI import OpenAIAPI
 from TTSFolder.coquiTTS import CoquiTTS
 from TTSFolder.openAITTS import OpenAITTS
-import os
-from openai import OpenAI
+
+from aux_functions import Aux_functions
 
 class Servidor:
     def __init__(self):
         ##Server configs
         self.app = Flask(__name__)
         self.app.secret_key = 'tu_clave_secreta'
+        self.aux = Aux_functions()
         ## Adding rules
         self.app.add_url_rule('/', 'register_user', self.register_user, methods=['GET'])
         self.app.add_url_rule('/upload_wav', 'upload_wav', self.upload_wav, methods=['POST'])
@@ -64,12 +69,12 @@ class Servidor:
                 state['mensajes'] = []
 
             # Add system message to user chat
-            state = self.addMessageToChat(self.systemMessage, "system", state)
+            state = self.aux.addMessageToChat(self.systemMessage, "system", state)
 
             # Save state in session
             session['estado'] = state
             
-            self.createUserDirectory(user_id)
+            self.aux.createUserDirectory(user_id)
 
             return 'User {} registered successfully.'.format(user_id), 200
 
@@ -110,14 +115,15 @@ class Servidor:
             state = session.get('estado', {})
 
             # Add user message to chat
-            state = self.addMessageToChat(text, "user", state)
+            state = self.aux.addMessageToChat(text, "user", state)
+            
 
             # Ask to language model
             messages_list = state['mensajes']
             response = self.LLM.request_to_llm(messages_list)
 
             # Add assistant response to chat
-            state = self.addMessageToChat(response, "assistant", state)
+            state = self.aux.addMessageToChat(response, "assistant", state)
 
             # Generate audio WAV
             outname = self.TTS.speak(response, user_id)
@@ -150,52 +156,17 @@ class Servidor:
             print(f"Error al intentar borrar la carpeta {user_id}: {e}")
             return f"An error occurred: {str(e)}", 500
 
+    
 
+
+    def ping(self): 
+        return "pong"
         
     def run(self, debug=False):
         self.app.run(debug=debug,host='0.0.0.0', port=5000)
 
-
-    ## # Add new messages to session['mensajes'] whit format [role,message]
-    def addMessageToChat(self, message, role, state):
-        """
-        Args:
-        - message (str): The message to be added to the conversation.
-        - role (str): The role of the participant sending the message (e.g., 'user', 'assistant', etc.).
-        - chat (list): The conversation history to which the message will be added.
-        - state (session): The state of this client on server
-        Returns: modified state
-        """
-        message_entry = [role, message]
-        state['mensajes'].append(message_entry)
-        return state
-
-
-    def printAllChat(self, state): 
-        """
-        Args:
-        - state (session): Contains the conversation history to be printed.
-
-        Returns:
-        None
-        """
-        lista_mensajes = state['mensajes']
-        print('Lista de mensajes ')
-        for mensaje in lista_mensajes:
-            print(mensaje)
-
-    def ping(self): 
-        return "pong"
-    
-    def createUserDirectory(self, name):
-    
-        #Path to new directory / folder
-        path_to_directory = os.path.join(os.getcwd(), name)
-
-        #Create directory
-        os.mkdir(path_to_directory)
-        print(f"The directory'{name}' has been created successfully")
         
+
 
 if __name__ == '__main__':
     servidor = Servidor()

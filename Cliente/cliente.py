@@ -50,12 +50,7 @@ def on_press(key):
         except Exception as e:
             print(f"Ocurrió un error al iniciar la grabación: {e}")
             restart_connection()
-    
-    if key == keyboard.KeyCode.from_char('s'): 
-        try:
-            exit_secuence()
-        except Exception as e:
-            print(f"Ocurrió un error saliendo : {e}") 
+     
         
 def on_release(key):
     global recording 
@@ -170,7 +165,7 @@ def restart_connection():
 def graceful_exit(signal, frame):
     print("\nGracefully exiting...")
     exit_secuence()
-    
+
 def clear_screen():
     if os.name == 'posix':  # Unix/Linux
         os.system('clear')
