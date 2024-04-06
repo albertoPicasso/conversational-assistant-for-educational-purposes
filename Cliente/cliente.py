@@ -6,55 +6,35 @@ import pyaudio
 import wave
 import requests
 from server_requests import Server_requests 
+import signal
 
-
-
-#server = Servidor()
 
 # Object needed to request to server
 SERVER_URL = 'http://192.168.0.16:5000'
 session = requests.Session()
-
-
-#Object to serverRequest
 sr = Server_requests(SERVER_URL, session)
 
 
-
-
 #Set audio parameters 
-FORMAT = pyaudio.paInt16    # Audio Data format (16 bits)
-CHANNELS = 1                # NChannel numbers
-RATE = 44100                # Sampling rate Hz
-CHUNK = 1024                # chunk size
+FORMAT = pyaudio.paInt16        # Audio Data format (16 bits)
+CHANNELS = 1                    # NChannel numbers
+RATE = 44100                    # Sampling rate Hz
+CHUNK = 1024                    # chunk size
 
 
-#Recording flag
-recording = False
-
-#Open the stream
+recording = False               #Recording flag
 stream =None
-
-#PyAudio object
 p = pyaudio.PyAudio()
-
-# list for store audio data
-frames = []
-
-#Audio name
+frames = []                     # list for store audio data
 filename = "input.wav"
 
-#Queue for threads communication
-q = queue.Queue()
 
-#Semaphore to stop the transcribing method til saving audio
-sem = threading.Semaphore(0)
-
-#Semaphore to stop chat til speaking text audio
-sem2 = threading.Semaphore(0)
+q = queue.Queue()               #Notify stop recording
+sem = threading.Semaphore(0)    #Semaphore to stop the transcribing method til saving audio
+sem2 = threading.Semaphore(0)   #Semaphore to stop chat til speaking text audio
 
 
-
+# Key management
 def on_press(key):
     global recording
     global stream
@@ -68,18 +48,14 @@ def on_press(key):
             recording_thread.start()
         except Exception as e:
             print(f"Ocurrió un error al iniciar la grabación: {e}")
+            restart_connection()
     
     if key == keyboard.KeyCode.from_char('s'): 
         try:
-            sr.logout()
-            listener.stop()
-            p.terminate
-            exit(0)   
+            exit_secuence()
         except Exception as e:
             print(f"Ocurrió un error saliendo : {e}") 
         
-
-
 def on_release(key):
     global recording 
     global filename
@@ -99,7 +75,7 @@ def on_release(key):
             sem2.release()
         except Exception as e:
             print(f"Ocurrió un error soltando la tecla: {e}")
-            pass
+            restart_connection()
 
 
 
@@ -133,14 +109,11 @@ def audioRecord():
     
 def openStream(): 
     global stream
-    try:
-        stream = p.open(format=FORMAT,
-        channels=CHANNELS,
-        rate=RATE,
-        input=True,
-        frames_per_buffer=CHUNK)
-    except Exception as e:
-            print(f"Ocurrió un error abriendo el stream: {e}")
+    stream = p.open(format=FORMAT,
+                    channels=CHANNELS,
+                    rate=RATE,
+                    input=True,
+                    frames_per_buffer=CHUNK)
 
 def closeStream():
     global stream
@@ -150,22 +123,20 @@ def closeStream():
 def playAudio(audio): 
     global sem2
     with wave.open(audio, 'rb') as wav_file:
-        # Configurar PyAudio
-        
+        # Configure PyAudio
         p = pyaudio.PyAudio()
         stream = p.open(format=p.get_format_from_width(wav_file.getsampwidth()),
                             channels=wav_file.getnchannels(),
                             rate=wav_file.getframerate(),
                             output=True)
 
-
-        # Leer y reproducir los datos del archivo WAV
+        #Read wav file
         data = wav_file.readframes(1024)
         while data:
             stream.write(data)
             data = wav_file.readframes(1024)
 
-        # Detener la reproducción
+        # Stop playing
         stream.stop_stream()
         stream.close()
         p.terminate()
@@ -173,25 +144,45 @@ def playAudio(audio):
 
 
 
-
-
+#Aux functions
+def exit_secuence():
+    try:
+        print("Exit")
+        sr.logout()
+        listener.stop()
+        p.terminate
+        exit (0)
+    except Exception as e:
+            print(f"Exit error: {e}")
+            exit(-1)  
+            
+def restart_connection(): 
+    try:
+        print("Restarting connection")
+        sr.logout()
+        sr.register_user()
+    except Exception as e:
+            print(f"Restart error: {e}")
+            exit(-1)  
+    
 
 def clear_screen():
-    if os.name == 'posix':  # Para sistemas Unix/Linux
+    if os.name == 'posix':  # Unix/Linux
         os.system('clear')
-    elif os.name == 'nt':  # Para Windows
+    elif os.name == 'nt':  # Windows
         os.system('cls')
     else:
-        # Sistema operativo no compatible
+        # Not supported
         pass 
 
 # Set the listener
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     clear_screen()
-
-    registerSuccess = sr.register_user()    
-    if registerSuccess is False: 
-        exit (-1)
+    try:
+        sr.register_user()    
+    except Exception as e:
+            print(f"Ocurrió un error soltando la tecla: {e}")
+            exit (-1)
         
     print("Listo!")
     listener.join() 
