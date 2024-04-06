@@ -37,7 +37,7 @@ class CoquiTTS(TtsInterface):
             text (str): The text to be converted to speech.
 
         Returns:
-            str: The filename of the generated audio file.
+            str: The filename of the generated wav audio file.
         """
         # if the request fail throw an exception and will be catched at the top funcion
         # Define the output filename

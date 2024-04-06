@@ -13,7 +13,15 @@ class OpenAITTS(TtsInterface):
 
 
     def speak(self, text: str, uid: str) -> str:
+        """
+        Converts text to speech using the OpenAI TTS model and saves the audio to a file.
 
+        Args:
+            text (str): The text to be converted to speech.
+
+        Returns:
+            str: The filename of the generated wav audio file.
+        """
 
         # Define the output filename
         name = "salida.mp3"  
@@ -36,7 +44,7 @@ class OpenAITTS(TtsInterface):
         #Convert mp3 to wav
         audio.export(path, format="wav")
 
-        #remove mp2
+        #remove mp3
 
         return path
     

@@ -4,7 +4,7 @@ class Aux_functions:
 
     
     ## Add new messages to session['mensajes'] whit format [role,message]
-    def addMessageToChat(self, message, role, state):
+    def addMessageToChat(self, message:str, role:str , state):
         """
         Args:
         - message (str): The message to be added to the conversation.
@@ -26,13 +26,13 @@ class Aux_functions:
         Returns:
         None
         """
-        lista_mensajes = state['mensajes']
+        message_list = state['mensajes']
         print('Lista de mensajes ')
-        for mensaje in lista_mensajes:
-            print(mensaje)
+        for message in message_list:
+            print(message)
 
     
-    def createUserDirectory(self, name):
+    def createUserDirectory(self, name:str):
         """
         Creates a new directory/folder with the specified name.
 
@@ -44,7 +44,23 @@ class Aux_functions:
         """
         #Path to new directory / folder
         path_to_directory = os.path.join(os.getcwd(), name)
-
-        #Create directory
         os.mkdir(path_to_directory)
-        #print(f"The directory'{name}' has been created successfully")
+        
+
+    def checkEndChat (self, message:str) -> bool: 
+        """
+        Checks if the message indicates the end of the chat based on certain levels.
+
+        Args:
+        - message (str): The message to be checked for indicating the end of the chat.
+
+        Returns:
+        - bool: True if the message contains any of the predefined levels, False otherwise.
+        """
+        levels = ["A1","A2","B1","B2","C1","C2"]
+
+        for level in levels: 
+            if level in message:
+                return True
+        
+        return False 

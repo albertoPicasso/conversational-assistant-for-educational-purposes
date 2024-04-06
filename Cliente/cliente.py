@@ -61,11 +61,10 @@ def on_release(key):
             q.put(True)
             # Wait to stop saving audio
             sem.acquire()
-            #name = server.launch(filename)
-            name = sr.send_wav(filename)
-            if (name == 'fail'):
-                print("Error en la recepcion del audio")
-                exit (-1)
+            data = sr.send_wav(filename)
+            name = data[0]
+            isEnd = data[1]
+            print(isEnd)
             playAudio(name)
             recording = False
             sem2.release()

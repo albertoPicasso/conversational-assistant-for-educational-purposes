@@ -1,10 +1,10 @@
-from flask import Flask, session, request, send_file
+from flask import Flask, session, request, send_file, jsonify
 import uuid
 import os
 from openai import OpenAI
-import signal
 import logging
-from datetime import datetime
+import base64
+
 
 from STTFolder.localWhisper import LocalWhisper
 from STTFolder.remoteWhisper import RemoteWhisper
@@ -113,33 +113,40 @@ class Servidor:
             path = os.path.join(os.getcwd(), user_id, filename)
             wav.save(path)
 
-            # Transcribe the WAV file
-            text = self.STT.transcribe(path)
-
             # Get session state
             state = session.get('estado', {})
 
-            # Add user message to chat
+            # Transcribe the WAV file
+            text = self.STT.transcribe(path)
             state = self.aux.addMessageToChat(text, "user", state)
-            
+            isEnd = self.aux.checkEndChat(text)
 
             # Ask to language model
             messages_list = state['mensajes']
             response = self.LLM.request_to_llm(messages_list)
-
-            # Add assistant response to chat
             state = self.aux.addMessageToChat(response, "assistant", state)
-
-            # Generate audio WAV
+            
+            #TTS
             outname = self.TTS.speak(response, user_id)
-            #self.printAllChat(state)
-
+            
             # Update session state
             session['estado'] = state
 
-            # Return the audio file
+            # Prepare the audio file
+            with open(outname, 'rb') as audio_file:
+                audio_data = audio_file.read()
+
+                # Codifica los datos binarios del audio en base64
+                audio_base64 = base64.b64encode(audio_data).decode('utf-8')
+
+            
+            response_data = {
+                'audio': audio_base64,
+                'flag': isEnd
+                }
+            
             self.app.logger.info (f'Processed audio from - id {user_id} ')
-            return send_file(outname, mimetype="application/octet-stream")
+            return jsonify(response_data)
 
         except Exception as e:
             self.app.logger.error('Unhandled exception occurred', exc_info=e)

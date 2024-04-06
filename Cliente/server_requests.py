@@ -1,4 +1,5 @@
 import requests 
+import base64
 
 class Server_requests:
     def __init__(self, serverurl, session):
@@ -43,11 +44,16 @@ class Server_requests:
             file = {'wav_file': (filename, archivo, 'audio/wav')}
             response = self.session.post(url_servidor, files=file)                
             if response.status_code == 200:
-                print('Success')
-                #Save received audio
+                #Recieve and process data
+                json_data = response.json()
+                audio_base64 = json_data['audio']
+                audio_data = base64.b64decode(audio_base64)
+                flag_value = json_data['flag']
+
                 with open(audioname, 'wb') as archivo_local:
-                    archivo_local.write(response.content)
-                    return audioname
+                    archivo_local.write(audio_data)
+                    return [audioname, flag_value]
+                
             elif response.status_code == 401:
                 print('User should be registered')
             elif response.status_code == 404:
