@@ -7,6 +7,7 @@ import wave
 import requests
 from server_requests import Server_requests 
 import signal
+import sys
 
 
 # Object needed to request to server
@@ -154,7 +155,7 @@ def exit_secuence():
         exit (0)
     except Exception as e:
             print(f"Exit error: {e}")
-            exit(-1)  
+            sys.exit(-1)  
             
 def restart_connection(): 
     try:
@@ -163,9 +164,13 @@ def restart_connection():
         sr.register_user()
     except Exception as e:
             print(f"Restart error: {e}")
-            exit(-1)  
+            sys.exit(-1)  
     
 
+def graceful_exit(signal, frame):
+    print("\nGracefully exiting...")
+    exit_secuence()
+    
 def clear_screen():
     if os.name == 'posix':  # Unix/Linux
         os.system('clear')
@@ -177,6 +182,7 @@ def clear_screen():
 
 # Set the listener
 with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+    signal.signal(signal.SIGINT,  graceful_exit)
     clear_screen()
     try:
         sr.register_user()    
