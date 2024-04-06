@@ -47,4 +47,4 @@ class Aux_functions:
 
         #Create directory
         os.mkdir(path_to_directory)
-        print(f"The directory'{name}' has been created successfully")
+        #print(f"The directory'{name}' has been created successfully")

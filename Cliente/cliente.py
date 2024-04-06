@@ -165,7 +165,7 @@ def restart_connection():
 def graceful_exit(signal, frame):
     print("\nGracefully exiting...")
     exit_secuence()
-
+    
 def clear_screen():
     if os.name == 'posix':  # Unix/Linux
         os.system('clear')

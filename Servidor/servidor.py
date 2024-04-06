@@ -3,6 +3,8 @@ import uuid
 import os
 from openai import OpenAI
 import signal
+import logging
+from datetime import datetime
 
 from STTFolder.localWhisper import LocalWhisper
 from STTFolder.remoteWhisper import RemoteWhisper
@@ -76,10 +78,13 @@ class Servidor:
             
             self.aux.createUserDirectory(user_id)
 
+            ip_address = request.remote_addr
+
+            self.app.logger.info (f'- User Register Succsessfully id {user_id} / ip {ip_address} ')
             return 'User {} registered successfully.'.format(user_id), 200
 
         except Exception as e:
-            # Manejo de excepciones genérico
+            self.app.logger.error('Unhandled exception occurred', exc_info=e)
             return 'Error registering user: {}'.format(str(e)), 500
 
   
@@ -133,10 +138,11 @@ class Servidor:
             session['estado'] = state
 
             # Return the audio file
+            self.app.logger.info (f'Processed audio from - id {user_id} ')
             return send_file(outname, mimetype="application/octet-stream")
 
         except Exception as e:
-            # Handle unexpected errors
+            self.app.logger.error('Unhandled exception occurred', exc_info=e)
             return f"An error occurred: {str(e)}", 500
       
     
@@ -146,14 +152,13 @@ class Servidor:
             if 'user_id' in session:
                 user_id = session['user_id']
                 session.pop('user_id')
-            
             # Remove client directory 
             os.system(f'rm -rf {user_id}')
-            print(f"Carpeta {user_id} y su contenido han sido eliminados exitosamente.")
+            self.app.logger.info (f'- Logout user Succsessfully - id {user_id} /  ')
             return 'Logout successfully.', 200
                 
         except Exception as e:
-            print(f"Error al intentar borrar la carpeta {user_id}: {e}")
+            self.app.logger.error('Unhandled exception occurred', exc_info=e)
             return f"An error occurred: {str(e)}", 500
 
     
@@ -161,10 +166,19 @@ class Servidor:
 
     def ping(self): 
         return "pong"
+    
+
         
     def run(self, debug=False):
+        
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        file_handler = logging.FileHandler('app.log')
+        file_handler.setFormatter(formatter)
+        self.app.logger.addHandler(file_handler)
+        self.app.logger.setLevel(logging.DEBUG)
+        self.app.logger.critical(f'Server Start ')
+        
         self.app.run(debug=debug,host='0.0.0.0', port=5000)
-
         
 
 
