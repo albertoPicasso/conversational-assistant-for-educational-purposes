@@ -64,8 +64,9 @@ def on_release(key):
             data = sr.send_wav(filename)
             name = data[0]
             isEnd = data[1]
-            print(isEnd)
             playAudio(name)
+            if (isEnd): 
+                exit_secuence()
             recording = False
             sem2.release()
         except Exception as e:

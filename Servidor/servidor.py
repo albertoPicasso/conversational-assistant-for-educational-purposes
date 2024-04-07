@@ -13,6 +13,7 @@ from TTSFolder.coquiTTS import CoquiTTS
 from TTSFolder.openAITTS import OpenAITTS
 
 from aux_functions import Aux_functions
+from EndChecker.teacherEndChecker import TeacherEndChecker
 
 class Servidor:
     def __init__(self):
@@ -20,13 +21,14 @@ class Servidor:
         self.app = Flask(__name__)
         self.app.secret_key = 'tu_clave_secreta'
         self.aux = Aux_functions()
+        self.endChecker = TeacherEndChecker()
         ## Adding rules
         self.app.add_url_rule('/', 'register_user', self.register_user, methods=['GET'])
         self.app.add_url_rule('/upload_wav', 'upload_wav', self.upload_wav, methods=['POST'])
         self.app.add_url_rule('/ping', 'ping', self.ping, methods=['GET'])
         self.app.add_url_rule('/logout', 'logout', self.logout, methods=['GET'])
         ## Server variables
-        self.systemMessage = "asistente tan simpatico "#"You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 3 questions. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Not everyone can be a B2. Look the tenses, the complexiti of the phrases. Please be more accurate Speak every time in spanish."
+        self.systemMessage = "You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 1 question. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Not everyone can be a B2. Look the tenses, the complexiti of the phrases. Please be more accurate Speak every time in spanish. Ademas necesito que transcribas lo numeros, por ejemplo si hay un 12 quiero que pongas doce , o si pone B1 pongas be uno si pone a2 que pongas a dos, El mensaje en el que vaya la puntuacion evaluacion final quiero que empiece por [END]"
 
         ##Interface Configs
 #--------------------REMOTE------------------------------------------·#
@@ -119,12 +121,14 @@ class Servidor:
             # Transcribe the WAV file
             text = self.STT.transcribe(path)
             state = self.aux.addMessageToChat(text, "user", state)
-            isEnd = self.aux.checkEndChat(text)
+            
 
             # Ask to language model
             messages_list = state['mensajes']
             response = self.LLM.request_to_llm(messages_list)
             state = self.aux.addMessageToChat(response, "assistant", state)
+            
+            isEnd = self.endChecker.checkEndChat(response)
             
             #TTS
             outname = self.TTS.speak(response, user_id)
