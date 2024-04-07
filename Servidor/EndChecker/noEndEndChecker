@@ -14,4 +14,4 @@ class NoEndEndChecker(ChatChecker):
         Returns:
         - bool: True if the message contains any of the predefined levels, False otherwise.
         """
-        return True
+        return False
