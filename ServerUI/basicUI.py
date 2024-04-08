@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import os
 
 def cambiar_idioma(event):
     idioma_seleccionado = idioma.get()
@@ -38,6 +39,7 @@ def imprimir_estado():
     print("Modo TTS seleccionado:", tts.get())
     print("Tamaño Whisper seleccionado:", whisperSize.get())
     print("Modelo LLM seleccionado:", modelos.get())
+    print("NUmero de puerto:", puerto.get())
     # Cerrar la ventana
     ventana.destroy()
 
