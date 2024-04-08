@@ -4,6 +4,7 @@ import os
 from openai import OpenAI
 import logging
 import base64
+import signal
 
 
 from STTFolder.localWhisper import LocalWhisper
@@ -16,7 +17,7 @@ from aux_functions import Aux_functions
 from EndChecker.teacherEndChecker import TeacherEndChecker
 
 class Servidor:
-    def __init__(self):
+    def __init__(self, stt = "local", whisperSize = "small" , llm = "remoto", llmSel = "Gemma"):
         ##Server configs
         self.app = Flask(__name__)
         self.app.secret_key = 'tu_clave_secreta'
@@ -37,8 +38,8 @@ class Servidor:
         #self.STT = RemoteWhisper("whisper-1", self.client)
 
         ##LLM
-        self.model = "gpt-3.5-turbo-0125"
-        self.LLM = OpenAIAPI(self.client, self.model)
+        #self.model = "gpt-3.5-turbo-0125"
+        #self.LLM = OpenAIAPI(self.client, self.model)
 
         #TTS
         #self.TTS = OpenAITTS("onyx")
@@ -49,8 +50,8 @@ class Servidor:
         self.STT = LocalWhisper(self.modelSize)
         
         ##LLM
-        #self.client = OpenAI(base_url="http://192.168.1.135:1234/v1", api_key="lm-studio") 
-        #self.model = "local-model"
+        self.client = OpenAI(base_url="http://192.168.1.135:1234/v1", api_key="lm-studio") 
+        self.model = "local-model"
 
         #TTS
         self.TTS = CoquiTTS("tts_models/es/css10/vits")
@@ -180,7 +181,7 @@ class Servidor:
     
 
         
-    def run(self, debug=False):
+    def run(self, debug, port = 5000):
         
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         file_handler = logging.FileHandler('app.log')
@@ -189,10 +190,10 @@ class Servidor:
         self.app.logger.setLevel(logging.DEBUG)
         self.app.logger.critical(f'Server Start ')
         
-        self.app.run(debug=debug,host='0.0.0.0', port=5000)
-        
+        self.app.run(debug=debug,host='0.0.0.0', port=port,  use_reloader=False)
+
 
 
 if __name__ == '__main__':
     servidor = Servidor()
-    servidor.run(debug=True)
+    servidor.run(debug=False)

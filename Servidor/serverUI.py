@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import subprocess
 import os
 
 def cambiar_idioma(event):
@@ -40,12 +41,16 @@ def imprimir_estado():
     print("Tamaño Whisper seleccionado:", whisperSize.get())
     print("Modelo LLM seleccionado:", modelos.get())
     print("NUmero de puerto:", puerto.get())
-    # Cerrar la ventana
+    lanzar_servidor()
+    
+def lanzar_servidor():    
     ventana.destroy()
+    comando = "python3.10 servidor.py"+" " + idioma.get() +" "+ stt.get()+" "+ whisperSize.get()+" "+ llm.get()+" "+ modelos.get()+" "+  tts.get()+" "+ puerto.get()
+    os.system(comando)
 
 # Crear la ventana principal
 ventana = tk.Tk()
-ventana.title("Selector de Idioma y Modo")
+ventana.title("Server config")
 ventana.geometry("600x300")
 
 # Crear el frame principal para contener todo excepto el desplegable extra
@@ -58,7 +63,7 @@ idioma = tk.StringVar()
 # Etiqueta y menú desplegable para el idioma
 etiqueta_idioma = tk.Label(frame_config_principal, text="Idioma del chat:",font=("Helvetica", 10, "italic"))
 etiqueta_idioma.pack(pady=(10,0))
-desplegable = ttk.Combobox(frame_config_principal, textvariable=idioma, state="readonly", values=('es', 'en', 'ger'))
+desplegable = ttk.Combobox(frame_config_principal, textvariable=idioma, state="readonly", values=('es', 'en', 'de'))
 desplegable.current(0)
 desplegable.pack(pady=(0,20))
 desplegable.bind("<<ComboboxSelected>>", cambiar_idioma)
