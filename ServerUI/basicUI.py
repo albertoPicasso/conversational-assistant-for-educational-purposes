@@ -30,8 +30,6 @@ def cambiar_tts():
     tts_mode = tts.get()
     print("Modo TTS seleccionado:", tts_mode)
 
-
-
 def imprimir_estado():
     print("Estado actual:")
     print("Idioma seleccionado:", idioma.get())
@@ -40,7 +38,7 @@ def imprimir_estado():
     print("Modo TTS seleccionado:", tts.get())
     print("Tamaño Whisper seleccionado:", whisperSize.get())
     print("Modelo LLM seleccionado:", modelos.get())
-    #Cerrar la ventana
+    # Cerrar la ventana
     ventana.destroy()
 
 # Crear la ventana principal
@@ -56,7 +54,7 @@ frame_config_principal.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 idioma = tk.StringVar()
 
 # Etiqueta y menú desplegable para el idioma
-etiqueta_idioma = tk.Label(frame_config_principal, text="Idioma del chat:")
+etiqueta_idioma = tk.Label(frame_config_principal, text="Idioma del chat:",font=("Helvetica", 10, "italic"))
 etiqueta_idioma.pack(pady=(10,0))
 desplegable = ttk.Combobox(frame_config_principal, textvariable=idioma, state="readonly", values=('es', 'en', 'ger'))
 desplegable.current(0)
@@ -65,7 +63,7 @@ desplegable.bind("<<ComboboxSelected>>", cambiar_idioma)
 
 # Función para configurar los botones y etiquetas
 def configurar_seccion(frame, etiqueta_texto, var_control, cmd):
-    etiqueta = tk.Label(frame, text=etiqueta_texto)
+    etiqueta = tk.Label(frame, text=etiqueta_texto,font=("Helvetica", 10, "italic"))
     etiqueta.pack(pady=(0,5))
     frame_botones = tk.Frame(frame)
     frame_botones.pack()
@@ -90,7 +88,7 @@ tts = tk.StringVar(value="local")
 configurar_seccion(frame_config_principal, "TTS:", tts, cambiar_tts)
 
 # Crear el frame y menú desplegable para "Configuración de Modelos" a la derecha
-frame_config_modelos = tk.Frame(ventana, padx=20)
+frame_config_modelos = tk.Frame(ventana, padx=20, pady=70)
 frame_config_modelos.pack(side=tk.RIGHT, fill=tk.Y, padx=(0, 10))
 
 whisperSize = tk.StringVar()
@@ -100,7 +98,6 @@ desplegable_extra = ttk.Combobox(frame_config_modelos, textvariable=whisperSize,
 desplegable_extra.current(0)
 desplegable_extra.pack()
 
-
 # Crear un segundo desplegable para modelos de LLM solo cuando LLM esté en local
 modelos = tk.StringVar()
 etiqueta_modelos = tk.Label(frame_config_modelos, text="Modelo LLM:", font=("Helvetica", 10, "italic"))
@@ -109,13 +106,20 @@ desplegable_modelos = ttk.Combobox(frame_config_modelos, textvariable=modelos, s
 desplegable_modelos.current(0)
 desplegable_modelos.pack()
 
-
-
+#Puerto
+puerto = tk.StringVar()
+puerto.set("5000")
+etiqueta_puerto = tk.Label(frame_config_principal, text="Número de puerto:", font=("Helvetica", 10, "italic"))
+etiqueta_puerto.pack(pady=(10,0))
+cuadro_puerto = tk.Entry(frame_config_principal, textvariable=puerto)
+cuadro_puerto.pack()
 
 # Botón de "Play" para imprimir el estado actual
-boton_play = tk.Button(ventana, text="Play", command=imprimir_estado, bg="green")
+boton_play = tk.Button(ventana, text="Play", command=imprimir_estado, bg="green", font=("Helvetica", 10, "bold"))
 boton_play.pack(side=tk.BOTTOM, pady=10)
+
 
 
 # Iniciar el bucle principal de la aplicación
 ventana.mainloop()
+
