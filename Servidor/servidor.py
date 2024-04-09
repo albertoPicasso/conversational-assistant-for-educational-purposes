@@ -115,8 +115,9 @@ class Servidor:
             response = self.LLM.request_to_llm(messages_list)
             state = self.aux.addMessageToChat(response, "assistant", state)
             
-            #isEnd = self.endChecker.checkEndChat(response)
-            isEnd = False
+            isEnd = self.endChecker.checkEndChat(response)
+            if (isEnd): 
+                response = Aux_functions.replace_number(response, self.lang)
             #TTS
             outname = self.TTS.speak(response, user_id)
             

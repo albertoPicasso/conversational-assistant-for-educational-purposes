@@ -116,4 +116,25 @@ class Aux_functions:
         else: 
             raise TypeError("Not valid language")
         
-    
+    def replace_number(text : str, lang ): 
+
+        if(lang == "es"): 
+            new_text = text.replace("B2", "be dos" )
+            new_text = new_text.replace("B1", "be uno")
+            new_text = new_text.replace("A1", "a uno")
+            new_text = new_text.replace("A2", "a dos")
+            new_text = new_text.replace("C1", "ce uno")
+            new_text = new_text.replace("C2", "ce uno")
+            return new_text
+        elif(lang == "en"): 
+            uno = " one"
+            dos = " two"
+            new_text = text.replace("2", dos)
+            new_text = new_text.replace("1", uno)
+            return new_text
+        elif(lang == "de"): 
+            uno = " eins"
+            dos = " zwei"
+            new_text = text.replace("2", dos)
+            new_text = new_text.replace("1", uno)
+            return new_text
