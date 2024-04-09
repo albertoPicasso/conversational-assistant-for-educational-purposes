@@ -35,11 +35,14 @@ class Servidor:
         self.lang = lang
         
         ##Interface Config
-        self.systemMessage = Aux_functions.selectSysMessage(lang)
-        self.STT = Aux_functions.createSTT(stt, whisperSize)
-        self.LLM = Aux_functions.createLLM(llm)
-        self.TTS = Aux_functions.createTTS(tts,lang)
-
+        try:
+            self.systemMessage = Aux_functions.selectSysMessage(lang)
+            self.STT = Aux_functions.createSTT(stt, whisperSize)
+            self.LLM = Aux_functions.createLLM(llm)
+            self.TTS = Aux_functions.createTTS(tts,lang)
+        except Exception as e:
+            self.app.logger.error('Unhandled exception occurred. Leaving...', exc_info=e)
+            sys.exit(-1)
 
 
 
