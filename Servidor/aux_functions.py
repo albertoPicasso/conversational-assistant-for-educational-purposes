@@ -126,15 +126,21 @@ class Aux_functions:
             new_text = new_text.replace("C1", "ce uno")
             new_text = new_text.replace("C2", "ce uno")
             return new_text
+        
         elif(lang == "en"): 
-            uno = " one"
-            dos = " two"
-            new_text = text.replace("2", dos)
-            new_text = new_text.replace("1", uno)
+            new_text = text.replace("B2", "bee two")
+            new_text = new_text.replace("B1", "bee one")
+            new_text = new_text.replace("A1", "ay one")
+            new_text = new_text.replace("A2", "ay two")
+            new_text = new_text.replace("C1", "see one")
+            new_text = new_text.replace("C2", "see two")
             return new_text
+            
         elif(lang == "de"): 
-            uno = " eins"
-            dos = " zwei"
-            new_text = text.replace("2", dos)
-            new_text = new_text.replace("1", uno)
+            new_text = text.replace("B2", "bee zwei")
+            new_text = new_text.replace("B1", "bee eins")
+            new_text = new_text.replace("A1", "ah eins")
+            new_text = new_text.replace("A2", "ah zwei")
+            new_text = new_text.replace("C1", "tseh eins")
+            new_text = new_text.replace("C2", "tseh zwei")
             return new_text
