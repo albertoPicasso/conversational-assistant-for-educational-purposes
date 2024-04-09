@@ -1,4 +1,12 @@
+
+from STTFolder.localWhisper import LocalWhisper
+from STTFolder.remoteWhisper import RemoteWhisper
+from LLMFolder.openAIAPI import OpenAIAPI
+from TTSFolder.coquiTTS import CoquiTTS
+from TTSFolder.openAITTS import OpenAITTS
+
 import os
+from openai import OpenAI
 
 class Aux_functions:
 
@@ -45,5 +53,54 @@ class Aux_functions:
         #Path to new directory / folder
         path_to_directory = os.path.join(os.getcwd(), name)
         os.mkdir(path_to_directory)
+
+    def createSTT(stt:str, whisperSize:str):
+
+        if (stt == "local"): 
+            stt = LocalWhisper(whisperSize)
+            return stt
+        elif (stt == "remoto"): 
+            client = OpenAI(api_key=os.getenv("OPENAIKEY"), base_url="https://api.openai.com/v1")
+            stt = RemoteWhisper("whisper-1", client)
+            print ("Remote")
+            return stt
+        else: 
+            raise TypeError("Error creating stt")
         
+
+    def createLLM(llm:str):
+
+        if (llm == "local"): 
+            client = OpenAI(base_url="http://192.168.1.135:1234/v1", api_key="lm-studio") 
+            model = "local-model"
+            llm = OpenAIAPI(client, model)
+            return llm
+        elif (llm == "remoto"): 
+            client = OpenAI(api_key=os.getenv("OPENAIKEY"), base_url="https://api.openai.com/v1")
+            model = "gpt-3.5-turbo-0125"
+            llm = OpenAIAPI(client, model)
+            print("Remoto")
+            return llm
+        else: 
+            print("Error")
+            raise TypeError("Error creating LLM")
+        
+        
+    def createTTS(tts:str, lang: str):
+        ##Arreglar esto, no se que pasa ni me acuerdo del error, check logs 
+        if (tts == "remoto"): 
+            tts = OpenAITTS("onyx")
+            return tts
+        elif (tts == "local" and lang == "es"): 
+            tts = CoquiTTS("tts_models/es/css10/vits")
+            return tts 
+        elif (tts == "local" and lang == "en"): 
+            tts = CoquiTTS("tts_models/en/ljspeech/fast_pitch")
+            return tts
+        elif (tts == "local" and lang == "de"): 
+            tts = CoquiTTS("tts_models/de/css10/vits-neon")
+            return tts
+        else: 
+            raise TypeError("Error creating LLM")
+
 

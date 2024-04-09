@@ -4,7 +4,7 @@ import os
 from openai import OpenAI
 import logging
 import base64
-import signal
+import sys
 
 
 from STTFolder.localWhisper import LocalWhisper
@@ -17,7 +17,9 @@ from aux_functions import Aux_functions
 from EndChecker.teacherEndChecker import TeacherEndChecker
 
 class Servidor:
-    def __init__(self, stt = "local", whisperSize = "small" , llm = "remoto", llmSel = "Gemma"):
+    def __init__(self, lang = "es", stt = "local", whisperSize = "small" , llm = "remoto", llmSel = "Gemma", tts = "local"):
+
+        
         ##Server configs
         self.app = Flask(__name__)
         self.app.secret_key = 'tu_clave_secreta'
@@ -31,30 +33,13 @@ class Servidor:
         ## Server variables
         self.systemMessage = "You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 1 question. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Not everyone can be a B2. Look the tenses, the complexiti of the phrases. Please be more accurate Speak every time in spanish. Ademas necesito que transcribas lo numeros, por ejemplo si hay un 12 quiero que pongas doce , o si pone B1 pongas be uno si pone a2 que pongas a dos, El mensaje en el que vaya la puntuacion evaluacion final quiero que empiece por [END]"
 
-        ##Interface Configs
-#--------------------REMOTE------------------------------------------·#
-        self.client = OpenAI(api_key=os.getenv("OPENAIKEY"), base_url="https://api.openai.com/v1")
-        ##STT        
-        #self.STT = RemoteWhisper("whisper-1", self.client)
+        ##Interface Config
+                
+        self.STT = Aux_functions.createSTT(stt, whisperSize)
+        self.LLM = Aux_functions.createLLM(llm)
+        self.TTS = Aux_functions.createTTS(tts,lang)
 
-        ##LLM
-        #self.model = "gpt-3.5-turbo-0125"
-        #self.LLM = OpenAIAPI(self.client, self.model)
 
-        #TTS
-        #self.TTS = OpenAITTS("onyx")
-
-#--------------------LOCAL------------------------------------------·#
-        ##STT
-        self.modelSize = "small"
-        self.STT = LocalWhisper(self.modelSize)
-        
-        ##LLM
-        self.client = OpenAI(base_url="http://192.168.1.135:1234/v1", api_key="lm-studio") 
-        self.model = "local-model"
-
-        #TTS
-        self.TTS = CoquiTTS("tts_models/es/css10/vits")
 
 
     def register_user(self):
@@ -195,5 +180,22 @@ class Servidor:
 
 
 if __name__ == '__main__':
-    servidor = Servidor()
-    servidor.run(debug=False)
+    arguments_number  = len(sys.argv) - 1
+    if(arguments_number == 0): #When args not given
+        servidor = Servidor()
+        servidor.run(debug=False)
+    elif(arguments_number == 7): #Args given
+        servidor = Servidor(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])
+        try:
+            port = int(sys.argv[7])  
+            servidor.run(debug=False, port= port)
+        except ValueError:  # Manejar el error si la conversión falla
+            print("Bad Port.")
+            exit (-1)
+        
+    else:
+        print("Invalid arguments number") 
+        exit (-1)
+    
+    #servidor = Servidor()
+    #servidor.run(debug=False)

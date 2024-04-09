@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-import subprocess
 import os
 
 def cambiar_idioma(event):
