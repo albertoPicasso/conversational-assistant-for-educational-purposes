@@ -44,7 +44,6 @@ def on_press(key):
             recording = True
             openStream()
             #Create the recording thread 
-            ##FORK
             recording_thread = threading.Thread(target=audioRecord)     ##Execute the audioRecord method
             recording_thread.start()
         except Exception as e:
