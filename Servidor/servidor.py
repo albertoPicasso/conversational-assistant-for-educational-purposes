@@ -6,15 +6,8 @@ import logging
 import base64
 import sys
 
-
-from STTFolder.localWhisper import LocalWhisper
-from STTFolder.remoteWhisper import RemoteWhisper
-from LLMFolder.openAIAPI import OpenAIAPI
-from TTSFolder.coquiTTS import CoquiTTS
-from TTSFolder.openAITTS import OpenAITTS
-
 from aux_functions import Aux_functions
-from EndChecker.teacherEndChecker import TeacherEndChecker
+from Teacher.languageTeacher import LanguageTeacher
 
 class Servidor:
     def __init__(self, lang = "es", stt = "local", whisperSize = "small" , llm = "remoto", llmSel = "Gemma", tts = "local"):
@@ -24,7 +17,7 @@ class Servidor:
         self.app = Flask(__name__)
         self.app.secret_key = 'tu_clave_secreta'
         self.aux = Aux_functions()
-        self.endChecker = TeacherEndChecker()
+        self.teacherMode = LanguageTeacher(lang)
         ## Adding rules
         self.app.add_url_rule('/', 'register_user', self.register_user, methods=['GET'])
         self.app.add_url_rule('/upload_wav', 'upload_wav', self.upload_wav, methods=['POST'])
@@ -116,17 +109,22 @@ class Servidor:
             # Ask to language model
             messages_list = state['mensajes']
             response = self.LLM.request_to_llm(messages_list)
-            state = self.aux.addMessageToChat(response, "assistant", state)
             
-            isEnd = self.endChecker.checkEndChat(response)
+            #Check if isEnd, if its True , prepare the message to TTS
+            #If is teacher or some 
+            isEnd = self.teacherMode.checkEndChat(response)
             if (isEnd): 
+                response = self.teacherMode.evaluation(messages_list, response, self.LLM)
                 response = Aux_functions.replace_number(response, self.lang)
-            #TTS
-            outname = self.TTS.speak(response, user_id)
             
+            #Add message
+            state = self.aux.addMessageToChat(response, "assistant", state)
             # Update session state
             session['estado'] = state
-
+            
+            # TTS
+            outname = self.TTS.speak(response, user_id)
+            
             # Prepare the audio file
             with open(outname, 'rb') as audio_file:
                 audio_data = audio_file.read()

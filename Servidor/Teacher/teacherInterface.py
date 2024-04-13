@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class ChatChecker(ABC):
+class TeacherInterface(ABC):
     @abstractmethod
     def checkEndChat(self, message: str) -> bool:
         """
@@ -14,4 +14,8 @@ class ChatChecker(ABC):
 
         This method must be implemented by any subclass that inherits from this class.
         """
+        pass
+
+    @abstractmethod
+    def evaluation(self, message_list, last_message, LLM):
         pass

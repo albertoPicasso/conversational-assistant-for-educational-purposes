@@ -1,17 +1,23 @@
-from .endCheckerInterface import ChatChecker
+from .teacherInterface import TeacherInterface
 
 ## Implementation of LlmInterface using OpenAI API
 
-class NoEndEndChecker(ChatChecker):    
+class NoTeacher(TeacherInterface):    
 
     def checkEndChat(self, message: str) -> bool:
         """
-        Checks if the message indicates the end of the chat based on certain levels.
+        Return False for no limits chats
 
         Args:
         - message (str): The message to be checked for indicating the end of the chat.
 
         Returns:
-        - bool: True if the message contains any of the predefined levels, False otherwise.
+        - bool: False
         """
         return False
+    
+    
+    def evaluation(self, message_list, last_message, LLM):
+        return last_message
+
+

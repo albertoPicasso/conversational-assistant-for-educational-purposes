@@ -22,7 +22,7 @@ class OpenAIAPI(LlmInterface):
         self.model = model
         self.client = client
 
-    def request_to_llm(self, chat) -> str:
+    def request_to_llm(self, chat, temp = 1) -> str:
         """
         Sends a chat request to the OpenAI LLM and returns the response.
 
@@ -41,6 +41,7 @@ class OpenAIAPI(LlmInterface):
         chat_completion = self.client.chat.completions.create(
             messages= request_messages,
             model=self.model,
+            temperature=temp
         )
         # if the request fail throw an exception and will be catched at the top funcion
         #Docu here --- https://platform.openai.com/docs/guides/error-codes

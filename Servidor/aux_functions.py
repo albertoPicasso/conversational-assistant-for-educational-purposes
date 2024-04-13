@@ -98,7 +98,7 @@ class Aux_functions:
         """
 
         if (llm == "local"): 
-            client = OpenAI(base_url="http://192.168.1.135:1234/v1", api_key="lm-studio") 
+            client = OpenAI(base_url="http://192.168.0.13:1234/v1", api_key="lm-studio") 
             model = "local-model"
             llm = OpenAIAPI(client, model)
             return llm
