@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 class TeacherInterface(ABC):
-    @abstractmethod
+    
     def checkEndChat(self, message: str) -> bool:
         """
         Abstract method to determine if a chat should end based on a given message.
@@ -14,8 +14,19 @@ class TeacherInterface(ABC):
 
         This method must be implemented by any subclass that inherits from this class.
         """
-        pass
 
-    @abstractmethod
-    def evaluation(self, message_list, last_message, LLM):
-        pass
+
+
+    def evaluation(self, message_list, last_message, LLM) -> str:
+        """
+        Abstract method to determine the statement.
+
+        Args:
+            message List(str): The messages of the chat.
+            last_message (str): Last message
+
+        Returns:
+            str: Evaluation
+
+        This method must be implemented by any subclass that inherits from this class.
+        """

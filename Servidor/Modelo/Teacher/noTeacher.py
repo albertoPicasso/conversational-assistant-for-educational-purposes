@@ -17,7 +17,7 @@ class NoTeacher(TeacherInterface):
         return False
     
     
-    def evaluation(self, message_list, last_message, LLM):
+    def evaluation(self, message_list, last_message, LLM)-> str:
         return last_message
 
 
