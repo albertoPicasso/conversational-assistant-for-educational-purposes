@@ -1,9 +1,9 @@
 
-from STTFolder.localWhisper import LocalWhisper
-from STTFolder.remoteWhisper import RemoteWhisper
-from LLMFolder.openAIAPI import OpenAIAPI
-from TTSFolder.coquiTTS import CoquiTTS
-from TTSFolder.openAITTS import OpenAITTS
+from Modelo.STTFolder.localWhisper import LocalWhisper
+from Modelo.STTFolder.remoteWhisper import RemoteWhisper
+from Modelo.LLMFolder.openAIAPI import OpenAIAPI
+from Modelo.TTSFolder.coquiTTS import CoquiTTS
+from Modelo.TTSFolder.openAITTS import OpenAITTS
 
 import os
 from openai import OpenAI

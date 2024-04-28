@@ -1,5 +1,5 @@
 from .teacherInterface import TeacherInterface
-from aux_functions import Aux_functions
+
 
 ## Implementation of LlmInterface using OpenAI API
 
