@@ -26,7 +26,7 @@ class LanguageTeacher(TeacherInterface):
         return False 
     
     
-    def evaluation(self, message_list, last_message, LLM )-> str:
+    def evaluation(self, message_list, last_message, LLM ):
         chat =  []
         #Create the systemMessage
         keyString  = (
