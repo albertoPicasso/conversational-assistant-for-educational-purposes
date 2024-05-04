@@ -6,18 +6,18 @@ import logging
 import base64
 import sys
 
-from aux_functions import Aux_functions
-from Teacher.languageTeacher import LanguageTeacher
+from Modelo.aux_functions import Aux_functions
+from Modelo.Teacher.languageTeacher import LanguageTeacher
 
 class Servidor:
-    def __init__(self, lang = "es", stt = "local", whisperSize = "small" , llm = "remoto", llmSel = "Gemma", tts = "local"):
+    def __init__(self):
 
         
         ##Server configs
         self.app = Flask(__name__)
         self.app.secret_key = 'tu_clave_secreta'
         self.aux = Aux_functions()
-        self.teacherMode = LanguageTeacher(lang)
+      
         ## Adding rules
         self.app.add_url_rule('/', 'register_user', self.register_user, methods=['GET'])
         self.app.add_url_rule('/upload_wav', 'upload_wav', self.upload_wav, methods=['POST'])
@@ -25,17 +25,7 @@ class Servidor:
         self.app.add_url_rule('/logout', 'logout', self.logout, methods=['GET'])
         ## Server variables
         #self.systemMessage = "You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 1 question. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Not everyone can be a B2. Look the tenses, the complexiti of the phrases. Please be more accurate Speak every time in spanish. Ademas necesito que transcribas lo numeros, por ejemplo si hay un 12 quiero que pongas doce , o si pone B1 pongas be uno si pone a2 que pongas a dos, El mensaje en el que vaya la puntuacion evaluacion final quiero que empiece por [END]"
-        self.lang = lang
         
-        ##Interface Config
-        try:
-            self.systemMessage = Aux_functions.selectSysMessage(lang)
-            self.STT = Aux_functions.createSTT(stt, whisperSize)
-            self.LLM = Aux_functions.createLLM(llm)
-            self.TTS = Aux_functions.createTTS(tts,lang)
-        except Exception as e:
-            self.app.logger.error('Unhandled exception occurred. Leaving...', exc_info=e)
-            sys.exit(-1)
 
 
 
@@ -169,19 +159,46 @@ class Servidor:
     
 
         
-    def run(self, debug, port = 5000):
+    def run(self, language = "es", stt = "local", whisperSize = "small" , llm = "remoto", localModels = "Gemma", tts = "local", port = 5000):
         
+        #Set logger
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         file_handler = logging.FileHandler('app.log')
         file_handler.setFormatter(formatter)
         self.app.logger.addHandler(file_handler)
         self.app.logger.setLevel(logging.DEBUG)
         self.app.logger.critical(f'Server Start ')
+
+        #Set Interfaces
+        print("Language:", language)
+        print("STT:", stt)
+        print("WhisperSize:", whisperSize)
+        print("LLM:", llm)
+        print("TTS:", tts)
         
-        self.app.run(debug=debug,host='0.0.0.0', port=port,  use_reloader=False)
+        print("Local Models:", localModels)
+        print("Port:", port)
+        
+        self.teacherMode = LanguageTeacher(language)
+        self.lang = language
+        
+        ##Interface Config
+        try:
+            self.systemMessage = Aux_functions.selectSysMessage(language)
+            self.STT = Aux_functions.createSTT(stt, whisperSize)
+            self.LLM = Aux_functions.createLLM(llm)
+            self.TTS = Aux_functions.createTTS(tts,language)
+        except Exception as e:
+            self.app.logger.error('Unhandled exception occurred. Leaving...', exc_info=e)
+            sys.exit(-1)
+       
+        self.app.run(debug=True,host='0.0.0.0', port=port,  use_reloader=False)
+       
 
+    def serverHelloWorld(self): 
+        print("Hello word")
 
-
+## def main ()
 if __name__ == '__main__':
     arguments_number  = len(sys.argv) - 1
     if(arguments_number == 0): #When args not given

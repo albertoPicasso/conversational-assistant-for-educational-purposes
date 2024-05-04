@@ -1,5 +1,5 @@
 from .teacherInterface import TeacherInterface
-from aux_functions import Aux_functions
+
 
 ## Implementation of LlmInterface using OpenAI API
 
@@ -26,7 +26,7 @@ class LanguageTeacher(TeacherInterface):
         return False 
     
     
-    def evaluation(self, message_list, last_message, LLM ):
+    def evaluation(self, message_list, last_message, LLM )-> str:
         chat =  []
         #Create the systemMessage
         keyString  = (
