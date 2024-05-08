@@ -7,7 +7,7 @@ import base64
 import sys
 
 from Modelo.aux_functions import Aux_functions
-from Modelo.Teacher.languageTeacher import LanguageTeacher
+
 
 class Servidor:
     def __init__(self):
@@ -179,7 +179,7 @@ class Servidor:
         print("Local Models:", localModels)
         print("Port:", port)
         
-        self.teacherMode = LanguageTeacher(language)
+        
         self.lang = language
         
         ##Interface Config
@@ -188,6 +188,7 @@ class Servidor:
             self.STT = Aux_functions.createSTT(stt, whisperSize)
             self.LLM = Aux_functions.createLLM(llm)
             self.TTS = Aux_functions.createTTS(tts,language)
+            self.teacherMode = Aux_functions.createLenguageTeacher(self.lang)
         except Exception as e:
             self.app.logger.error('Unhandled exception occurred. Leaving...', exc_info=e)
             sys.exit(-1)

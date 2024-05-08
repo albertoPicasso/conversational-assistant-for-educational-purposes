@@ -4,6 +4,7 @@ from Modelo.STTFolder.remoteWhisper import RemoteWhisper
 from Modelo.LLMFolder.openAIAPI import OpenAIAPI
 from Modelo.TTSFolder.coquiTTS import CoquiTTS
 from Modelo.TTSFolder.openAITTS import OpenAITTS
+from Modelo.TeacherFolder.languageTeacher import LanguageTeacher
 
 import os
 from openai import OpenAI
@@ -148,6 +149,10 @@ class Aux_functions:
             return tts
         else: 
             raise TypeError("Error creating TTS")
+        
+    def createLenguageTeacher(lang: str):
+        tm = LanguageTeacher(lang)
+        return tm
         
     def selectSysMessage(lang:str):
         """

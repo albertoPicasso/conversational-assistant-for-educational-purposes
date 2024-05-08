@@ -9,3 +9,22 @@
 2024-05-08 19:50:53,500 - INFO - Processed audio from - id f7d4507d-a9e1-418f-8a23-162361f2f3fa 
 2024-05-08 19:51:15,205 - INFO - Processed audio from - id f7d4507d-a9e1-418f-8a23-162361f2f3fa 
 2024-05-08 19:51:29,665 - INFO - - Logout user Succsessfully - id f7d4507d-a9e1-418f-8a23-162361f2f3fa /  
+2024-05-08 19:58:50,076 - CRITICAL - Server Start 
+2024-05-08 19:59:20,930 - INFO - - User Register Succsessfully id 178a2f25-ad78-41a3-8349-6d5c9841a250 / ip 192.168.0.13 
+2024-05-08 19:59:40,376 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/servidor.py", line 105, in upload_wav
+    isEnd = self.teacherMode.checkEndChat(response)
+AttributeError: 'NoneType' object has no attribute 'checkEndChat'
+2024-05-08 19:59:57,067 - INFO - - Logout user Succsessfully - id 178a2f25-ad78-41a3-8349-6d5c9841a250 /  
+2024-05-08 20:00:01,171 - INFO - - User Register Succsessfully id 65148f1c-a70d-4946-b621-fee81354e7a4 / ip 192.168.0.13 
+2024-05-08 20:00:21,942 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/servidor.py", line 105, in upload_wav
+    isEnd = self.teacherMode.checkEndChat(response)
+AttributeError: 'NoneType' object has no attribute 'checkEndChat'
+2024-05-08 20:00:30,757 - INFO - - Logout user Succsessfully - id 65148f1c-a70d-4946-b621-fee81354e7a4 /  
+2024-05-08 20:01:26,444 - CRITICAL - Server Start 
+2024-05-08 20:01:49,001 - INFO - - User Register Succsessfully id d69bc736-2c27-459d-964f-072efe99a7b3 / ip 192.168.0.13 
+2024-05-08 20:02:05,225 - INFO - Processed audio from - id d69bc736-2c27-459d-964f-072efe99a7b3 
+2024-05-08 20:02:10,837 - INFO - - Logout user Succsessfully - id d69bc736-2c27-459d-964f-072efe99a7b3 /  
