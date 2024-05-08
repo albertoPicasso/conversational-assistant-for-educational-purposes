@@ -127,7 +127,11 @@ class Aux_functions:
         Raises:
         - TypeError: If an unrecognized TTS system type or language is specified.
         """
-        
+        ##If error change max_len = 5000 in 
+        #gedit /home/al/Escritorio/TFG_env/lib/python3.10/site-packages/TTS/tts/layers/generic/pos_encoding.py
+        ##Delete models in 
+        # /home/al/.local/share/tts/tts_models--en--multi-dataset--tortoise-v2
+
         if (tts == "remoto"): 
             tts = OpenAITTS("onyx")
             return tts
@@ -135,7 +139,9 @@ class Aux_functions:
             tts = CoquiTTS("tts_models/es/css10/vits")
             return tts 
         elif (tts == "local" and lang == "en"): 
-            tts = CoquiTTS("tts_models/en/ljspeech/fast_pitch")
+            #tts = CoquiTTS("tts_models/en/ljspeech/fast_pitch")tts_models/en/multi-dataset/tortoise-v2
+            tts = CoquiTTS("tts_models/en/ljspeech/vits")
+            #tts = CoquiTTS("tts_models/en/multi-dataset/tortoise-v2")
             return tts
         elif (tts == "local" and lang == "de"): 
             tts = CoquiTTS("tts_models/de/css10/vits-neon")

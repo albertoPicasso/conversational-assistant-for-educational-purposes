@@ -20,7 +20,7 @@ public class Cliente : MonoBehaviour
     private string filePath = "AudioRecorded.wav";                    
     static private HttpClient httpClient = new HttpClient();                        //Mantiene el estado entre llamadas                   
     static public string SERVER_URL = "http://192.168.0.16:5000";
-    private ServerRequests sr = new ServerRequests(SERVER_URL, httpClient);
+    private ServerRequests sr = new ServerRequestsController(SERVER_URL, httpClient);
     public Animator dashiAnimator;
 
 
@@ -292,7 +292,7 @@ public static class WavUtility
 }
 
 
-public class ServerRequests
+public class ServerRequestsController
 {
     //Esta clase se encarga directamente del trato con el servidor 
     private string serverUrl;
