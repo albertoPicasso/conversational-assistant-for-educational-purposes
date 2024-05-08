@@ -1,0 +1,11 @@
+2024-05-08 19:31:43,637 - CRITICAL - Server Start 
+2024-05-08 19:44:32,471 - CRITICAL - Server Start 
+2024-05-08 19:46:33,575 - INFO - - User Register Succsessfully id e555bbf5-6e04-4a15-801d-02202c85fb12 / ip 192.168.0.13 
+2024-05-08 19:48:22,181 - INFO - Processed audio from - id e555bbf5-6e04-4a15-801d-02202c85fb12 
+2024-05-08 19:48:53,696 - INFO - - Logout user Succsessfully - id e555bbf5-6e04-4a15-801d-02202c85fb12 /  
+2024-05-08 19:49:04,595 - INFO - - User Register Succsessfully id f7d4507d-a9e1-418f-8a23-162361f2f3fa / ip 192.168.0.13 
+2024-05-08 19:49:29,803 - INFO - Processed audio from - id f7d4507d-a9e1-418f-8a23-162361f2f3fa 
+2024-05-08 19:49:50,619 - INFO - Processed audio from - id f7d4507d-a9e1-418f-8a23-162361f2f3fa 
+2024-05-08 19:50:53,500 - INFO - Processed audio from - id f7d4507d-a9e1-418f-8a23-162361f2f3fa 
+2024-05-08 19:51:15,205 - INFO - Processed audio from - id f7d4507d-a9e1-418f-8a23-162361f2f3fa 
+2024-05-08 19:51:29,665 - INFO - - Logout user Succsessfully - id f7d4507d-a9e1-418f-8a23-162361f2f3fa /  

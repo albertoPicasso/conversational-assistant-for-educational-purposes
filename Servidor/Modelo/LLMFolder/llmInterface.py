@@ -6,7 +6,7 @@ class LlmInterface(ABC):
     language models (LLMs).
     """
 
-    @abstractmethod
+
     def request_to_llm(self, chat) -> str:
         """
         Sends a request to a llm.
@@ -17,4 +17,4 @@ class LlmInterface(ABC):
         Returns:
             str: The response from the LLM. ONLY STRING NO COMPLETE JSON 
         """
-        pass
+
