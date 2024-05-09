@@ -1,30 +1,31 @@
-2024-05-08 19:31:43,637 - CRITICAL - Server Start 
-2024-05-08 19:44:32,471 - CRITICAL - Server Start 
-2024-05-08 19:46:33,575 - INFO - - User Register Succsessfully id e555bbf5-6e04-4a15-801d-02202c85fb12 / ip 192.168.0.13 
-2024-05-08 19:48:22,181 - INFO - Processed audio from - id e555bbf5-6e04-4a15-801d-02202c85fb12 
-2024-05-08 19:48:53,696 - INFO - - Logout user Succsessfully - id e555bbf5-6e04-4a15-801d-02202c85fb12 /  
-2024-05-08 19:49:04,595 - INFO - - User Register Succsessfully id f7d4507d-a9e1-418f-8a23-162361f2f3fa / ip 192.168.0.13 
-2024-05-08 19:49:29,803 - INFO - Processed audio from - id f7d4507d-a9e1-418f-8a23-162361f2f3fa 
-2024-05-08 19:49:50,619 - INFO - Processed audio from - id f7d4507d-a9e1-418f-8a23-162361f2f3fa 
-2024-05-08 19:50:53,500 - INFO - Processed audio from - id f7d4507d-a9e1-418f-8a23-162361f2f3fa 
-2024-05-08 19:51:15,205 - INFO - Processed audio from - id f7d4507d-a9e1-418f-8a23-162361f2f3fa 
-2024-05-08 19:51:29,665 - INFO - - Logout user Succsessfully - id f7d4507d-a9e1-418f-8a23-162361f2f3fa /  
-2024-05-08 19:58:50,076 - CRITICAL - Server Start 
-2024-05-08 19:59:20,930 - INFO - - User Register Succsessfully id 178a2f25-ad78-41a3-8349-6d5c9841a250 / ip 192.168.0.13 
-2024-05-08 19:59:40,376 - ERROR - Unhandled exception occurred
+2024-05-09 12:45:16,060 - CRITICAL - Server Start 
+2024-05-09 12:52:28,795 - CRITICAL - Server Start 
+2024-05-09 12:58:56,250 - CRITICAL - Server Start 
+2024-05-09 13:07:48,320 - CRITICAL - Server Start 
+2024-05-09 13:08:17,611 - INFO - - User Register Succsessfully id 83c08612-8113-4910-af7e-650b270abb38 / ip 192.168.0.13 
+2024-05-09 13:08:36,106 - ERROR - Unhandled exception occurred
 Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG/Servidor/Modelo/servidor.py", line 105, in upload_wav
-    isEnd = self.teacherMode.checkEndChat(response)
-AttributeError: 'NoneType' object has no attribute 'checkEndChat'
-2024-05-08 19:59:57,067 - INFO - - Logout user Succsessfully - id 178a2f25-ad78-41a3-8349-6d5c9841a250 /  
-2024-05-08 20:00:01,171 - INFO - - User Register Succsessfully id 65148f1c-a70d-4946-b621-fee81354e7a4 / ip 192.168.0.13 
-2024-05-08 20:00:21,942 - ERROR - Unhandled exception occurred
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG/Servidor/Modelo/servidor.py", line 105, in upload_wav
-    isEnd = self.teacherMode.checkEndChat(response)
-AttributeError: 'NoneType' object has no attribute 'checkEndChat'
-2024-05-08 20:00:30,757 - INFO - - Logout user Succsessfully - id 65148f1c-a70d-4946-b621-fee81354e7a4 /  
-2024-05-08 20:01:26,444 - CRITICAL - Server Start 
-2024-05-08 20:01:49,001 - INFO - - User Register Succsessfully id d69bc736-2c27-459d-964f-072efe99a7b3 / ip 192.168.0.13 
-2024-05-08 20:02:05,225 - INFO - Processed audio from - id d69bc736-2c27-459d-964f-072efe99a7b3 
-2024-05-08 20:02:10,837 - INFO - - Logout user Succsessfully - id d69bc736-2c27-459d-964f-072efe99a7b3 /  
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 157, in upload_wav
+    outname = self.TTS.speak(response, user_id)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/TTSFolder/coquiTTS.py", line 47, in speak
+    self.TTS.tts_to_file(text=text, file_path=path, speed=1.2, split_sentences=False)
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/TTS/api.py", line 342, in tts_to_file
+    self.synthesizer.save_wav(wav=wav, path=file_path, pipe_out=pipe_out)
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/TTS/utils/synthesizer.py", line 251, in save_wav
+    save_wav(wav=wav, path=path, sample_rate=self.output_sample_rate, pipe_out=pipe_out)
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/TTS/utils/audio/numpy_transforms.py", line 447, in save_wav
+    scipy.io.wavfile.write(path, sample_rate, wav_norm)
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/scipy/io/wavfile.py", line 767, in write
+    fid = open(filename, 'wb')
+FileNotFoundError: [Errno 2] No such file or directory: '/home/al/Escritorio/TFG/83c08612-8113-4910-af7e-650b270abb38/output.wav'
+2024-05-09 13:10:34,519 - INFO - - Logout user Succsessfully - id 83c08612-8113-4910-af7e-650b270abb38 /  
+2024-05-09 13:11:18,913 - CRITICAL - Server Start 
+2024-05-09 13:11:28,668 - INFO - - User Register Succsessfully id a58e8fd8-43a9-4625-8a04-2f7055588625 / ip 192.168.0.13 
+2024-05-09 13:11:49,790 - INFO - Processed audio from - id a58e8fd8-43a9-4625-8a04-2f7055588625 
+2024-05-09 13:12:14,309 - INFO - Processed audio from - id a58e8fd8-43a9-4625-8a04-2f7055588625 
+2024-05-09 13:12:44,835 - INFO - Processed audio from - id a58e8fd8-43a9-4625-8a04-2f7055588625 
+2024-05-09 13:13:41,041 - INFO - Processed audio from - id a58e8fd8-43a9-4625-8a04-2f7055588625 
+2024-05-09 13:14:14,259 - INFO - Processed audio from - id a58e8fd8-43a9-4625-8a04-2f7055588625 
+2024-05-09 13:15:02,900 - INFO - Processed audio from - id a58e8fd8-43a9-4625-8a04-2f7055588625 
+2024-05-09 13:16:30,176 - INFO - Processed audio from - id a58e8fd8-43a9-4625-8a04-2f7055588625 
+2024-05-09 13:18:13,705 - INFO - - Logout user Succsessfully - id a58e8fd8-43a9-4625-8a04-2f7055588625 /  

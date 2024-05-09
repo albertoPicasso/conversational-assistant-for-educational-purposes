@@ -1,4 +1,4 @@
-from Modelo.servidor import Servidor
+from Modelo.serverMain import Servidor
 
 
 class ServerController: 

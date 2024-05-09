@@ -11,22 +11,63 @@ from Modelo.aux_functions import Aux_functions
 
 class Servidor:
     def __init__(self):
-
         
         ##Server configs
         self.app = Flask(__name__)
         self.app.secret_key = 'tu_clave_secreta'
         self.aux = Aux_functions()
-      
+
         ## Adding rules
         self.app.add_url_rule('/', 'register_user', self.register_user, methods=['GET'])
         self.app.add_url_rule('/upload_wav', 'upload_wav', self.upload_wav, methods=['POST'])
         self.app.add_url_rule('/ping', 'ping', self.ping, methods=['GET'])
         self.app.add_url_rule('/logout', 'logout', self.logout, methods=['GET'])
+        
+        folder_path = "tempUserData"
+        ##Create data container
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+        
         ## Server variables
         #self.systemMessage = "You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 1 question. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Not everyone can be a B2. Look the tenses, the complexiti of the phrases. Please be more accurate Speak every time in spanish. Ademas necesito que transcribas lo numeros, por ejemplo si hay un 12 quiero que pongas doce , o si pone B1 pongas be uno si pone a2 que pongas a dos, El mensaje en el que vaya la puntuacion evaluacion final quiero que empiece por [END]"
         
 
+      
+    def run(self, language = "es", stt = "local", whisperSize = "small" , llm = "remoto", localModels = "Gemma", tts = "local", port = 5000):
+        
+        #Set logger
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        file_handler = logging.FileHandler('app.log')
+        file_handler.setFormatter(formatter)
+        self.app.logger.addHandler(file_handler)
+        self.app.logger.setLevel(logging.DEBUG)
+        self.app.logger.critical(f'Server Start ')
+
+        #Set Interfaces
+        print("Language:", language)
+        print("STT:", stt)
+        print("WhisperSize:", whisperSize)
+        print("LLM:", llm)
+        print("TTS:", tts)
+        
+        print("Local Models:", localModels)
+        print("Port:", port)
+        
+        
+        self.lang = language
+        
+        ##Interface Config
+        try:
+            self.systemMessage = Aux_functions.selectSysMessage(language)
+            self.STT = Aux_functions.createSTT(stt, whisperSize)
+            self.LLM = Aux_functions.createLLM(llm)
+            self.TTS = Aux_functions.createTTS(tts,language)
+            self.teacherMode = Aux_functions.createLenguageTeacher(self.lang)
+        except Exception as e:
+            self.app.logger.error('Unhandled exception occurred. Leaving...', exc_info=e)
+            sys.exit(-1)
+       
+        self.app.run(debug=True,host='0.0.0.0', port=port,  use_reloader=False)
 
 
     def register_user(self):
@@ -85,7 +126,7 @@ class Servidor:
 
             # Save the received file in client folder in server
             filename = 'inputServ.wav'
-            path = os.path.join(os.getcwd(), user_id, filename)
+            path = os.path.join(os.getcwd(), "tempUserData",user_id, filename)
             wav.save(path)
 
             # Get session state
@@ -142,8 +183,10 @@ class Servidor:
             if 'user_id' in session:
                 user_id = session['user_id']
                 session.pop('user_id')
+                "tempUserData"
             # Remove client directory 
-            os.system(f'rm -rf {user_id}')
+            path = os.path.join(os.getcwd(), "tempUserData",user_id)
+            os.system(f'rm -rf {path}')
             self.app.logger.info (f'- Logout user Succsessfully - id {user_id} /  ')
             return 'Logout successfully.', 200
                 
@@ -151,50 +194,10 @@ class Servidor:
             self.app.logger.error('Unhandled exception occurred', exc_info=e)
             return f"An error occurred: {str(e)}", 500
 
-    
-
 
     def ping(self): 
         return "pong"
     
-
-        
-    def run(self, language = "es", stt = "local", whisperSize = "small" , llm = "remoto", localModels = "Gemma", tts = "local", port = 5000):
-        
-        #Set logger
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-        file_handler = logging.FileHandler('app.log')
-        file_handler.setFormatter(formatter)
-        self.app.logger.addHandler(file_handler)
-        self.app.logger.setLevel(logging.DEBUG)
-        self.app.logger.critical(f'Server Start ')
-
-        #Set Interfaces
-        print("Language:", language)
-        print("STT:", stt)
-        print("WhisperSize:", whisperSize)
-        print("LLM:", llm)
-        print("TTS:", tts)
-        
-        print("Local Models:", localModels)
-        print("Port:", port)
-        
-        
-        self.lang = language
-        
-        ##Interface Config
-        try:
-            self.systemMessage = Aux_functions.selectSysMessage(language)
-            self.STT = Aux_functions.createSTT(stt, whisperSize)
-            self.LLM = Aux_functions.createLLM(llm)
-            self.TTS = Aux_functions.createTTS(tts,language)
-            self.teacherMode = Aux_functions.createLenguageTeacher(self.lang)
-        except Exception as e:
-            self.app.logger.error('Unhandled exception occurred. Leaving...', exc_info=e)
-            sys.exit(-1)
-       
-        self.app.run(debug=True,host='0.0.0.0', port=port,  use_reloader=False)
-       
 
     def serverHelloWorld(self): 
         print("Hello word")

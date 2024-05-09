@@ -53,7 +53,7 @@ class Aux_functions:
         None
         """
         #Path to new directory / folder
-        path_to_directory = os.path.join(os.getcwd(), name)
+        path_to_directory = os.path.join(os.getcwd(), "tempUserData",name)
         os.mkdir(path_to_directory)
 
     def createSTT(stt:str, whisperSize:str):

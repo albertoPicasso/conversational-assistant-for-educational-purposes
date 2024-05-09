@@ -42,7 +42,7 @@ class CoquiTTS(TtsInterface):
         # if the request fail throw an exception and will be catched at the top funcion
         # Define the output filename
         name = "output.wav"  
-        path = os.path.join(os.getcwd(), uid, name)
+        path = os.path.join(os.getcwd(), "tempUserData", uid, name)
         # Perform text-to-speech synthesis and save audio
         self.TTS.tts_to_file(text=text, file_path=path, speed=1.2, split_sentences=False)
 
