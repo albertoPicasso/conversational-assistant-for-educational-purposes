@@ -255,7 +255,6 @@ class Aux_functions:
         """ Añade un nuevo usuario a la tabla 'usuarios' con la contraseña hasheada. """
 
         conn = sqlite3.connect('users.db')
-        print("Conexión establecida a la base de datos.")
       
         salt = bcrypt.gensalt()
         pass_hashed = bcrypt.hashpw(contrasena.encode('utf-8'), salt)
@@ -279,6 +278,7 @@ class Aux_functions:
 
         cursor = conn.cursor()
         # Select the hashed password for the provided username
+        
         cursor.execute('SELECT contrasena FROM usuarios WHERE usuario = ?', (username,))
         result = cursor.fetchone()
 

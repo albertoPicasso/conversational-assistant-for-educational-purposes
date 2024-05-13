@@ -31,7 +31,10 @@ class Servidor:
             os.makedirs(folder_path)
         
         ##Create database if not exist
-        
+        conn = Aux_functions.create_conexion('users.db')
+        if conn:
+            Aux_functions.create_table(conn)
+            conn.close()
         Aux_functions.add_user('Alberto M', 'al', 'al')
         
       
@@ -87,12 +90,18 @@ class Servidor:
                 print(username, password)
 
                 flag = Aux_functions.verify_user(username, password)
+                ip_address = request.remote_addr
+
+            
                 if (flag):
+                    self.app.logger.info (f'- User Logged Succsessfully ip {ip_address} ')
                     return "Verifing user: OK", 200
                 else:
-                   return "Verifing user: NOT OK", 401     
+                    self.app.logger.info (f'- User attemped to log ip {ip_address} ')
+                    return "Verifing user: NOT OK", 401     
+                
             else : 
-                print("no Json")
+                self.app.logger.info (f'- Bad format ip {ip_address} ')
         except Exception as e:
             self.app.logger.error('Unhandled exception occurred', exc_info=e)
             return 'Error verifing user: {}'.format(str(e)), 500
