@@ -9,6 +9,9 @@ from Modelo.TeacherFolder.languageTeacher import LanguageTeacher
 import os
 from openai import OpenAI
 
+import sqlite3
+import bcrypt
+
 class Aux_functions:
 
     
@@ -224,3 +227,77 @@ class Aux_functions:
             new_text = new_text.replace("C1", "tseh eins")
             new_text = new_text.replace("C2", "tseh zwei")
             return new_text
+    
+    
+    def create_conexion(db_file):
+        """ Crea una conexión a la base de datos SQLite especificada por db_file. """
+        conn = None
+        try:
+            conn = sqlite3.connect(db_file)
+            print("Conexión establecida a la base de datos.")
+        except sqlite3.Error as e:
+            print(f"Error al conectar a la base de datos: {e}")
+        return conn
+    
+    def create_table(conn):
+        cursor = conn.cursor()
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            usuario TEXT NOT NULL UNIQUE,
+            contrasena TEXT NOT NULL
+        )
+        ''')
+        
+
+    def add_user( nombre, usuario, contrasena):
+        """ Añade un nuevo usuario a la tabla 'usuarios' con la contraseña hasheada. """
+
+        conn = sqlite3.connect('users.db')
+        print("Conexión establecida a la base de datos.")
+      
+        salt = bcrypt.gensalt()
+        pass_hashed = bcrypt.hashpw(contrasena.encode('utf-8'), salt)
+
+        try:
+            cursor = conn.cursor()
+            cursor.execute('INSERT INTO usuarios (nombre, usuario, contrasena) VALUES (?, ?, ?)', (nombre, usuario, pass_hashed))
+            conn.commit()
+            print("Usuario añadido con éxito.")
+        except sqlite3.Error as e:
+            print(f"Error al añadir usuario: {e}")
+
+
+
+    def verify_user(username, password):
+        """ Verifies if the provided credentials are correct by comparing them with the database. """
+
+        conn = sqlite3.connect('users.db')
+
+        print(username)
+
+        cursor = conn.cursor()
+        # Select the hashed password for the provided username
+        cursor.execute('SELECT contrasena FROM usuarios WHERE usuario = ?', (username,))
+        result = cursor.fetchone()
+
+        if result is None:
+            print("User not found.")
+            return False
+
+        pass_hashed = result[0]
+
+        # Compare the provided password with the stored hashed password
+        if bcrypt.checkpw(password.encode('utf-8'), pass_hashed):
+            print("Authentication successful.")
+            return True
+        else:
+            print("Authentication failed.")
+            return False
+
+        
+
+
+
+    

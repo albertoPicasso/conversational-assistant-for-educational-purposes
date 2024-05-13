@@ -1,0 +1,101 @@
+2024-05-13 13:34:33,746 - CRITICAL - Server Start 
+2024-05-13 13:41:20,200 - CRITICAL - Server Start 
+2024-05-13 13:44:11,770 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 90, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 281, in verify_user
+    cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+sqlite3.OperationalError: no such table: users
+2024-05-13 13:44:33,793 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 90, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 281, in verify_user
+    cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+sqlite3.OperationalError: no such table: users
+2024-05-13 13:45:52,295 - CRITICAL - Server Start 
+2024-05-13 13:46:49,634 - CRITICAL - Server Start 
+2024-05-13 13:47:11,602 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 91, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 281, in verify_user
+    cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+sqlite3.OperationalError: no such table: users
+2024-05-13 13:51:07,644 - CRITICAL - Server Start 
+2024-05-13 13:53:28,814 - CRITICAL - Server Start 
+2024-05-13 15:33:39,263 - CRITICAL - Server Start 
+2024-05-13 15:36:22,054 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 90, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 281, in verify_user
+    cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+sqlite3.OperationalError: no such table: users
+2024-05-13 15:36:47,100 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 90, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 281, in verify_user
+    cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+sqlite3.OperationalError: no such table: users
+2024-05-13 15:36:53,859 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 90, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 281, in verify_user
+    cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+sqlite3.OperationalError: no such table: users
+2024-05-13 15:38:58,826 - CRITICAL - Server Start 
+2024-05-13 15:41:13,154 - CRITICAL - Server Start 
+2024-05-13 15:41:22,559 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 90, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 281, in verify_user
+    cursor.execute('SELECT contrasena FROM usuarios WHERE usuario = ?', (username))
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 1, and there are 2 supplied.
+2024-05-13 15:42:00,689 - CRITICAL - Server Start 
+2024-05-13 15:44:29,032 - CRITICAL - Server Start 
+2024-05-13 15:46:35,414 - CRITICAL - Server Start 
+2024-05-13 15:46:45,737 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 90, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 284, in verify_user
+    cursor.execute(aux)
+sqlite3.OperationalError: no such column: al
+2024-05-13 15:46:51,673 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 90, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 284, in verify_user
+    cursor.execute(aux)
+sqlite3.OperationalError: no such column: al
+2024-05-13 15:46:52,492 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 90, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 284, in verify_user
+    cursor.execute(aux)
+sqlite3.OperationalError: no such column: al
+2024-05-13 15:46:52,611 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 90, in logIn
+    flag = Aux_functions.verify_user(username, password)
+  File "/home/al/Escritorio/TFG/Servidor/Modelo/aux_functions.py", line 284, in verify_user
+    cursor.execute(aux)
+sqlite3.OperationalError: no such column: al
+2024-05-13 15:48:51,086 - CRITICAL - Server Start 
+2024-05-13 15:50:15,537 - CRITICAL - Server Start 
+2024-05-13 15:59:08,980 - INFO - - User Register Succsessfully id b226ade4-7c86-45ef-a06c-722f9dd8094b / ip 192.168.0.13 
+2024-05-13 15:59:39,276 - INFO - - Logout user Succsessfully - id b226ade4-7c86-45ef-a06c-722f9dd8094b /  
+2024-05-13 16:00:01,095 - CRITICAL - Server Start 
+2024-05-13 16:01:39,709 - INFO - - User Register Succsessfully id 9571fc3d-6a27-454c-9b9c-3d2ef88c6e19 / ip 192.168.0.13 
+2024-05-13 16:02:16,364 - INFO - Processed audio from - id 9571fc3d-6a27-454c-9b9c-3d2ef88c6e19 
+2024-05-13 16:02:46,852 - INFO - Processed audio from - id 9571fc3d-6a27-454c-9b9c-3d2ef88c6e19 
+2024-05-13 16:02:57,013 - INFO - - Logout user Succsessfully - id 9571fc3d-6a27-454c-9b9c-3d2ef88c6e19 /  
+2024-05-13 16:03:05,520 - INFO - - User Register Succsessfully id 1d9e4b25-f2ab-4210-9244-a3586b1baf16 / ip 192.168.0.13 
+2024-05-13 16:03:17,647 - INFO - Processed audio from - id 1d9e4b25-f2ab-4210-9244-a3586b1baf16 
+2024-05-13 16:03:21,800 - INFO - - Logout user Succsessfully - id 1d9e4b25-f2ab-4210-9244-a3586b1baf16 /  

@@ -5,6 +5,7 @@ from openai import OpenAI
 import logging
 import base64
 import sys
+import sqlite3
 
 from Modelo.aux_functions import Aux_functions
 
@@ -18,20 +19,21 @@ class Servidor:
         self.aux = Aux_functions()
 
         ## Adding rules
-        self.app.add_url_rule('/', 'register_user', self.register_user, methods=['GET'])
+        self.app.add_url_rule('/', 'register_user', self.register_user_session, methods=['GET'])
         self.app.add_url_rule('/upload_wav', 'upload_wav', self.upload_wav, methods=['POST'])
         self.app.add_url_rule('/ping', 'ping', self.ping, methods=['GET'])
         self.app.add_url_rule('/logout', 'logout', self.logout, methods=['GET'])
+        self.app.add_url_rule('/logIn', 'login', self.logIn, methods=['POST'])
         
         folder_path = "tempUserData"
         ##Create data container
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
         
-        ## Server variables
-        #self.systemMessage = "You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 1 question. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Not everyone can be a B2. Look the tenses, the complexiti of the phrases. Please be more accurate Speak every time in spanish. Ademas necesito que transcribas lo numeros, por ejemplo si hay un 12 quiero que pongas doce , o si pone B1 pongas be uno si pone a2 que pongas a dos, El mensaje en el que vaya la puntuacion evaluacion final quiero que empiece por [END]"
+        ##Create database if not exist
         
-
+        Aux_functions.add_user('Alberto M', 'al', 'al')
+        
       
     def run(self, language = "es", stt = "local", whisperSize = "small" , llm = "remoto", localModels = "Gemma", tts = "local", port = 5000):
         
@@ -44,6 +46,7 @@ class Servidor:
         self.app.logger.critical(f'Server Start ')
 
         #Set Interfaces
+        """
         print("Language:", language)
         print("STT:", stt)
         print("WhisperSize:", whisperSize)
@@ -52,7 +55,7 @@ class Servidor:
         
         print("Local Models:", localModels)
         print("Port:", port)
-        
+        """
         
         self.lang = language
         
@@ -63,6 +66,7 @@ class Servidor:
             self.LLM = Aux_functions.createLLM(llm)
             self.TTS = Aux_functions.createTTS(tts,language)
             self.teacherMode = Aux_functions.createLenguageTeacher(self.lang)
+            print("Server is ready")
         except Exception as e:
             self.app.logger.error('Unhandled exception occurred. Leaving...', exc_info=e)
             sys.exit(-1)
@@ -70,7 +74,31 @@ class Servidor:
         self.app.run(debug=True,host='0.0.0.0', port=port,  use_reloader=False)
 
 
-    def register_user(self):
+    def logIn(self):
+        ##Get data from Json
+        
+        try:
+            if request.is_json:
+                data = request.get_json()
+                print(data)
+                # Extraer username y password
+                username = data.get('username')
+                password = data.get('password')
+                print(username, password)
+
+                flag = Aux_functions.verify_user(username, password)
+                if (flag):
+                    return "Verifing user: OK", 200
+                else:
+                   return "Verifing user: NOT OK", 401     
+            else : 
+                print("no Json")
+        except Exception as e:
+            self.app.logger.error('Unhandled exception occurred', exc_info=e)
+            return 'Error verifing user: {}'.format(str(e)), 500
+
+
+    def register_user_session(self):
         try:
             # Give a user_id if user is not registered
             if 'user_id' not in session:
