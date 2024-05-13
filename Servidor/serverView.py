@@ -193,4 +193,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = ServerView(root)
     root.mainloop()
- 

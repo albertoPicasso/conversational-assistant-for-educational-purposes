@@ -26,7 +26,7 @@ class OpenAITTS(TtsInterface):
         # Define the output filename
         name = "salida.mp3"  
         namewav = "salida.wav"
-        path = os.path.join(os.getcwd(),  "tempUserData", uid, name)
+        path = os.path.join(os.getcwd(), "tempUserData", uid, name)
         # Perform text-to-speech synthesis and save audio
         response = self.client.audio.speech.create(
             model="tts-1",
@@ -40,7 +40,7 @@ class OpenAITTS(TtsInterface):
         #Load .mp3 in memory 
         audio = AudioSegment.from_mp3(path)
 
-        path = os.path.join(os.getcwd(), uid, namewav)
+        path = os.path.join(os.getcwd(), "tempUserData",uid, namewav)
         #Convert mp3 to wav
         audio.export(path, format="wav")
 
