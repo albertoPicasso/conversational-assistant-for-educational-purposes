@@ -73,15 +73,17 @@ class Servidor:
             if request.is_json:
                 
                 data = request.get_json()
+                ip_address = request.remote_addr
                 name = data.get('name')
                 username = data.get('username')
                 password = data.get('password')
                 try:
                     Aux_functions.add_user(name, username, password)
                 except sqlite3.Error as e:
-                    print(f"Error al añadir usuario: {e}")
+                    self.app.logger.info (f'- User attemped to register / ip {ip_address} ')
                     return "User already exist", 409
                 
+                self.app.logger.info (f'- User Register Succsessfully ip {ip_address} ')
                 return "ok", 200
 
         except Exception as e:
@@ -93,14 +95,12 @@ class Servidor:
         try:
             if request.is_json:
                 data = request.get_json()
-                # Extraer username y password
                 username = data.get('username')
                 password = data.get('password')
 
                 flag = Aux_functions.verify_user(username, password)
                 ip_address = request.remote_addr
 
-            
                 if (flag):
                     self.app.logger.info (f'- User Logged Succsessfully ip {ip_address} ')
                     return "Verifing user: OK", 200
@@ -110,6 +110,7 @@ class Servidor:
                 
             else : 
                 self.app.logger.info (f'- Bad format ip {ip_address} ')
+                return "something failed", 500
         except Exception as e:
             self.app.logger.error('Unhandled exception occurred', exc_info=e)
             return 'Error verifing user: {}'.format(str(e)), 500
@@ -266,5 +267,3 @@ if __name__ == '__main__':
         print("Invalid arguments number") 
         exit (-1)
     
-    #servidor = Servidor()
-    #servidor.run(debug=False)

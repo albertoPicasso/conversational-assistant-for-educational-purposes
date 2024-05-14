@@ -1,146 +1,16 @@
-2024-05-14 20:23:50,928 - CRITICAL - Server Start 
-2024-05-14 20:30:20,030 - ERROR - Unhandled exception occurred
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 608, in get_json
-    rv = self.json_module.loads(data)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/flask/json/provider.py", line 187, in loads
-    return json.loads(s, **kwargs)
-  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
-    return _default_decoder.decode(s)
-  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "/usr/lib/python3.10/json/decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-json.decoder.JSONDecodeError: Expecting ':' delimiter: line 1 column 8 (char 7)
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 71, in register_new_user
-    if request.is_json:
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 617, in get_json
-    rv = self.on_json_loading_failed(e)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/flask/wrappers.py", line 131, in on_json_loading_failed
-    return super().on_json_loading_failed(e)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 642, in on_json_loading_failed
-    raise BadRequest(f"Failed to decode JSON object: {e}")
-werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: Expecting ':' delimiter: line 1 column 8 (char 7)
-2024-05-14 20:32:59,791 - CRITICAL - Server Start 
-2024-05-14 20:33:14,636 - ERROR - Unhandled exception occurred
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 608, in get_json
-    rv = self.json_module.loads(data)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/flask/json/provider.py", line 187, in loads
-    return json.loads(s, **kwargs)
-  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
-    return _default_decoder.decode(s)
-  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "/usr/lib/python3.10/json/decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-json.decoder.JSONDecodeError: Expecting ':' delimiter: line 1 column 8 (char 7)
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 73, in register_new_user
-    data = request.get_json()
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 617, in get_json
-    rv = self.on_json_loading_failed(e)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/flask/wrappers.py", line 131, in on_json_loading_failed
-    return super().on_json_loading_failed(e)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 642, in on_json_loading_failed
-    raise BadRequest(f"Failed to decode JSON object: {e}")
-werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: Expecting ':' delimiter: line 1 column 8 (char 7)
-2024-05-14 20:33:53,507 - ERROR - Unhandled exception occurred
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 608, in get_json
-    rv = self.json_module.loads(data)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/flask/json/provider.py", line 187, in loads
-    return json.loads(s, **kwargs)
-  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
-    return _default_decoder.decode(s)
-  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "/usr/lib/python3.10/json/decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-json.decoder.JSONDecodeError: Expecting ':' delimiter: line 1 column 8 (char 7)
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 73, in register_new_user
-    data = request.get_json()
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 617, in get_json
-    rv = self.on_json_loading_failed(e)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/flask/wrappers.py", line 131, in on_json_loading_failed
-    return super().on_json_loading_failed(e)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 642, in on_json_loading_failed
-    raise BadRequest(f"Failed to decode JSON object: {e}")
-werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: Expecting ':' delimiter: line 1 column 8 (char 7)
-2024-05-14 20:35:58,629 - CRITICAL - Server Start 
-2024-05-14 20:36:27,624 - ERROR - Unhandled exception occurred
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 608, in get_json
-    rv = self.json_module.loads(data)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/flask/json/provider.py", line 187, in loads
-    return json.loads(s, **kwargs)
-  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
-    return _default_decoder.decode(s)
-  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "/usr/lib/python3.10/json/decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-json.decoder.JSONDecodeError: Expecting ':' delimiter: line 1 column 8 (char 7)
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 73, in register_new_user
-    data = request.get_json()
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 617, in get_json
-    rv = self.on_json_loading_failed(e)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/flask/wrappers.py", line 131, in on_json_loading_failed
-    return super().on_json_loading_failed(e)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 642, in on_json_loading_failed
-    raise BadRequest(f"Failed to decode JSON object: {e}")
-werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: Expecting ':' delimiter: line 1 column 8 (char 7)
-2024-05-14 20:37:08,265 - INFO - - User Logged Succsessfully ip 192.168.0.13 
-2024-05-14 20:37:16,690 - INFO - - User attemped to log ip 192.168.0.13 
-2024-05-14 20:38:02,633 - ERROR - Unhandled exception occurred
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 608, in get_json
-    rv = self.json_module.loads(data)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/flask/json/provider.py", line 187, in loads
-    return json.loads(s, **kwargs)
-  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
-    return _default_decoder.decode(s)
-  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "/usr/lib/python3.10/json/decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-json.decoder.JSONDecodeError: Expecting ':' delimiter: line 1 column 8 (char 7)
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/al/Escritorio/TFG/Servidor/Modelo/serverMain.py", line 73, in register_new_user
-    data = request.get_json()
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 617, in get_json
-    rv = self.on_json_loading_failed(e)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/flask/wrappers.py", line 131, in on_json_loading_failed
-    return super().on_json_loading_failed(e)
-  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/werkzeug/wrappers/request.py", line 642, in on_json_loading_failed
-    raise BadRequest(f"Failed to decode JSON object: {e}")
-werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: Expecting ':' delimiter: line 1 column 8 (char 7)
-2024-05-14 20:48:07,252 - CRITICAL - Server Start 
-2024-05-14 20:49:00,205 - CRITICAL - Server Start 
-2024-05-14 20:50:36,968 - CRITICAL - Server Start 
-2024-05-14 21:00:27,256 - CRITICAL - Server Start 
-2024-05-14 21:01:22,645 - INFO - - User Logged Succsessfully ip 192.168.0.13 
-2024-05-14 21:16:26,337 - INFO - - User Logged Succsessfully ip 192.168.0.13 
-2024-05-14 21:16:26,701 - INFO - - User Logged Succsessfully ip 192.168.0.13 
-2024-05-14 21:16:29,203 - INFO - - User Logged Succsessfully ip 192.168.0.13 
-2024-05-14 21:16:30,492 - INFO - - User Logged Succsessfully ip 192.168.0.13 
-2024-05-14 21:16:31,597 - INFO - - User Logged Succsessfully ip 192.168.0.13 
-2024-05-14 21:16:32,323 - INFO - - User Logged Succsessfully ip 192.168.0.13 
+2024-05-14 21:21:00,171 - CRITICAL - Server Start 
+2024-05-14 21:21:14,083 - INFO - - User Register Succsessfully ip 192.168.0.13 
+2024-05-14 21:34:04,657 - CRITICAL - Server Start 
+2024-05-14 21:34:45,051 - INFO - - User Register Succsessfully ip 192.168.0.13 
+2024-05-14 21:34:55,672 - INFO - - User Logged Succsessfully ip 192.168.0.13 
+2024-05-14 21:34:57,644 - INFO - - User Register Succsessfully id 8a159a2c-d3f5-4814-9e3d-7635b6383d1c / ip 192.168.0.13 
+2024-05-14 21:35:46,825 - INFO - Processed audio from - id 8a159a2c-d3f5-4814-9e3d-7635b6383d1c 
+2024-05-14 21:35:59,141 - INFO - - Logout user Succsessfully - id 8a159a2c-d3f5-4814-9e3d-7635b6383d1c /  
+2024-05-14 21:45:41,461 - CRITICAL - Server Start 
+2024-05-14 21:55:17,668 - CRITICAL - Server Start 
+2024-05-14 21:56:33,857 - INFO - - User Register Succsessfully ip 192.168.0.13 
+2024-05-14 21:56:40,393 - INFO - - User Logged Succsessfully ip 192.168.0.13 
+2024-05-14 21:56:40,801 - INFO - - User Register Succsessfully id 8f0dc679-a4c4-4c7a-af4c-fc0a88baba5d / ip 192.168.0.13 
+2024-05-14 21:57:09,875 - INFO - Processed audio from - id 8f0dc679-a4c4-4c7a-af4c-fc0a88baba5d 
+2024-05-14 21:57:34,979 - INFO - Processed audio from - id 8f0dc679-a4c4-4c7a-af4c-fc0a88baba5d 
+2024-05-14 21:57:48,926 - INFO - - Logout user Succsessfully - id 8f0dc679-a4c4-4c7a-af4c-fc0a88baba5d /  

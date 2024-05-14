@@ -131,6 +131,7 @@ class Aux_functions:
         Raises:
         - TypeError: If an unrecognized TTS system type or language is specified.
         """
+
         ##If error change max_len = 5000 in 
         #gedit /home/al/Escritorio/TFG_env/lib/python3.10/site-packages/TTS/tts/layers/generic/pos_encoding.py
         ##Delete models in 
@@ -143,7 +144,6 @@ class Aux_functions:
             tts = CoquiTTS("tts_models/es/css10/vits")
             return tts 
         elif (tts == "local" and lang == "en"): 
-            #tts = CoquiTTS("tts_models/en/ljspeech/fast_pitch")tts_models/en/multi-dataset/tortoise-v2
             tts = CoquiTTS("tts_models/en/ljspeech/vits")
             #tts = CoquiTTS("tts_models/en/multi-dataset/tortoise-v2")
             return tts
@@ -153,7 +153,22 @@ class Aux_functions:
         else: 
             raise TypeError("Error creating TTS")
         
+
     def createLenguageTeacher(lang: str):
+        """
+        Creates and returns a LanguageTeacher instance for the specified language.
+
+        This function initializes a LanguageTeacher object using the provided language code.
+
+        Args:
+        - lang (str): The language code for the language teacher. 
+
+        Returns:
+        - LanguageTeacher: An instance of the LanguageTeacher class initialized with the specified language.
+
+        Raises:
+        - TypeError: If the provided 'lang' is not a valid language code.
+        """
         tm = LanguageTeacher(lang)
         return tm
         
@@ -172,6 +187,7 @@ class Aux_functions:
         Raises:
         - TypeError: If the provided 'lang' is not one of the recognized options.
         """
+
         if (lang == "es"):
             esMessage = "You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 3 questions. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Look the tenses, the complexity of the phrases. Please be more accurate. Speak every time in spanish."
             return esMessage 
@@ -230,16 +246,47 @@ class Aux_functions:
     
     
     def create_conexion(db_file):
-        """ Crea una conexión a la base de datos SQLite especificada por db_file. """
+        """
+        Creates and returns a connection to the specified SQLite database file. 
+
+        This function attempts to establish a connection to the SQLite database specified by 'db_file'. 
+        If the connection fails, it catches the sqlite3.Error exception and prints an error message.
+
+        Args:
+        - db_file (str): The path to the SQLite database file.
+
+        Returns:
+        - sqlite3.Connection or None: A connection object to the SQLite database, or None if the connection fails.
+
+        Raises:
+        - sqlite3.Error: If an error occurs while trying to connect to the database.
+        """
+
         conn = None
         try:
             conn = sqlite3.connect(db_file)
-            print("Conexión establecida a la base de datos.")
         except sqlite3.Error as e:
-            print(f"Error al conectar a la base de datos: {e}")
+            raise TypeError(f"Error al conectar a la base de datos: {e}")
         return conn
     
     def create_table(conn):
+        """
+        Creates a 'usuarios' table in the specified SQLite database if it does not already exist.
+
+        This function uses the provided database connection to create a table named 'usuarios' with 
+        the following columns:
+        - id: An integer primary key that auto-increments.
+        - nombre: A text field that cannot be null.
+        - usuario: A unique text field that cannot be null.
+        - contrasena: A text field that cannot be null.
+
+        Args:
+        - conn (sqlite3.Connection): The connection object to the SQLite database.
+
+        Returns:
+        - None
+        """
+
         cursor = conn.cursor()
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS usuarios (
@@ -252,7 +299,24 @@ class Aux_functions:
         
 
     def add_user( nombre, usuario, contrasena):
-        """ Añade un nuevo usuario a la tabla 'usuarios' con la contraseña hasheada. """
+        """
+        Adds a new user to the 'usuarios' table in the 'users.db' SQLite database.
+
+        This function connects to the 'users.db' SQLite database and inserts a new record into the 'usuarios' table.
+        The password is hashed using bcrypt before storing it in the database.
+
+        Args:
+        - nombre (str): The name of the user.
+        - usuario (str): The unique username of the user.
+        - contrasena (str): The plaintext password of the user.
+
+        Returns:
+        - None
+
+        Raises:
+        - sqlite3.Error: If an error occurs while interacting with the SQLite database.
+        - bcrypt.Error: If an error occurs while hashing the password.
+        """
 
         conn = sqlite3.connect('users.db')
         salt = bcrypt.gensalt()
@@ -262,34 +326,40 @@ class Aux_functions:
         conn.commit()
         
 
-
-
-
     def verify_user(username, password):
-        """ Verifies if the provided credentials are correct by comparing them with the database. """
+        """
+        Verifies a user's credentials against the 'usuarios' table in the 'users.db' SQLite database.
+
+        This function connects to the 'users.db' SQLite database and retrieves the hashed password for the 
+        specified username. It then checks if the provided plaintext password matches the hashed password 
+        stored in the database using bcrypt.
+
+        Args:
+        - username (str): The username of the user to verify.
+        - password (str): The plaintext password of the user to verify.
+
+        Returns:
+        - bool: True if the credentials are valid, False otherwise.
+
+        Raises:
+        - sqlite3.Error: If an error occurs while interacting with the SQLite database.
+        - bcrypt.Error: If an error occurs while checking the hashed password.
+        """
 
         conn = sqlite3.connect('users.db')
-
-        print(username)
-
         cursor = conn.cursor()
-        # Select the hashed password for the provided username
         
         cursor.execute('SELECT contrasena FROM usuarios WHERE usuario = ?', (username,))
         result = cursor.fetchone()
 
         if result is None:
-            print("User not found.")
             return False
 
         pass_hashed = result[0]
 
-        # Compare the provided password with the stored hashed password
         if bcrypt.checkpw(password.encode('utf-8'), pass_hashed):
-            print("Authentication successful.")
             return True
         else:
-            print("Authentication failed.")
             return False
 
         

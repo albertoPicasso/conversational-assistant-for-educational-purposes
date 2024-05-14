@@ -29,6 +29,7 @@ class CoquiTTS(TtsInterface):
         self.model = model
         self.TTS = TTS(model_name=self.model).to(self.device)
 
+
     def speak(self, text: str, uid: str) -> str:
         """
         Converts text to speech using the Coqui TTS model and saves the audio to a file.

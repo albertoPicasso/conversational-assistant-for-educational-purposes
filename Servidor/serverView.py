@@ -160,9 +160,6 @@ class ServerView():
     def on_text_change(self, *args):
         self.controller.set_port(self.idioma.get())
 
-
-
-
     def cambiar_idioma(self, event):
         self.controller.set_language(self.idioma.get())
         
@@ -203,17 +200,7 @@ class ServerView():
         Returns:
             None
         """
-        """
-        print("Estado actual:")
-        print("Idioma seleccionado:", self.idioma.get())
-        print("Modo STT seleccionado:", self.stt.get())
-        print("Modo LLM seleccionado:", self.llm.get())
-        print("Modo TTS seleccionado:", self.tts.get())
 
-        print("Tamaño Whisper seleccionado:", self.whisperSize.get())
-        print("Modelo LLM seleccionado:", self.modelos.get())
-        print("Número de puerto:", self.puerto.get())
-       """
         self.master.destroy()
         self.controller.launch_server()
         
