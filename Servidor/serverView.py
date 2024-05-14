@@ -39,20 +39,21 @@ class ServerView():
         self.frame_config_principal.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         # Configuración de idioma
-        self.idioma = tk.StringVar(value="es")
+        self.idioma = tk.StringVar(value= self.controller.get_language())
         self.setup_dropdown(self.frame_config_principal, "Idioma del chat:", self.idioma, ('es', 'en', 'de'), self.cambiar_idioma)
 
         # Configuración de STT, LLM y TTS
-        self.stt = tk.StringVar(value="local")
-        self.llm = tk.StringVar(value="local")
-        self.tts = tk.StringVar(value="local")
+        self.stt = tk.StringVar(value=self.controller.get_stt())
+        self.llm = tk.StringVar(value=self.controller.get_llm())
+        self.tts = tk.StringVar(value=self.controller.get_tts())
         self.setup_radio_section(self.frame_config_principal, "STT:", self.stt, self.cambiar_stt)
         self.setup_radio_section(self.frame_config_principal, "LLM:", self.llm, self.cambiar_llm)
         self.setup_radio_section(self.frame_config_principal, "TTS:", self.tts, self.cambiar_tts)
 
         # Configuración del número de puerto
         
-        self.puerto = tk.StringVar(value="5000")
+        self.puerto = tk.StringVar(value=self.controller.get_port())
+        self.puerto.trace_add("write", self.on_text_change)
         self.setup_entry(self.frame_config_principal, "Número de puerto:", self.puerto)
 
         # Botón de lanzamiento
@@ -101,15 +102,21 @@ class ServerView():
         self.frame_config_extra.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
         # Configuración de Tamaño Whisper
-        self.whisperSize = tk.StringVar(value="base")
-        self.setup_dropdown(self.frame_config_extra, "Tamaño Whisper:", self.whisperSize, ('small', 'base', 'tiny'))
+        self.whisperSize = tk.StringVar(value=self.controller.get_whisper_size())
+        self.setup_dropdown(
+            self.frame_config_extra, 
+            "Tamaño Whisper:", 
+            self.whisperSize, 
+            ('small', 'base', 'tiny'), 
+            self.on_whisper_size_change
+        )
 
         # Configuración de Modelos LLM
         self.modelos = tk.StringVar(value="Gemma")
         self.setup_dropdown(self.frame_config_extra, "Modelo LLM:", self.modelos, ('Gemma', 'Mistral7B'),  enabled=False)
 
 
-    def setup_radio_section(self, frame, label_text, variable, command):
+    def setup_radio_section(self, frame, label_text, variable, command = None):
         """
         Sets up a section with radio buttons within a specified frame.
 
@@ -130,6 +137,8 @@ class ServerView():
         tk.Radiobutton(frame_botones, text="Local", variable=variable, value="local", command=command).pack(side=tk.LEFT, expand=True)
         tk.Radiobutton(frame_botones, text="Remoto", variable=variable, value="remoto", command=command).pack(side=tk.LEFT, expand=True)
 
+
+
     def setup_entry(self, frame, label_text, variable):
         """
         Sets up an entry widget within a specified frame.
@@ -143,26 +152,44 @@ class ServerView():
             None
         """
         label = tk.Label(frame, text=label_text, font=("Helvetica", 10, "italic"))
-        label.pack(pady=(10,0))
+        label.pack(pady=(10, 0))
         entry = tk.Entry(frame, textvariable=variable)
         entry.pack()
 
+
+    def on_text_change(self, *args):
+        self.controller.set_port(self.idioma.get())
+
+
+
+
     def cambiar_idioma(self, event):
-        #print("Idioma seleccionado:", self.idioma.get())
-        pass
+        self.controller.set_language(self.idioma.get())
+        
 
     def cambiar_stt(self):
-        #print("Modo STT seleccionado:", self.stt.get())
-        pass
+        self.controller.set_stt(self.stt.get())
+        
 
     def cambiar_llm(self):
-        #print("Modo LLM seleccionado:", self.llm.get())
-        pass
+        self.controller.set_llm(self.llm.get())
+        
         
 
     def cambiar_tts(self):
-        #print("Modo TTS seleccionado:", self.tts.get())
-        pass
+        self.controller.set_tts(self.tts.get())
+        
+
+    def cambiar_puerto(self):
+        self.controller.set_port(self.puerto.get())
+        
+    
+    def on_whisper_size_change(self, value):
+        self.controller.set_whisper_size(self.whisperSize.get() )
+        
+
+    def on_modelos_change(self, value):
+        self.controller.set_llm_models(self.modelos.get())
 
 
 
@@ -182,12 +209,13 @@ class ServerView():
         print("Modo STT seleccionado:", self.stt.get())
         print("Modo LLM seleccionado:", self.llm.get())
         print("Modo TTS seleccionado:", self.tts.get())
+
         print("Tamaño Whisper seleccionado:", self.whisperSize.get())
         print("Modelo LLM seleccionado:", self.modelos.get())
         print("Número de puerto:", self.puerto.get())
        """
         self.master.destroy()
-        self.controller.launch_server(self.idioma.get(), self.stt.get(), self.whisperSize.get(),  self.llm.get(),  self.modelos.get(), self.tts.get(),self.puerto.get())
+        self.controller.launch_server()
         
 if __name__ == "__main__":
     root = tk.Tk()

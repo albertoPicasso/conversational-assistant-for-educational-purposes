@@ -49,7 +49,7 @@ class Servidor:
         self.app.logger.critical(f'Server Start ')
 
         #Set Interfaces
-        """
+        '''
         print("Language:", language)
         print("STT:", stt)
         print("WhisperSize:", whisperSize)
@@ -58,7 +58,7 @@ class Servidor:
         
         print("Local Models:", localModels)
         print("Port:", port)
-        """
+        '''
         
         self.lang = language
         
