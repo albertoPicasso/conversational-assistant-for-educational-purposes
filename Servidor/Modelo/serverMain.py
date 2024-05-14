@@ -19,11 +19,12 @@ class Servidor:
         self.aux = Aux_functions()
 
         ## Adding rules
-        self.app.add_url_rule('/', 'register_user', self.register_user_session, methods=['GET'])
+        self.app.add_url_rule('/', 'register_user_session', self.register_user_session, methods=['GET'])
         self.app.add_url_rule('/upload_wav', 'upload_wav', self.upload_wav, methods=['POST'])
         self.app.add_url_rule('/ping', 'ping', self.ping, methods=['GET'])
         self.app.add_url_rule('/logout', 'logout', self.logout, methods=['GET'])
         self.app.add_url_rule('/logIn', 'login', self.logIn, methods=['POST'])
+        self.app.add_url_rule('/register_new_user', 'register_new_user', self.register_new_user, methods=['POST'])
         
         folder_path = "tempUserData"
         ##Create data container
@@ -35,8 +36,10 @@ class Servidor:
         if conn:
             Aux_functions.create_table(conn)
             conn.close()
-        Aux_functions.add_user('Alberto M', 'al', 'al')
-        
+        try:
+            Aux_functions.add_user('Alberto M', 'al', 'al')
+        except sqlite3.Error as e:
+            print(f"Error al añadir usuario: {e}")
       
     def run(self, language = "es", stt = "local", whisperSize = "small" , llm = "remoto", localModels = "Gemma", tts = "local", port = 5000):
         
@@ -47,19 +50,6 @@ class Servidor:
         self.app.logger.addHandler(file_handler)
         self.app.logger.setLevel(logging.DEBUG)
         self.app.logger.critical(f'Server Start ')
-
-        #Set Interfaces
-        '''
-        print("Language:", language)
-        print("STT:", stt)
-        print("WhisperSize:", whisperSize)
-        print("LLM:", llm)
-        print("TTS:", tts)
-        
-        print("Local Models:", localModels)
-        print("Port:", port)
-        '''
-        
         self.lang = language
         
         ##Interface Config
@@ -77,17 +67,35 @@ class Servidor:
         self.app.run(debug=True,host='0.0.0.0', port=port,  use_reloader=False)
 
 
-    def logIn(self):
-        ##Get data from Json
+    def register_new_user(self):
         
         try:
             if request.is_json:
+                
                 data = request.get_json()
-                print(data)
+                name = data.get('name')
+                username = data.get('username')
+                password = data.get('password')
+                try:
+                    Aux_functions.add_user(name, username, password)
+                except sqlite3.Error as e:
+                    print(f"Error al añadir usuario: {e}")
+                    return "User already exist", 409
+                
+                return "ok", 200
+
+        except Exception as e:
+            self.app.logger.error('Unhandled exception occurred', exc_info=e)
+            return "Something gone wrong", 500
+
+
+    def logIn(self):
+        try:
+            if request.is_json:
+                data = request.get_json()
                 # Extraer username y password
                 username = data.get('username')
                 password = data.get('password')
-                print(username, password)
 
                 flag = Aux_functions.verify_user(username, password)
                 ip_address = request.remote_addr

@@ -255,17 +255,13 @@ class Aux_functions:
         """ Añade un nuevo usuario a la tabla 'usuarios' con la contraseña hasheada. """
 
         conn = sqlite3.connect('users.db')
-      
         salt = bcrypt.gensalt()
         pass_hashed = bcrypt.hashpw(contrasena.encode('utf-8'), salt)
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO usuarios (nombre, usuario, contrasena) VALUES (?, ?, ?)', (nombre, usuario, pass_hashed))
+        conn.commit()
+        
 
-        try:
-            cursor = conn.cursor()
-            cursor.execute('INSERT INTO usuarios (nombre, usuario, contrasena) VALUES (?, ?, ?)', (nombre, usuario, pass_hashed))
-            conn.commit()
-            print("Usuario añadido con éxito.")
-        except sqlite3.Error as e:
-            print(f"Error al añadir usuario: {e}")
 
 
 
