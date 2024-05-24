@@ -21,7 +21,6 @@ class CoquiTTS(TtsInterface):
         Args:
             model (str): The name of the Coqui TTS model to use (e.g., "tts_models/en/ljspeech").
         """
-
         # Automatically configure device (CPU or GPU)
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
 

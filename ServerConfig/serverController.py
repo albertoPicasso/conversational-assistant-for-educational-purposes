@@ -1,10 +1,21 @@
-from Modelo.serverMain import Servidor
-from Modelo.configModel import ConfigModel
+import sys
+import os
+#from ..Servidor.Modelo.serverMain import Servidor
+from configModel import ConfigModel
 
 
 class ServerController: 
 
     def __init__(self):
+
+        # Add the path to sys.path
+        module_path = '/home/al/Escritorio/TFG/Servidor/Modelo'
+        if module_path not in sys.path:
+            sys.path.append(module_path)
+
+        # Import the module using the absolute path
+        from serverMain import Servidor
+        
         self.serverModel = Servidor()
         self.model = ConfigModel()
 
@@ -88,4 +99,7 @@ class ServerController:
          
 
 if __name__ == "__main__":
+    ##Import Server
+
+
     controller = ServerController()

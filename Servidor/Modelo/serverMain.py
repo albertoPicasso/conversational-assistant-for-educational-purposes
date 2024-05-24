@@ -7,7 +7,7 @@ import base64
 import sys
 import sqlite3
 
-from Modelo.aux_functions import Aux_functions
+from aux_functions import Aux_functions
 
 
 class Servidor:
@@ -43,6 +43,15 @@ class Servidor:
       
     def run(self, language = "es", stt = "local", whisperSize = "small" , llm = "remoto", localModels = "Gemma", tts = "local", port = 5000):
         
+        print(f"Language: {language}")
+        print(f"STT: {stt}")
+        print(f"Whisper Size: {whisperSize}")
+        print(f"LLM: {llm}")
+        print(f"Local Models: {localModels}")
+        print(f"TTS: {tts}")
+        print(f"Port: {port}")
+
+
         #Set logger
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         file_handler = logging.FileHandler('app.log')
@@ -150,7 +159,7 @@ class Servidor:
             return 'Error registering user: {}'.format(str(e)), 500
 
   
-    def upload_wav(self):
+    def upload_wav(self):    
         try:
             # Check if user is authenticated
             if 'user_id' not in session:
@@ -179,6 +188,7 @@ class Servidor:
             state = session.get('estado', {})
 
             # Transcribe the WAV file
+
             text = self.STT.transcribe(path)
             state = self.aux.addMessageToChat(text, "user", state)
             

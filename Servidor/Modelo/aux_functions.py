@@ -1,10 +1,10 @@
 
-from Modelo.STTFolder.localWhisper import LocalWhisper
-from Modelo.STTFolder.remoteWhisper import RemoteWhisper
-from Modelo.LLMFolder.openAIAPI import OpenAIAPI
-from Modelo.TTSFolder.coquiTTS import CoquiTTS
-from Modelo.TTSFolder.openAITTS import OpenAITTS
-from Modelo.TeacherFolder.languageTeacher import LanguageTeacher
+from STTFolder.localWhisper import LocalWhisper
+from STTFolder.remoteWhisper import RemoteWhisper
+from LLMFolder.openAIAPI import OpenAIAPI
+from TTSFolder.coquiTTS import CoquiTTS
+from TTSFolder.openAITTS import OpenAITTS
+from TeacherFolder.languageTeacher import LanguageTeacher
 
 import os
 from openai import OpenAI
@@ -31,7 +31,7 @@ class Aux_functions:
         return state
 
 
-    def printAllChat(self, state): 
+    def printAllChat(state): 
         """
         Args:
         - state (session): Contains the conversation history to be printed.
@@ -102,7 +102,7 @@ class Aux_functions:
         """
 
         if (llm == "local"): 
-            client = OpenAI(base_url="http://192.168.0.13:1234/v1", api_key="lm-studio") 
+            client = OpenAI(base_url="http://192.168.0.14:1234/v1", api_key="lm-studio") 
             model = "local-model"
             llm = OpenAIAPI(client, model)
             return llm
