@@ -11,6 +11,7 @@ from aux_functions import Aux_functions
 
 
 class Servidor:
+
     def __init__(self):
         
         ##Server configs
@@ -25,7 +26,8 @@ class Servidor:
         self.app.add_url_rule('/logout', 'logout', self.logout, methods=['GET'])
         self.app.add_url_rule('/logIn', 'login', self.logIn, methods=['POST'])
         self.app.add_url_rule('/register_new_user', 'register_new_user', self.register_new_user, methods=['POST'])
-        
+        self.app.add_url_rule('/delete_user', 'delete_user', self.delete_user, methods=['POST'])
+
         folder_path = "tempUserData"
         ##Create data container
         if not os.path.exists(folder_path):
@@ -92,8 +94,10 @@ class Servidor:
                     self.app.logger.info (f'- User attemped to register / ip {ip_address} ')
                     return "User already exist", 409
                 
+                
                 self.app.logger.info (f'- User Register Succsessfully ip {ip_address} ')
                 return "ok", 200
+                
 
         except Exception as e:
             self.app.logger.error('Unhandled exception occurred', exc_info=e)
@@ -249,6 +253,32 @@ class Servidor:
         except Exception as e:
             self.app.logger.error('Unhandled exception occurred', exc_info=e)
             return f"An error occurred: {str(e)}", 500
+
+
+
+    def delete_user (self ): 
+        try:
+            if request.is_json:
+                
+                data = request.get_json()
+                ip_address = request.remote_addr
+                username = data.get('username')
+                password = data.get('password')
+                flag = Aux_functions.delete_user(username, password)
+                
+                if (flag):
+                    self.app.logger.info (f'- Acount deleted / ip {ip_address} ')
+                    return "User deleted", 200
+                    
+                else: 
+                    self.app.logger.info (f'- Attempt to delete a acount/ ip {ip_address} ')
+                    return "User not found", 400
+
+
+        except Exception as e:
+            self.app.logger.error('Unhandled exception occurred', exc_info=e)
+            return f"An error occurred: {str(e)}", 500
+
 
 
     def ping(self): 

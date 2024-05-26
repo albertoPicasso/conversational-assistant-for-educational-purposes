@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from serverController import ServerController
+from configController import ConfigController
 
 class ServerView():
     def __init__(self, master):
@@ -18,7 +18,7 @@ class ServerView():
         self.master.title("Server Config")
         self.master.geometry("600x300")
 
-        self.controller = ServerController()
+        self.controller = ConfigController()
 
         self.setup_main_widgets()
         self.setup_extra_widgets()

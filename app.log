@@ -434,3 +434,18 @@ openai.InternalServerError: Error code: 500 - {'error': "Model with key 'local-m
 2024-05-24 17:41:54,305 - INFO - - User Register Succsessfully id bdae9cbb-ced7-49d4-a707-f22944328381 / ip 192.168.0.14 
 2024-05-24 17:42:31,053 - INFO - Processed audio from - id bdae9cbb-ced7-49d4-a707-f22944328381 
 2024-05-24 17:42:50,226 - INFO - - Logout user Succsessfully - id bdae9cbb-ced7-49d4-a707-f22944328381 /  
+2024-05-26 18:22:06,862 - CRITICAL - Server Start 
+2024-05-26 18:40:03,059 - CRITICAL - Server Start 
+2024-05-26 18:41:00,426 - INFO - - Attempt to delete a acount/ ip 192.168.0.14 
+2024-05-26 18:41:09,197 - INFO - - Acount deleted / ip 192.168.0.14 
+2024-05-26 18:41:12,101 - INFO - - User attemped to log ip 192.168.0.14 
+2024-05-26 18:41:13,531 - INFO - - User attemped to log ip 192.168.0.14 
+2024-05-26 18:41:15,066 - INFO - - User Register Succsessfully id 99040b69-6eab-4e73-8b56-2a6992943f66 / ip 192.168.0.14 
+2024-05-26 18:41:18,757 - INFO - - Logout user Succsessfully - id 99040b69-6eab-4e73-8b56-2a6992943f66 /  
+2024-05-26 18:41:30,341 - INFO - - User attemped to log ip 192.168.0.14 
+2024-05-26 18:41:34,416 - INFO - - User Register Succsessfully id c7990603-fa53-4f72-8408-1432ee62a088 / ip 192.168.0.14 
+2024-05-26 18:41:36,774 - INFO - - Logout user Succsessfully - id c7990603-fa53-4f72-8408-1432ee62a088 /  
+2024-05-26 18:42:13,640 - INFO - - User attemped to log ip 192.168.0.14 
+2024-05-26 18:42:21,889 - INFO - - User Register Succsessfully ip 192.168.0.14 
+2024-05-26 18:42:28,543 - INFO - - User Logged Succsessfully ip 192.168.0.14 
+2024-05-26 18:42:28,795 - INFO - - User Register Succsessfully id 194178ba-0d59-4b45-9e50-2daa8f7821db / ip 192.168.0.14 

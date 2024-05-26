@@ -4,7 +4,7 @@ import os
 from configModel import ConfigModel
 
 
-class ServerController: 
+class ConfigController: 
 
     def __init__(self):
 
@@ -102,4 +102,4 @@ if __name__ == "__main__":
     ##Import Server
 
 
-    controller = ServerController()
+    controller = ConfigController()

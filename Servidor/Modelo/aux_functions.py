@@ -362,8 +362,49 @@ class Aux_functions:
         else:
             return False
 
-        
+    
+    def delete_user(username, password):
+        """
+        Deletes a user from the 'usuarios' table in the 'users.db' SQLite database if the provided credentials are valid.
 
+        This function connects to the 'users.db' SQLite database and retrieves the hashed password for the 
+        specified username. It then checks if the provided plaintext password matches the hashed password 
+        stored in the database using bcrypt. If the credentials are valid, it deletes the user from the database.
+
+        Args:
+        - username (str): The username of the user to delete.
+        - password (str): The plaintext password of the user to verify.
+
+        Returns:
+        - bool: True if the user was deleted, False otherwise.
+
+        Raises:
+        - sqlite3.Error: If an error occurs while interacting with the SQLite database.
+        - bcrypt.Error: If an error occurs while checking the hashed password.
+        """
+
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+        
+        # Verify the user's credentials
+        cursor.execute('SELECT contrasena FROM usuarios WHERE usuario = ?', (username,))
+        result = cursor.fetchone()
+
+        if result is None:
+            return False
+
+        pass_hashed = result[0]
+
+        if bcrypt.checkpw(password.encode('utf-8'), pass_hashed):
+            # Credentials are valid, delete the user
+            cursor.execute('DELETE FROM usuarios WHERE usuario = ?', (username,))
+            conn.commit()
+            conn.close()
+            return True
+        else:
+            conn.close()
+            return False
+        
 
 
     
