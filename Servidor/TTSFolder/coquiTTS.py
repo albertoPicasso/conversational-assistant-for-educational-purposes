@@ -3,48 +3,49 @@ import torch
 from TTS.api import TTS
 import os 
 
-## CoquiTTS Implementation for Text-to-Speech (TTS)
+## Implementación de CoquiTTS para Texto a Voz (TTS)
 
 class CoquiTTS(TtsInterface):
     """
-    This class implements the TtsInterface for Text-to-Speech (TTS) functionality 
-    using the Coqui TTS library.
+    Esta clase implementa la interfaz TtsInterface para la funcionalidad de Texto a Voz (TTS)
+    utilizando la biblioteca Coqui TTS.
 
-    It takes a TTS model name as an argument in the constructor and uses the 
-    Coqui TTS API to convert text to speech and save the generated audio to a file.
+    Toma el nombre de un modelo TTS como argumento en el constructor y utiliza
+    la API de Coqui TTS para convertir texto a voz y guardar el audio generado en un archivo.
     """
 
     def __init__(self, model):
         """
-        Initializes the CoquiTTS object.
+        Inicializa el objeto CoquiTTS.
 
         Args:
-            model (str): The name of the Coqui TTS model to use (e.g., "tts_models/en/ljspeech").
+            model (str): El nombre del modelo Coqui TTS a utilizar (por ejemplo, "tts_models/en/ljspeech").
         """
-        # Automatically configure device (CPU or GPU)
+        # Configura automáticamente el dispositivo (CPU o GPU)
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
 
-        # Load the Coqui TTS model onto the chosen device
+        # Cargar el modelo Coqui TTS en el dispositivo elegido
         self.model = model
         self.TTS = TTS(model_name=self.model).to(self.device)
 
-
     def speak(self, text: str, uid: str) -> str:
         """
-        Converts text to speech using the Coqui TTS model and saves the audio to a file.
+        Convierte texto a voz utilizando el modelo Coqui TTS y guarda el audio en un archivo.
 
         Args:
-            text (str): The text to be converted to speech.
+            text (str): El texto a convertir en voz.
+            uid (str): El identificador de usuario para crear una ruta única para el archivo de audio.
 
         Returns:
-            str: The filename of the generated wav audio file.
+            str: El nombre del archivo de audio generado en formato wav.
         """
-        # if the request fail throw an exception and will be catched at the top funcion
-        # Define the output filename
-        name = "output.wav"  
-        path = os.path.join(os.getcwd(), "tempUserData", uid, name)
-        # Perform text-to-speech synthesis and save audio
-        self.TTS.tts_to_file(text=text, file_path=path, speed=1.2, split_sentences=False)
+        # Si la solicitud falla, lanzará una excepción que será capturada en la función superior
+        # Definir el nombre del archivo de salida
+        nombre = "output.wav"  
+        ruta = os.path.join(os.getcwd(), "tempUserData", uid, nombre)
+        
+        # Realizar la síntesis de texto a voz y guardar el audio
+        self.TTS.tts_to_file(text=text, file_path=ruta, speed=1.2, split_sentences=False)
 
-        # Return the filename of the generated audio
-        return path
+        # Devolver el nombre del archivo de audio generado
+        return ruta

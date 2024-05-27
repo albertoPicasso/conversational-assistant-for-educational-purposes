@@ -1,48 +1,50 @@
 from .llmInterface import LlmInterface
 
-## Implementation of LlmInterface using OpenAI API
+## Implementación de LlmInterface usando la API de OpenAI
 
 class OpenAIAPI(LlmInterface):
     """
-    This class implements the LlmInterface for interacting with the OpenAI API.
+    Esta clase implementa LlmInterface para interactuar con la API de OpenAI.
 
-    It takes an OpenAI client object and an LLM model name as arguments in the 
-    constructor. The `request_to_llm` method sends a chat request to the specified 
-    model using the OpenAI client and returns the response.
+    Toma un objeto cliente de OpenAI y un nombre de modelo LLM como argumentos en el 
+    constructor. El método `request_to_llm` envía una solicitud de chat al modelo 
+    especificado usando el cliente de OpenAI y devuelve la respuesta.
     """
 
     def __init__(self, client, model):
         """
-        Initializes the OpenAIAPI object.
+        Inicializa el objeto OpenAIAPI.
 
         Args:
-            client (OpenAI): An OpenAI client object used for interacting with the API.
-            model (str): The name of the OpenAI LLM model to use (e.g., "text-davinci-003").
+            client (OpenAI): Un objeto cliente de OpenAI utilizado para interactuar con la API.
+            model (str): El nombre del modelo LLM de OpenAI a usar (por ejemplo, "text-davinci-003").
         """
         self.model = model
         self.client = client
 
-    def request_to_llm(self, chat, temp = 1) -> str:
+    def request_to_llm(self, chat, temp=1) -> str:
         """
-        Sends a chat request to the OpenAI LLM and returns the response.
+        Envía una solicitud de chat al LLM de OpenAI y devuelve la respuesta.
 
         Args:
-            chat (str): The text to send to the LLM.
+            chat (list): El texto a enviar al LLM en formato de lista de tuplas (rol, contenido).
+            temp (float): La temperatura para la generación del texto (opcional, por defecto es 1).
 
         Returns:
-            str : The LLM response
+            str: La respuesta del LLM.
         """
-        # Create messages array to make a request with format ["role": rolemessage , "content": contentmessage }]
+        # Crear un array de mensajes para hacer una solicitud con el formato [{"role": rol, "content": contenido}]
         request_messages = []
         for message in chat: 
             request_messages.append({"role": message[0], "content": message[1]})
 
-        #ask model
+        # Solicitar al modelo
         chat_completion = self.client.chat.completions.create(
-            messages= request_messages,
+            messages=request_messages,
             model=self.model,
             temperature=temp
         )
-        # if the request fail throw an exception and will be catched at the top funcion
-        #Docu here --- https://platform.openai.com/docs/guides/error-codes
+
+        # Si la solicitud falla, se lanzará una excepción que será capturada en la función superior
+        # Documentación aquí: https://platform.openai.com/docs/guides/error-codes
         return chat_completion.choices[0].message.content

@@ -18,13 +18,15 @@ class Aux_functions:
     ## Add new messages to session['mensajes'] whit format [role,message]
     def addMessageToChat(self, message:str, role:str , state):
         """
+        Añade un mensaje a la conversación.
+
         Args:
-        - message (str): The message to be added to the conversation.
-        - role (str): The role of the participant sending the message (e.g., 'user', 'assistant', etc.).
-        - chat (list): The conversation history to which the message will be added.
-        - state (session): The state of this client on server
-        
-        Returns: modified state
+            message (str): El mensaje a añadir a la conversación.
+            role (str): El rol del participante que envía el mensaje (por ejemplo, 'user', 'assistant', etc.).
+            state (session): El estado de este cliente en el servidor.
+
+        Returns:
+            dict: El estado modificado.
         """
         message_entry = [role, message]
         state['mensajes'].append(message_entry)
@@ -33,11 +35,13 @@ class Aux_functions:
 
     def printAllChat(state): 
         """
+        Imprime todo el historial de la conversación.
+
         Args:
-        - state (session): Contains the conversation history to be printed.
+            state (session): Contiene el historial de la conversación a imprimir.
 
         Returns:
-        None
+            None
         """
         message_list = state['mensajes']
         print('Lista de mensajes ')
@@ -47,13 +51,13 @@ class Aux_functions:
     
     def createUserDirectory(self, name:str):
         """
-        Creates a new directory/folder with the specified name.
+        Crea un nuevo directorio/carpeta con el nombre especificado.
 
         Args:
-        - name (str): The name of the directory to be created.
+            name (str): El nombre del directorio a crear.
 
         Returns:
-        None
+            None
         """
         #Path to new directory / folder
         path_to_directory = os.path.join(os.getcwd(), "tempUserData",name)
@@ -61,19 +65,20 @@ class Aux_functions:
 
     def createSTT(stt:str, whisperSize:str):
         """
-        Creates an instance of a speech-to-text (STT) system, specified to be either local or remote. The type of STT
-        system is determined by the 'stt' parameter, and its configuration is influenced by the 'whisperSize' or the API settings.
+        Crea una instancia de un sistema de reconocimiento de voz a texto (STT), que puede ser local o remoto. El tipo de sistema STT
+        se determina por el parámetro 'stt', y su configuración se influye por el 'whisperSize' o la configuración de la API.
 
         Args:
-        - stt (str): Specifies the type of STT system to create. Options are "local" for a locally run Whisper model or "remoto" for a remote service.
-        - whisperSize (str): Configuration size for the Whisper model if 'stt' is "local".
+            stt (str): Especifica el tipo de sistema STT a crear. Las opciones son "local" para un modelo Whisper ejecutado localmente o "remoto" para un servicio remoto.
+            whisperSize (str): Tamaño de configuración para el modelo Whisper si 'stt' es "local".
 
         Returns:
-        - object: An instance of either LocalWhisper or RemoteWhisper based on the 'stt' parameter.
+            object: Una instancia de LocalWhisper o RemoteWhisper basada en el parámetro 'stt'.
 
         Raises:
-        - TypeError: If the 'stt' parameter is not one of the recognized options.
+            TypeError: Si el parámetro 'stt' no es una de las opciones reconocidas.
         """
+
 
         if (stt == "local"): 
             stt = LocalWhisper(whisperSize)
@@ -89,16 +94,17 @@ class Aux_functions:
 
     def createLLM(llm:str):
         """
-        Creates an instance of a speech-to-text (STT) system, either local or remote, based on the specified type.
+        Crea una instancia de un sistema de reconocimiento de voz a texto (STT), ya sea local o remoto, según el tipo especificado.
 
         Args:
-        - stt (str): The type of STT system to create, "local" for a local system or "remoto" for a remote system.
-        - whisperSize (str): The configuration size for the Whisper model if a local STT system is chosen.
+            stt (str): El tipo de sistema STT a crear, "local" para un sistema local o "remoto" para un sistema remoto.
+            whisperSize (str): El tamaño de configuración para el modelo Whisper si se elige un sistema STT local.
+
         Returns:
-        - object: An instance of LocalWhisper or RemoteWhisper based on the specified type.
+            object: Una instancia de LocalWhisper o RemoteWhisper según el tipo especificado.
 
         Raises:
-        - TypeError: If an unrecognized STT system type is specified.
+            TypeError: Si se especifica un tipo de sistema STT no reconocido.
         """
 
         if (llm == "local"): 
@@ -119,17 +125,17 @@ class Aux_functions:
         
     def createTTS(tts:str, lang: str):
         """
-        Creates an instance of a text-to-speech (TTS) system, configured according to the specified type and language.
+        Crea una instancia de un sistema de texto a voz (TTS), configurado según el tipo y el idioma especificados.
 
         Args:
-        - tts (str): The type of TTS system to create. Options are "remoto" for a remote system or "local" for a local system.
-        - lang (str): The language for the TTS system. Valid options are "es" for Spanish, "en" for English, or "de" for German.
+            tts (str): El tipo de sistema TTS a crear. Las opciones son "remoto" para un sistema remoto o "local" para un sistema local.
+            lang (str): El idioma para el sistema TTS. Las opciones válidas son "es" para español, "en" para inglés o "de" para alemán.
 
         Returns:
-        - object: An instance of either OpenAITTS or CoquiTTS based on the specified type and language.
+            object: Una instancia de OpenAITTS o CoquiTTS según el tipo y el idioma especificados.
 
         Raises:
-        - TypeError: If an unrecognized TTS system type or language is specified.
+            TypeError: Si se especifica un tipo de sistema TTS o un idioma no reconocido.
         """
 
         ##If error change max_len = 5000 in 
@@ -156,36 +162,37 @@ class Aux_functions:
 
     def createLenguageTeacher(lang: str):
         """
-        Creates and returns a LanguageTeacher instance for the specified language.
+        Crea y devuelve una instancia de LanguageTeacher para el idioma especificado.
 
-        This function initializes a LanguageTeacher object using the provided language code.
+        Esta función inicializa un objeto LanguageTeacher utilizando el código de idioma proporcionado.
 
         Args:
-        - lang (str): The language code for the language teacher. 
+            lang (str): El código de idioma para el profesor de idiomas.
 
         Returns:
-        - LanguageTeacher: An instance of the LanguageTeacher class initialized with the specified language.
+            LanguageTeacher: Una instancia de la clase LanguageTeacher inicializada con el idioma especificado.
 
         Raises:
-        - TypeError: If the provided 'lang' is not a valid language code.
+            TypeError: Si el 'lang' proporcionado no es un código de idioma válido.
         """
+
         tm = LanguageTeacher(lang)
         return tm
         
     def selectSysMessage(lang:str):
         """
-        Selects and returns a system message tailored for a language-specific speaking test simulation. The message instructs
-        the user on how to conduct the test as if they were a language teacher, specifying the approach to questioning, the 
-        scoring method, and the expectation for detailed feedback.
+        Selecciona y devuelve un mensaje del sistema adaptado para una simulación de prueba de conversación específica del idioma.
+        El mensaje instruye al usuario sobre cómo realizar la prueba como si fuera un profesor de idiomas, especificando el enfoque 
+        para las preguntas, el método de calificación y la expectativa de retroalimentación detallada.
 
         Args:
-        - lang (str): The language of the speaking test. Valid options are "es" for Spanish, "de" for German, and "en" for English.
+            lang (str): El idioma de la prueba de conversación. Las opciones válidas son "es" para español, "de" para alemán y "en" para inglés.
 
         Returns:
-        - str: A detailed message containing instructions for conducting a speaking test in the specified language.
+            str: Un mensaje detallado que contiene instrucciones para realizar una prueba de conversación en el idioma especificado.
 
         Raises:
-        - TypeError: If the provided 'lang' is not one of the recognized options.
+            TypeError: Si el 'lang' proporcionado no es una de las opciones reconocidas.
         """
 
         if (lang == "es"):
@@ -202,21 +209,20 @@ class Aux_functions:
         
     def replace_number(text : str, lang ): 
         """
-        Replaces specific alphanumeric symbols in a given text with their pronunciation equivalents in the specified language.
-        This version is configured for Spanish ('es'), English ('en') and German ('de'), replacing sequences like 'B2' with 'be dos' according to how they
-        are pronounced in the language.
+        Reemplaza símbolos alfanuméricos específicos en un texto dado con sus equivalentes de pronunciación en el idioma especificado.
+        Esta versión está configurada para español ('es'), inglés ('en') y alemán ('de'), reemplazando secuencias como 'B2' con 'be dos' 
+        según cómo se pronuncian en el idioma.
 
         Args:
-        - text (str): The original text containing alphanumeric symbols that need to be replaced.
-        - lang (str): The language code that determines how replacements should be conducted. Currently only 'es' (Spanish) is implemented.
+            text (str): El texto original que contiene los símbolos alfanuméricos que deben ser reemplazados.
+            lang (str): El código de idioma que determina cómo se deben realizar los reemplazos. Actualmente solo se implementa 'es' (español).
 
         Returns:
-        - str: The modified text with symbols replaced by their pronunciation in the specified language.
+            str: El texto modificado con los símbolos reemplazados por su pronunciación en el idioma especificado.
 
         Raises:
-        - ValueError: If the 'lang' is not supported or implemented.
+            ValueError: Si el 'lang' no es compatible o no está implementado.
         """
-
         if(lang == "es"): 
             new_text = text.replace("B2", "be dos" )
             new_text = new_text.replace("B1", "be uno")
@@ -247,19 +253,19 @@ class Aux_functions:
     
     def create_conexion(db_file):
         """
-        Creates and returns a connection to the specified SQLite database file. 
+        Crea y devuelve una conexión al archivo de base de datos SQLite especificado.
 
-        This function attempts to establish a connection to the SQLite database specified by 'db_file'. 
-        If the connection fails, it catches the sqlite3.Error exception and prints an error message.
+        Esta función intenta establecer una conexión con la base de datos SQLite especificada por 'db_file'. 
+        Si la conexión falla, captura la excepción sqlite3.Error e imprime un mensaje de error.
 
         Args:
-        - db_file (str): The path to the SQLite database file.
+            db_file (str): La ruta al archivo de base de datos SQLite.
 
         Returns:
-        - sqlite3.Connection or None: A connection object to the SQLite database, or None if the connection fails.
+            sqlite3.Connection or None: Un objeto de conexión a la base de datos SQLite, o None si la conexión falla.
 
         Raises:
-        - sqlite3.Error: If an error occurs while trying to connect to the database.
+            sqlite3.Error: Si ocurre un error al intentar conectar a la base de datos.
         """
 
         conn = None
@@ -271,20 +277,20 @@ class Aux_functions:
     
     def create_table(conn):
         """
-        Creates a 'usuarios' table in the specified SQLite database if it does not already exist.
+        Crea una tabla 'usuarios' en la base de datos SQLite especificada si no existe.
 
-        This function uses the provided database connection to create a table named 'usuarios' with 
-        the following columns:
-        - id: An integer primary key that auto-increments.
-        - nombre: A text field that cannot be null.
-        - usuario: A unique text field that cannot be null.
-        - contrasena: A text field that cannot be null.
+        Esta función utiliza la conexión de base de datos proporcionada para crear una tabla llamada 'usuarios' con 
+        las siguientes columnas:
+            - id: Una clave primaria entera que se auto incrementa.
+            - nombre: Un campo de texto que no puede ser nulo.
+            - usuario: Un campo de texto único que no puede ser nulo.
+            - contrasena: Un campo de texto que no puede ser nulo.
 
         Args:
-        - conn (sqlite3.Connection): The connection object to the SQLite database.
+            conn (sqlite3.Connection): El objeto de conexión a la base de datos SQLite.
 
         Returns:
-        - None
+            None
         """
 
         cursor = conn.cursor()
@@ -300,22 +306,22 @@ class Aux_functions:
 
     def add_user( nombre, usuario, contrasena):
         """
-        Adds a new user to the 'usuarios' table in the 'users.db' SQLite database.
+        Añade un nuevo usuario a la tabla 'usuarios' en la base de datos SQLite 'users.db'.
 
-        This function connects to the 'users.db' SQLite database and inserts a new record into the 'usuarios' table.
-        The password is hashed using bcrypt before storing it in the database.
+        Esta función se conecta a la base de datos SQLite 'users.db' e inserta un nuevo registro en la tabla 'usuarios'.
+        La contraseña se cifra utilizando bcrypt antes de almacenarla en la base de datos.
 
         Args:
-        - nombre (str): The name of the user.
-        - usuario (str): The unique username of the user.
-        - contrasena (str): The plaintext password of the user.
+            nombre (str): El nombre del usuario.
+            usuario (str): El nombre de usuario único del usuario.
+            contrasena (str): La contraseña en texto plano del usuario.
 
         Returns:
-        - None
+            None
 
         Raises:
-        - sqlite3.Error: If an error occurs while interacting with the SQLite database.
-        - bcrypt.Error: If an error occurs while hashing the password.
+            sqlite3.Error: Si ocurre un error al interactuar con la base de datos SQLite.
+            bcrypt.Error: Si ocurre un error al cifrar la contraseña.
         """
 
         conn = sqlite3.connect('users.db')
@@ -328,22 +334,22 @@ class Aux_functions:
 
     def verify_user(username, password):
         """
-        Verifies a user's credentials against the 'usuarios' table in the 'users.db' SQLite database.
+        Verifica las credenciales de un usuario contra la tabla 'usuarios' en la base de datos SQLite 'users.db'.
 
-        This function connects to the 'users.db' SQLite database and retrieves the hashed password for the 
-        specified username. It then checks if the provided plaintext password matches the hashed password 
-        stored in the database using bcrypt.
+        Esta función se conecta a la base de datos SQLite 'users.db' y recupera la contraseña cifrada para el 
+        nombre de usuario especificado. Luego verifica si la contraseña en texto plano proporcionada coincide 
+        con la contraseña cifrada almacenada en la base de datos utilizando bcrypt.
 
         Args:
-        - username (str): The username of the user to verify.
-        - password (str): The plaintext password of the user to verify.
+            username (str): El nombre de usuario del usuario a verificar.
+            password (str): La contraseña en texto plano del usuario a verificar.
 
         Returns:
-        - bool: True if the credentials are valid, False otherwise.
+            bool: True si las credenciales son válidas, False en caso contrario.
 
         Raises:
-        - sqlite3.Error: If an error occurs while interacting with the SQLite database.
-        - bcrypt.Error: If an error occurs while checking the hashed password.
+            sqlite3.Error: Si ocurre un error al interactuar con la base de datos SQLite.
+            bcrypt.Error: Si ocurre un error al verificar la contraseña cifrada.
         """
 
         conn = sqlite3.connect('users.db')
@@ -365,22 +371,23 @@ class Aux_functions:
     
     def delete_user(username, password):
         """
-        Deletes a user from the 'usuarios' table in the 'users.db' SQLite database if the provided credentials are valid.
+        Elimina un usuario de la tabla 'usuarios' en la base de datos SQLite 'users.db' si las credenciales proporcionadas son válidas.
 
-        This function connects to the 'users.db' SQLite database and retrieves the hashed password for the 
-        specified username. It then checks if the provided plaintext password matches the hashed password 
-        stored in the database using bcrypt. If the credentials are valid, it deletes the user from the database.
+        Esta función se conecta a la base de datos SQLite 'users.db' y recupera la contraseña cifrada para el 
+        nombre de usuario especificado. Luego verifica si la contraseña en texto plano proporcionada coincide 
+        con la contraseña cifrada almacenada en la base de datos utilizando bcrypt. Si las credenciales son válidas, 
+        elimina al usuario de la base de datos.
 
         Args:
-        - username (str): The username of the user to delete.
-        - password (str): The plaintext password of the user to verify.
+            username (str): El nombre de usuario del usuario a eliminar.
+            password (str): La contraseña en texto plano del usuario a verificar.
 
         Returns:
-        - bool: True if the user was deleted, False otherwise.
+            bool: True si el usuario fue eliminado, False en caso contrario.
 
         Raises:
-        - sqlite3.Error: If an error occurs while interacting with the SQLite database.
-        - bcrypt.Error: If an error occurs while checking the hashed password.
+            sqlite3.Error: Si ocurre un error al interactuar con la base de datos SQLite.
+            bcrypt.Error: Si ocurre un error al verificar la contraseña cifrada.
         """
 
         conn = sqlite3.connect('users.db')

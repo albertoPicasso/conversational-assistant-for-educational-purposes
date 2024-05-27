@@ -2,47 +2,46 @@ import whisper
 import torch
 from .STTInterface import STTInterface
 
-## Local Implementation of AudioInterface
-## Uses the Whisper model from OpenAI locally
+## Implementación local de AudioInterface
+## Utiliza el modelo Whisper de OpenAI localmente
 
 class LocalWhisper(STTInterface):
     """
-    This class implements the AudioInterface interface using the Whisper model
-    from OpenAI locally.
+    Esta clase implementa la interfaz AudioInterface utilizando el modelo Whisper
+    de OpenAI localmente.
     """
 
     ## Constructor
     def __init__(self, model_size: str) -> None:
         """
-        Initializes the LocalWhisper object.
+        Inicializa el objeto LocalWhisper.
 
         Args:
-            model_size (str): The size of the Whisper model to use. This can be
-                "small", "base", or "tiny" cannot use larger models due to vram limitation
+            model_size (str): El tamaño del modelo Whisper a utilizar. Puede ser
+                "small", "base" o "tiny"; no se pueden usar modelos más grandes debido a limitaciones de VRAM.
         """
         self.model = model_size
-        # Automatically configure device (CPU or GPU)
+        # Configura automáticamente el dispositivo (CPU o GPU)
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         
 
     def transcribe(self, filename: str) -> str:
         """
-        Transcribes an audio file to text using the Whisper model.
+        Transcribe un archivo de audio a texto usando el modelo Whisper.
 
         Args:
-            filename (str): The path to the audio file to transcribe.
+            filename (str): La ruta al archivo de audio a transcribir.
 
         Returns:
-            str: The transcribed text from the audio file.
+            str: El texto transcrito del archivo de audio.
         """
         
-        #If something flails trhow an exception that will be catched a top level
-        # Load the Whisper model onto the chosen device (CPU or GPU)
+        # Si algo falla, lanzará una excepción que será capturada a nivel superior
+        # Cargar el modelo Whisper en el dispositivo elegido (CPU o GPU)
         model = whisper.load_model(self.model, self.device)
 
-        # Transcribe the audio file
+        # Transcribir el archivo de audio
         result = model.transcribe(audio=filename)
-        
 
-        # Return the transcribed text
+        # Devolver el texto transcrito
         return result["text"]

@@ -1,15 +1,15 @@
 class ConfigModel:
     """
-    Class for storing and managing the server configuration settings.
+    Clase para almacenar y gestionar las configuraciones del servidor.
 
-    This class provides getters and setters for various configuration
-    settings such as language, STT, Whisper model size, LLM, LLM models,
-    TTS, and port.
+    Esta clase proporciona getters y setters para varias configuraciones
+    tales como idioma, STT, tamaño del modelo Whisper, LLM, modelos LLM,
+    TTS y puerto.
     """
 
     def __init__(self):
         """
-        Initializes an instance of the ConfigModel class with default settings.
+        Inicializa una instancia de la clase ConfigModel con configuraciones por defecto.
         """
         self._language = "es"
         self._stt = "local"
@@ -22,139 +22,139 @@ class ConfigModel:
     @property
     def language(self):
         """
-        Get the current language setting.
+        Obtiene la configuración actual del idioma.
 
         Returns:
-            str: The current language setting.
+            str: La configuración actual del idioma.
         """
         return self._language
 
     @language.setter
     def language(self, value):
         """
-        Set a new language.
+        Establece un nuevo idioma.
 
         Args:
-            value (str): The new language to set.
+            value (str): El nuevo idioma a establecer.
         """
         self._language = value
 
     @property
     def stt(self):
         """
-        Get the current speech-to-text (STT) setting.
+        Obtiene la configuración actual del servicio de reconocimiento de voz (STT).
 
         Returns:
-            str: The current STT setting.
+            str: La configuración actual de STT.
         """
         return self._stt
 
     @stt.setter
     def stt(self, value):
         """
-        Set a new speech-to-text (STT) setting.
+        Establece una nueva configuración para el servicio de reconocimiento de voz (STT).
 
         Args:
-            value (str): The new STT setting to set.
+            value (str): La nueva configuración de STT a establecer.
         """
         self._stt = value
 
     @property
     def whisper_size(self):
         """
-        Get the current Whisper model size setting.
+        Obtiene la configuración actual del tamaño del modelo Whisper.
 
         Returns:
-            str: The current Whisper model size setting.
+            str: La configuración actual del tamaño del modelo Whisper.
         """
         return self._whisper_size
 
     @whisper_size.setter
     def whisper_size(self, value):
         """
-        Set a new Whisper model size.
+        Establece un nuevo tamaño para el modelo Whisper.
 
         Args:
-            value (str): The new Whisper model size to set.
+            value (str): El nuevo tamaño del modelo Whisper a establecer.
         """
         self._whisper_size = value
 
     @property
     def llm(self):
         """
-        Get the current large language model (LLM) setting.
+        Obtiene la configuración actual del modelo de lenguaje grande (LLM).
 
         Returns:
-            str: The current LLM setting.
+            str: La configuración actual de LLM.
         """
         return self._llm
 
     @llm.setter
     def llm(self, value):
         """
-        Set a new large language model (LLM) setting.
+        Establece una nueva configuración para el modelo de lenguaje grande (LLM).
 
         Args:
-            value (str): The new LLM setting to set.
+            value (str): La nueva configuración de LLM a establecer.
         """
         self._llm = value
 
     @property
     def llm_models(self):
         """
-        Get the current LLM models setting.
+        Obtiene la configuración actual de los modelos LLM.
 
         Returns:
-            str: The current LLM models setting.
+            str: La configuración actual de los modelos LLM.
         """
         return self._llm_models
 
     @llm_models.setter
     def llm_models(self, value):
         """
-        Set new LLM models.
+        Establece nuevos modelos LLM.
 
         Args:
-            value (str): The new LLM models to set.
+            value (str): Los nuevos modelos LLM a establecer.
         """
         self._llm_models = value
 
     @property
     def tts(self):
         """
-        Get the current text-to-speech (TTS) setting.
+        Obtiene la configuración actual del servicio de texto a voz (TTS).
 
         Returns:
-            str: The current TTS setting.
+            str: La configuración actual de TTS.
         """
         return self._tts
 
     @tts.setter
     def tts(self, value):
         """
-        Set a new text-to-speech (TTS) setting.
+        Establece una nueva configuración para el servicio de texto a voz (TTS).
 
         Args:
-            value (str): The new TTS setting to set.
+            value (str): La nueva configuración de TTS a establecer.
         """
         self._tts = value
 
     @property
     def port(self):
         """
-        Get the current port setting.
+        Obtiene la configuración actual del puerto.
 
         Returns:
-            int: The current port setting.
+            int: La configuración actual del puerto.
         """
         return self._port
 
     @port.setter
     def port(self, value):
         """
-        Set a new port.
+        Establece un nuevo puerto.
 
         Args:
-            value (int): The new port setting to set.
+            value (int): La nueva configuración de puerto a establecer.
         """
         self._port = value

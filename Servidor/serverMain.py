@@ -15,22 +15,22 @@ class Servidor:
     def __init__(self):
 
         """
-        Initialize the server configuration and set up routes and database.
+        Inicializa la configuración del servidor y configura las rutas y la base de datos.
 
-        This constructor does the following:
-        - Initializes a Flask application.
-        - Sets a secret key for the Flask application.
-        - Initializes auxiliary functions.
-        - Adds URL rules for various endpoints.
-        - Creates a folder for temporary user data if it doesn't exist.
-        - Creates a database for user data if it doesn't exist, and adds a default user.
+        Este constructor realiza las siguientes acciones:
+        - Inicializa una aplicación Flask.
+        - Establece una clave secreta para la aplicación Flask.
+        - Inicializa funciones auxiliares.
+        - Agrega reglas de URL para varios endpoints.
+        - Crea una carpeta para datos temporales de usuarios si no existe.
+        - Crea una base de datos para datos de usuarios si no existe y agrega un usuario predeterminado.
 
-        Attributes:
-            app (Flask): The Flask application instance.
-            aux (Aux_functions): An instance of auxiliary functions for various utility operations.
+        Atributos:
+            app (Flask): La instancia de la aplicación Flask.
+            aux (Aux_functions): Una instancia de funciones auxiliares para varias operaciones de utilidad.
 
         Raises:
-            sqlite3.Error: If there is an error adding the default user to the database.
+            sqlite3.Error: Si hay un error al agregar el usuario predeterminado a la base de datos.
         """
         
         ##Server configs
@@ -65,22 +65,22 @@ class Servidor:
     
     def run(self, language = "es", stt = "local", whisperSize = "small" , llm = "remoto", localModels = "Gemma", tts = "local", port = 5000):
         """
-        Run the Flask server with the specified configurations.
+        Ejecuta el servidor Flask con las configuraciones especificadas.
 
-        This method sets up logging, initializes various components of the system (such as STT, LLM, and TTS),
-        and starts the Flask server.
+        Este método configura el registro, inicializa varios componentes del sistema (como STT, LLM y TTS)
+        y arranca el servidor Flask.
 
         Args:
-            language (str, optional): The language setting for the system. Default is "es".
-            stt (str, optional): The speech-to-text service to be used. Default is "local".
-            whisperSize (str, optional): The size of the Whisper model to be used for STT. Default is "small".
-            llm (str, optional): The large language model to be used. Default is "remoto".
-            localModels (str, optional): The local models to be used. Default is "Gemma".
-            tts (str, optional): The text-to-speech service to be used. Default is "local".
-            port (int, optional): The port on which the Flask server will run. Default is 5000.
+            language (str, optional): La configuración de idioma para el sistema. Por defecto es "es".
+            stt (str, optional): El servicio de reconocimiento de voz a texto a utilizar. Por defecto es "local".
+            whisperSize (str, optional): El tamaño del modelo Whisper a utilizar para STT. Por defecto es "small".
+            llm (str, optional): El modelo de lenguaje grande a utilizar. Por defecto es "remoto".
+            localModels (str, optional): Los modelos locales a utilizar. Por defecto es "Gemma".
+            tts (str, optional): El servicio de texto a voz a utilizar. Por defecto es "local".
+            port (int, optional): El puerto en el que se ejecutará el servidor Flask. Por defecto es 5000.
 
         Raises:
-            Exception: If an unhandled exception occurs during the initialization of system components.
+            Exception: Si ocurre una excepción no manejada durante la inicialización de los componentes del sistema.
         """
         #Set logger
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -108,17 +108,17 @@ class Servidor:
 
     def register_new_user(self):
         """
-        Register a new user based on the JSON data received in the request.
+        Registra un nuevo usuario basado en los datos JSON recibidos en la solicitud.
 
-        This method extracts user information from a JSON payload, attempts to add the user
-        to the database, and handles any potential errors during the process. It also logs 
-        the success or failure of the registration attempt.
+        Este método extrae la información del usuario de una carga útil JSON, intenta agregar al usuario
+        a la base de datos y maneja cualquier error potencial durante el proceso. También registra
+        el éxito o fracaso del intento de registro.
 
         Returns:
-            tuple: A tuple containing a message and an HTTP status code.
-                - "ok", 200: If the user is successfully registered.
-                - "User already exist", 409: If there is an attempt to register an existing user.
-                - "Something gone wrong", 500: If an unhandled exception occurs.
+            tuple: Una tupla que contiene un mensaje y un código de estado HTTP.
+                - "ok", 200: Si el usuario se registra con éxito.
+                - "User already exist", 409: Si se intenta registrar un usuario existente.
+                - "Something gone wrong", 500: Si ocurre una excepción no manejada.
         """
         try:
             if request.is_json:
@@ -146,16 +146,16 @@ class Servidor:
 
     def logIn(self):
         """
-        Authenticate a user based on the JSON data received in the request.
+        Autentica a un usuario basado en los datos JSON recibidos en la solicitud.
 
-        This method extracts the username and password from a JSON payload, verifies the user's credentials,
-        and handles the login process. It also logs the success or failure of the login attempt.
+        Este método extrae el nombre de usuario y la contraseña de una carga útil JSON, verifica las credenciales del usuario
+        y maneja el proceso de inicio de sesión. También registra el éxito o fracaso del intento de inicio de sesión.
 
         Returns:
-            tuple: A tuple containing a message and an HTTP status code.
-                - "Verifing user: OK", 200: If the user is successfully authenticated.
-                - "Verifing user: NOT OK", 401: If the authentication fails.
-                - "something failed", 500: If the request format is incorrect or an unhandled exception occurs.
+            tuple: Una tupla que contiene un mensaje y un código de estado HTTP.
+                - "Verifing user: OK", 200: Si el usuario se autentica con éxito.
+                - "Verifing user: NOT OK", 401: Si la autenticación falla.
+                - "something failed", 500: Si el formato de la solicitud es incorrecto o ocurre una excepción no manejada.
         """
         try:
             if request.is_json:
@@ -183,16 +183,16 @@ class Servidor:
 
     def register_user_session(self):
         """
-        Register a new user session and initialize the session state.
+        Registra una nueva sesión de usuario e inicializa el estado de la sesión.
 
-        This method assigns a unique user ID to the session if it doesn't already have one,
-        initializes the session state and messages, adds a system message to the chat,
-        creates a user directory, and logs the registration success or failure.
+        Este método asigna un ID de usuario único a la sesión si aún no lo tiene,
+        inicializa el estado de la sesión y los mensajes, agrega un mensaje del sistema al chat,
+        crea un directorio de usuario y registra el éxito o fracaso del registro.
 
         Returns:
-            tuple: A tuple containing a message and an HTTP status code.
-                - 'User {user_id} registered successfully.', 200: If the user session is successfully registered.
-                - 'Error registering user: {error_message}', 500: If an unhandled exception occurs during registration.
+            tuple: Una tupla que contiene un mensaje y un código de estado HTTP.
+                - 'User {user_id} registered successfully.', 200: Si la sesión de usuario se registra con éxito.
+                - 'Error registering user: {error_message}', 500: Si ocurre una excepción no manejada durante el registro.
         """
         try:
             # Give a user_id if user is not registered
@@ -229,25 +229,24 @@ class Servidor:
   
     def upload_wav(self):
         """
-        Handle the upload of a WAV file, transcribe its contents, interact with the language model,
-        and return a synthesized response.
+        Maneja la carga de un archivo WAV, transcribe su contenido, interactúa con el modelo de lenguaje
+        y devuelve una respuesta sintetizada.
 
-        This method performs the following actions:
-        - Checks if the user is authenticated.
-        - Validates the presence and selection of a WAV file in the request.
-        - Saves the uploaded WAV file to a temporary directory.
-        - Transcribes the WAV file to text using the STT system.
-        - Adds the transcribed text to the chat history.
-        - Sends the chat history to a language model and receives a response.
-        - Checks if the conversation has ended and prepares an evaluation message if necessary.
-        - Adds the assistant's response to the chat history.
-        - Converts the response to speech using the TTS system.
-        - Encodes the audio response in base64 and returns it along with an end-of-conversation flag.
+        Este método realiza las siguientes acciones:
+        - Verifica si el usuario está autenticado.
+        - Valida la presencia y selección de un archivo WAV en la solicitud.
+        - Guarda el archivo WAV cargado en un directorio temporal.
+        - Transcribe el archivo WAV a texto utilizando el sistema STT.
+        - Agrega el texto transcrito al historial del chat.
+        - Envía el historial del chat a un modelo de lenguaje y recibe una respuesta.
+        - Verifica si la conversación ha terminado y prepara un mensaje de evaluación si es necesario.
+        - Agrega la respuesta del asistente al historial del chat.
+        - Convierte la respuesta a voz utilizando el sistema TTS.
+        - Codifica la respuesta de audio en base64 y la devuelve junto con una bandera de fin de conversación.
 
         Returns:
-            Response: A JSON response containing the encoded audio and end-of-conversation flag, or an error message and status code.
+            Response: Una respuesta JSON que contiene el audio codificado y la bandera de fin de conversación, o un mensaje de error y un código de estado.
         """
-    
         try:
             # Check if user is authenticated
             if 'user_id' not in session:
@@ -323,18 +322,18 @@ class Servidor:
     
     def logout(self):
         """
-        Log out the user by removing the user ID from the session and deleting the user's temporary data directory.
+        Cierra la sesión del usuario eliminando el ID de usuario de la sesión y borrando el directorio de datos temporales del usuario.
 
-        This method performs the following actions:
-        - Checks if the user is authenticated.
-        - Removes the user ID from the session.
-        - Deletes the user's temporary data directory.
-        - Logs the successful logout.
+        Este método realiza las siguientes acciones:
+        - Verifica si el usuario está autenticado.
+        - Elimina el ID de usuario de la sesión.
+        - Borra el directorio de datos temporales del usuario.
+        - Registra el cierre de sesión exitoso.
 
         Returns:
-            tuple: A tuple containing a message and an HTTP status code.
-                - 'Logout successfully.', 200: If the user is successfully logged out.
-                - 'An error occurred: {error_message}', 500: If an unhandled exception occurs during the logout process.
+            tuple: Una tupla que contiene un mensaje y un código de estado HTTP.
+                - 'Logout successfully.', 200: Si el usuario cierra sesión con éxito.
+                - 'An error occurred: {error_message}', 500: Si ocurre una excepción no manejada durante el cierre de sesión.
         """
         try:
             if 'user_id' in session:
@@ -355,17 +354,17 @@ class Servidor:
 
     def delete_user (self ): 
         """
-        Delete a user based on the JSON data received in the request.
+        Elimina un usuario basado en los datos JSON recibidos en la solicitud.
 
-        This method extracts the username and password from a JSON payload, attempts to delete the user
-        from the database, and handles any potential errors during the process. It also logs the success
-        or failure of the deletion attempt.
+        Este método extrae el nombre de usuario y la contraseña de una carga útil JSON, intenta eliminar al usuario
+        de la base de datos y maneja cualquier error potencial durante el proceso. También registra el éxito
+        o fracaso del intento de eliminación.
 
         Returns:
-            tuple: A tuple containing a message and an HTTP status code.
-                - "User deleted", 200: If the user is successfully deleted.
-                - "User not found", 400: If the user is not found or the deletion fails.
-                - "An error occurred: {error_message}", 500: If an unhandled exception occurs.
+            tuple: Una tupla que contiene un mensaje y un código de estado HTTP.
+                - "User deleted", 200: Si el usuario se elimina con éxito.
+                - "User not found", 400: Si el usuario no se encuentra o la eliminación falla.
+                - "An error occurred: {error_message}", 500: Si ocurre una excepción no manejada.
         """
         try:
             if request.is_json:
@@ -392,10 +391,10 @@ class Servidor:
 
     def ping(self):
         """
-        Simple health check endpoint that responds with 'pong'.
+        Endpoint simple de verificación de estado que responde con 'pong'.
 
         Returns:
-            str: The string "pong".
+            str: La cadena "pong".
         """ 
         return "pong"
 
@@ -403,24 +402,24 @@ class Servidor:
 ## def main ()
 if __name__ == '__main__':
     """
-    Main entry point for the server application.
+    Punto de entrada principal para la aplicación del servidor.
 
-    This script can be run with or without command-line arguments. If no arguments are provided,
-    it initializes and runs the server with default settings. If exactly seven arguments are provided,
-    it initializes and runs the server with the specified settings.
+    Este script se puede ejecutar con o sin argumentos de línea de comandos. Si no se proporcionan argumentos,
+    inicializa y ejecuta el servidor con configuraciones predeterminadas. Si se proporcionan exactamente siete argumentos,
+    inicializa y ejecuta el servidor con las configuraciones especificadas.
 
-    Command-line Arguments:
-        1. language (str): The language setting for the system.
-        2. stt (str): The speech-to-text service to be used.
-        3. whisperSize (str): The size of the Whisper model to be used for STT.
-        4. llm (str): The large language model to be used.
-        5. localModels (str): The local models to be used.
-        6. tts (str): The text-to-speech service to be used.
-        7. port (int): The port on which the Flask server will run.
+    Argumentos de línea de comandos:
+        1. language (str): La configuración de idioma para el sistema.
+        2. stt (str): El servicio de reconocimiento de voz a texto a utilizar.
+        3. whisperSize (str): El tamaño del modelo Whisper a utilizar para STT.
+        4. llm (str): El modelo de lenguaje grande a utilizar.
+        5. localModels (str): Los modelos locales a utilizar.
+        6. tts (str): El servicio de texto a voz a utilizar.
+        7. port (int): El puerto en el que se ejecutará el servidor Flask.
 
     Raises:
-        ValueError: If the provided port argument is not a valid integer.
-        SystemExit: If the number of arguments is invalid or if the port argument is invalid.
+        ValueError: Si el argumento del puerto proporcionado no es un entero válido.
+        SystemExit: Si el número de argumentos es inválido o si el argumento del puerto es inválido.
     """
     arguments_number  = len(sys.argv) - 1
     if(arguments_number == 0): #When args not given

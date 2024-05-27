@@ -1,21 +1,22 @@
 from abc import ABC, abstractmethod
 
-## Interface dedicated to Speech-to-Text (STT) handling
-## Provides abstract methods 
+## Interfaz dedicada al manejo de reconocimiento de voz a texto (STT)
+## Proporciona métodos abstractos
 
 class STTInterface(ABC):
     """
-    This abstract base class defines the interface for transcribing audio files.
+    Esta clase base abstracta define la interfaz para transcribir archivos de audio.
     """
 
+    @abstractmethod
     def transcribe(self, filename: str) -> str:
         """
-        Transcribes an audio file to text.
+        Transcribe un archivo de audio a texto.
 
         Args:
-            filename (str): The path to the audio file to transcribe.
+            filename (str): La ruta al archivo de audio a transcribir.
 
         Returns:
-            str: The transcribed text from the audio file.
+            str: El texto transcrito del archivo de audio.
         """
-
+        pass

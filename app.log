@@ -1,0 +1,175 @@
+2024-05-27 19:03:44,568 - CRITICAL - Server Start 
+2024-05-27 19:05:22,964 - CRITICAL - Server Start 
+2024-05-27 19:05:42,326 - INFO - - User Logged Succsessfully ip 192.168.0.14 
+2024-05-27 19:05:42,595 - INFO - - User Register Succsessfully id 22df4596-03f4-4c82-a2e4-db95d52d7902 / ip 192.168.0.14 
+2024-05-27 19:05:56,522 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/serverMain.py", line 280, in upload_wav
+    text = self.STT.transcribe(path)
+  File "/home/al/Escritorio/TFG/Servidor/STTFolder/remoteWhisper.py", line 41, in transcribe
+    transcription = self.client.audio.transcriptions.create(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/resources/audio/transcriptions.py", line 116, in create
+    return self._post(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1240, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 921, in request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1020, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2024-05-27 19:07:44,312 - CRITICAL - Server Start 
+2024-05-27 19:07:57,665 - INFO - - User Logged Succsessfully ip 192.168.0.14 
+2024-05-27 19:07:57,947 - INFO - - User Register Succsessfully id 94405424-cf73-41f1-9804-022a5071e206 / ip 192.168.0.14 
+2024-05-27 19:08:08,307 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/serverMain.py", line 280, in upload_wav
+    text = self.STT.transcribe(path)
+  File "/home/al/Escritorio/TFG/Servidor/STTFolder/remoteWhisper.py", line 41, in transcribe
+    transcription = self.client.audio.transcriptions.create(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/resources/audio/transcriptions.py", line 116, in create
+    return self._post(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1240, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 921, in request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1020, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2024-05-27 19:08:21,926 - INFO - - Logout user Succsessfully - id 94405424-cf73-41f1-9804-022a5071e206 /  
+2024-05-27 19:09:52,036 - CRITICAL - Server Start 
+2024-05-27 19:10:12,807 - INFO - - User Logged Succsessfully ip 192.168.0.14 
+2024-05-27 19:10:13,331 - INFO - - User Register Succsessfully id ec7b3e03-45cb-45e0-8450-3a28222f60f5 / ip 192.168.0.14 
+2024-05-27 19:10:23,676 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/serverMain.py", line 280, in upload_wav
+    text = self.STT.transcribe(path)
+  File "/home/al/Escritorio/TFG/Servidor/STTFolder/remoteWhisper.py", line 41, in transcribe
+    transcription = self.client.audio.transcriptions.create(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/resources/audio/transcriptions.py", line 116, in create
+    return self._post(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1240, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 921, in request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1020, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2024-05-27 19:11:42,607 - CRITICAL - Server Start 
+2024-05-27 19:12:35,577 - INFO - - Logout user Succsessfully - id ec7b3e03-45cb-45e0-8450-3a28222f60f5 /  
+2024-05-27 19:12:59,844 - INFO - - User Logged Succsessfully ip 192.168.0.14 
+2024-05-27 19:13:00,347 - INFO - - User Register Succsessfully id cee1a480-0bdc-4215-b72c-c28be6a90933 / ip 192.168.0.14 
+2024-05-27 19:14:15,884 - INFO - Processed audio from - id cee1a480-0bdc-4215-b72c-c28be6a90933 
+2024-05-27 19:14:25,590 - INFO - - Logout user Succsessfully - id cee1a480-0bdc-4215-b72c-c28be6a90933 /  
+2024-05-27 19:16:47,510 - CRITICAL - Server Start 
+2024-05-27 19:17:18,743 - INFO - - User Logged Succsessfully ip 192.168.0.14 
+2024-05-27 19:17:18,997 - INFO - - User Register Succsessfully id 80091519-bb19-4a61-bf43-dcfa67b3d44a / ip 192.168.0.14 
+2024-05-27 19:18:06,814 - INFO - Processed audio from - id 80091519-bb19-4a61-bf43-dcfa67b3d44a 
+2024-05-27 19:18:24,660 - INFO - - Logout user Succsessfully - id 80091519-bb19-4a61-bf43-dcfa67b3d44a /  
+2024-05-27 19:19:33,035 - CRITICAL - Server Start 
+2024-05-27 19:19:51,090 - INFO - - User Logged Succsessfully ip 192.168.0.14 
+2024-05-27 19:19:51,482 - INFO - - User Register Succsessfully id b183292e-9a9d-425b-8fa5-ff68fbf885df / ip 192.168.0.14 
+2024-05-27 19:20:02,742 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/serverMain.py", line 280, in upload_wav
+    text = self.STT.transcribe(path)
+  File "/home/al/Escritorio/TFG/Servidor/STTFolder/remoteWhisper.py", line 41, in transcribe
+    transcription = self.client.audio.transcriptions.create(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/resources/audio/transcriptions.py", line 116, in create
+    return self._post(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1240, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 921, in request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1020, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2024-05-27 19:29:48,645 - CRITICAL - Server Start 
+2024-05-27 19:30:16,405 - INFO - - User Logged Succsessfully ip 192.168.0.14 
+2024-05-27 19:30:16,611 - INFO - - User Register Succsessfully id 1d8cec8c-a259-42d2-a102-47fcf948256e / ip 192.168.0.14 
+2024-05-27 19:30:28,273 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/serverMain.py", line 280, in upload_wav
+    text = self.STT.transcribe(path)
+  File "/home/al/Escritorio/TFG/Servidor/STTFolder/remoteWhisper.py", line 42, in transcribe
+    transcription = self.client.audio.transcriptions.create(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/resources/audio/transcriptions.py", line 116, in create
+    return self._post(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1240, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 921, in request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1020, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2024-05-27 19:31:50,546 - CRITICAL - Server Start 
+2024-05-27 19:31:58,606 - INFO - - Logout user Succsessfully - id 1d8cec8c-a259-42d2-a102-47fcf948256e /  
+2024-05-27 19:32:08,783 - INFO - - User Logged Succsessfully ip 192.168.0.14 
+2024-05-27 19:32:09,343 - INFO - - User Register Succsessfully id 589c609f-be4d-4f62-a99e-2ff32077edaa / ip 192.168.0.14 
+2024-05-27 19:32:21,325 - ERROR - Unhandled exception occurred
+Traceback (most recent call last):
+  File "/home/al/Escritorio/TFG/Servidor/serverMain.py", line 280, in upload_wav
+    text = self.STT.transcribe(path)
+  File "/home/al/Escritorio/TFG/Servidor/STTFolder/remoteWhisper.py", line 42, in transcribe
+    transcription = self.client.audio.transcriptions.create(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/resources/audio/transcriptions.py", line 116, in create
+    return self._post(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1240, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 921, in request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in _request
+    return self._retry_request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1053, in _retry_request
+    return self._request(
+  File "/home/al/Escritorio/TFG_env/lib/python3.10/site-packages/openai/_base_client.py", line 1020, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2024-05-27 19:32:29,830 - INFO - - Logout user Succsessfully - id 589c609f-be4d-4f62-a99e-2ff32077edaa /  
+2024-05-27 19:55:01,462 - CRITICAL - Server Start 
+2024-05-27 19:55:29,966 - CRITICAL - Server Start 
+2024-05-27 19:55:43,185 - CRITICAL - Server Start 
+2024-05-27 20:06:14,952 - CRITICAL - Server Start 
