@@ -13,6 +13,25 @@ from aux_functions import Aux_functions
 class Servidor:
 
     def __init__(self):
+
+        """
+        Initialize the server configuration and set up routes and database.
+
+        This constructor does the following:
+        - Initializes a Flask application.
+        - Sets a secret key for the Flask application.
+        - Initializes auxiliary functions.
+        - Adds URL rules for various endpoints.
+        - Creates a folder for temporary user data if it doesn't exist.
+        - Creates a database for user data if it doesn't exist, and adds a default user.
+
+        Attributes:
+            app (Flask): The Flask application instance.
+            aux (Aux_functions): An instance of auxiliary functions for various utility operations.
+
+        Raises:
+            sqlite3.Error: If there is an error adding the default user to the database.
+        """
         
         ##Server configs
         self.app = Flask(__name__)
@@ -43,17 +62,26 @@ class Servidor:
         except sqlite3.Error as e:
             print(f"Error al añadir usuario: {e}")
       
+    
     def run(self, language = "es", stt = "local", whisperSize = "small" , llm = "remoto", localModels = "Gemma", tts = "local", port = 5000):
-        
-        print(f"Language: {language}")
-        print(f"STT: {stt}")
-        print(f"Whisper Size: {whisperSize}")
-        print(f"LLM: {llm}")
-        print(f"Local Models: {localModels}")
-        print(f"TTS: {tts}")
-        print(f"Port: {port}")
+        """
+        Run the Flask server with the specified configurations.
 
+        This method sets up logging, initializes various components of the system (such as STT, LLM, and TTS),
+        and starts the Flask server.
 
+        Args:
+            language (str, optional): The language setting for the system. Default is "es".
+            stt (str, optional): The speech-to-text service to be used. Default is "local".
+            whisperSize (str, optional): The size of the Whisper model to be used for STT. Default is "small".
+            llm (str, optional): The large language model to be used. Default is "remoto".
+            localModels (str, optional): The local models to be used. Default is "Gemma".
+            tts (str, optional): The text-to-speech service to be used. Default is "local".
+            port (int, optional): The port on which the Flask server will run. Default is 5000.
+
+        Raises:
+            Exception: If an unhandled exception occurs during the initialization of system components.
+        """
         #Set logger
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         file_handler = logging.FileHandler('app.log')
@@ -79,7 +107,19 @@ class Servidor:
 
 
     def register_new_user(self):
-        
+        """
+        Register a new user based on the JSON data received in the request.
+
+        This method extracts user information from a JSON payload, attempts to add the user
+        to the database, and handles any potential errors during the process. It also logs 
+        the success or failure of the registration attempt.
+
+        Returns:
+            tuple: A tuple containing a message and an HTTP status code.
+                - "ok", 200: If the user is successfully registered.
+                - "User already exist", 409: If there is an attempt to register an existing user.
+                - "Something gone wrong", 500: If an unhandled exception occurs.
+        """
         try:
             if request.is_json:
                 
@@ -105,6 +145,18 @@ class Servidor:
 
 
     def logIn(self):
+        """
+        Authenticate a user based on the JSON data received in the request.
+
+        This method extracts the username and password from a JSON payload, verifies the user's credentials,
+        and handles the login process. It also logs the success or failure of the login attempt.
+
+        Returns:
+            tuple: A tuple containing a message and an HTTP status code.
+                - "Verifing user: OK", 200: If the user is successfully authenticated.
+                - "Verifing user: NOT OK", 401: If the authentication fails.
+                - "something failed", 500: If the request format is incorrect or an unhandled exception occurs.
+        """
         try:
             if request.is_json:
                 data = request.get_json()
@@ -130,6 +182,18 @@ class Servidor:
 
 
     def register_user_session(self):
+        """
+        Register a new user session and initialize the session state.
+
+        This method assigns a unique user ID to the session if it doesn't already have one,
+        initializes the session state and messages, adds a system message to the chat,
+        creates a user directory, and logs the registration success or failure.
+
+        Returns:
+            tuple: A tuple containing a message and an HTTP status code.
+                - 'User {user_id} registered successfully.', 200: If the user session is successfully registered.
+                - 'Error registering user: {error_message}', 500: If an unhandled exception occurs during registration.
+        """
         try:
             # Give a user_id if user is not registered
             if 'user_id' not in session:
@@ -163,7 +227,27 @@ class Servidor:
             return 'Error registering user: {}'.format(str(e)), 500
 
   
-    def upload_wav(self):    
+    def upload_wav(self):
+        """
+        Handle the upload of a WAV file, transcribe its contents, interact with the language model,
+        and return a synthesized response.
+
+        This method performs the following actions:
+        - Checks if the user is authenticated.
+        - Validates the presence and selection of a WAV file in the request.
+        - Saves the uploaded WAV file to a temporary directory.
+        - Transcribes the WAV file to text using the STT system.
+        - Adds the transcribed text to the chat history.
+        - Sends the chat history to a language model and receives a response.
+        - Checks if the conversation has ended and prepares an evaluation message if necessary.
+        - Adds the assistant's response to the chat history.
+        - Converts the response to speech using the TTS system.
+        - Encodes the audio response in base64 and returns it along with an end-of-conversation flag.
+
+        Returns:
+            Response: A JSON response containing the encoded audio and end-of-conversation flag, or an error message and status code.
+        """
+    
         try:
             # Check if user is authenticated
             if 'user_id' not in session:
@@ -238,7 +322,20 @@ class Servidor:
       
     
     def logout(self):
-       
+        """
+        Log out the user by removing the user ID from the session and deleting the user's temporary data directory.
+
+        This method performs the following actions:
+        - Checks if the user is authenticated.
+        - Removes the user ID from the session.
+        - Deletes the user's temporary data directory.
+        - Logs the successful logout.
+
+        Returns:
+            tuple: A tuple containing a message and an HTTP status code.
+                - 'Logout successfully.', 200: If the user is successfully logged out.
+                - 'An error occurred: {error_message}', 500: If an unhandled exception occurs during the logout process.
+        """
         try:
             if 'user_id' in session:
                 user_id = session['user_id']
@@ -257,6 +354,19 @@ class Servidor:
 
 
     def delete_user (self ): 
+        """
+        Delete a user based on the JSON data received in the request.
+
+        This method extracts the username and password from a JSON payload, attempts to delete the user
+        from the database, and handles any potential errors during the process. It also logs the success
+        or failure of the deletion attempt.
+
+        Returns:
+            tuple: A tuple containing a message and an HTTP status code.
+                - "User deleted", 200: If the user is successfully deleted.
+                - "User not found", 400: If the user is not found or the deletion fails.
+                - "An error occurred: {error_message}", 500: If an unhandled exception occurs.
+        """
         try:
             if request.is_json:
                 
@@ -274,22 +384,44 @@ class Servidor:
                     self.app.logger.info (f'- Attempt to delete a acount/ ip {ip_address} ')
                     return "User not found", 400
 
-
         except Exception as e:
             self.app.logger.error('Unhandled exception occurred', exc_info=e)
             return f"An error occurred: {str(e)}", 500
 
 
 
-    def ping(self): 
-        return "pong"
-    
+    def ping(self):
+        """
+        Simple health check endpoint that responds with 'pong'.
 
-    def serverHelloWorld(self): 
-        print("Hello word")
+        Returns:
+            str: The string "pong".
+        """ 
+        return "pong"
+
 
 ## def main ()
 if __name__ == '__main__':
+    """
+    Main entry point for the server application.
+
+    This script can be run with or without command-line arguments. If no arguments are provided,
+    it initializes and runs the server with default settings. If exactly seven arguments are provided,
+    it initializes and runs the server with the specified settings.
+
+    Command-line Arguments:
+        1. language (str): The language setting for the system.
+        2. stt (str): The speech-to-text service to be used.
+        3. whisperSize (str): The size of the Whisper model to be used for STT.
+        4. llm (str): The large language model to be used.
+        5. localModels (str): The local models to be used.
+        6. tts (str): The text-to-speech service to be used.
+        7. port (int): The port on which the Flask server will run.
+
+    Raises:
+        ValueError: If the provided port argument is not a valid integer.
+        SystemExit: If the number of arguments is invalid or if the port argument is invalid.
+    """
     arguments_number  = len(sys.argv) - 1
     if(arguments_number == 0): #When args not given
         servidor = Servidor()

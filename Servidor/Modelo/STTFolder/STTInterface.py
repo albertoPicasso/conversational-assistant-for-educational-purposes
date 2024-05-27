@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 ## Interface dedicated to Speech-to-Text (STT) handling
 ## Provides abstract methods 
 
-class AudioInterface(ABC):
+class STTInterface(ABC):
     """
     This abstract base class defines the interface for transcribing audio files.
     """

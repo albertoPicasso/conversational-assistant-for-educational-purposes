@@ -1,11 +1,11 @@
 import whisper
 import torch
-from .audioInterface import AudioInterface
+from .STTInterface import STTInterface
 
 ## Local Implementation of AudioInterface
 ## Uses the Whisper model from OpenAI locally
 
-class LocalWhisper(AudioInterface):
+class LocalWhisper(STTInterface):
     """
     This class implements the AudioInterface interface using the Whisper model
     from OpenAI locally.

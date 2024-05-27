@@ -449,3 +449,5 @@ openai.InternalServerError: Error code: 500 - {'error': "Model with key 'local-m
 2024-05-26 18:42:21,889 - INFO - - User Register Succsessfully ip 192.168.0.14 
 2024-05-26 18:42:28,543 - INFO - - User Logged Succsessfully ip 192.168.0.14 
 2024-05-26 18:42:28,795 - INFO - - User Register Succsessfully id 194178ba-0d59-4b45-9e50-2daa8f7821db / ip 192.168.0.14 
+2024-05-27 16:50:26,070 - CRITICAL - Server Start 
+2024-05-27 16:51:20,899 - CRITICAL - Server Start 

@@ -3,6 +3,14 @@ from tkinter import ttk
 from configController import ConfigController
 
 class ServerView():
+    """
+    Class for creating and managing the server configuration interface.
+
+    This class handles the initialization and layout of the server configuration interface
+    using tkinter. It includes methods for setting up various widgets and handling user input
+    to configure server settings such as language, STT, LLM, TTS, Whisper model size, and port.
+    """
+
     def __init__(self, master):
         """
         Initializes an instance of the ServerConfig class.
@@ -53,7 +61,7 @@ class ServerView():
         # Configuración del número de puerto
         
         self.puerto = tk.StringVar(value=self.controller.get_port())
-        self.puerto.trace_add("write", self.on_text_change)
+        self.puerto.trace_add("write", self.cambiar_puerto)
         self.setup_entry(self.frame_config_principal, "Número de puerto:", self.puerto)
 
         # Botón de lanzamiento
@@ -157,35 +165,72 @@ class ServerView():
         entry.pack()
 
 
-    def on_text_change(self, *args):
-        self.controller.set_port(self.idioma.get())
+    def cambiar_puerto(self, *args):
+        """
+        Change the server port setting.
+
+        This method retrieves the port value from the user input and sets it in the controller.
+
+        Args:
+            *args: Additional arguments passed by the trace or event handler.
+        """
+        self.controller.set_port(self.puerto.get())
 
     def cambiar_idioma(self, event):
+        """
+        Change the language setting.
+
+        This method retrieves the language value from the user input and sets it in the controller.
+
+        Args:
+            event (Event): The event that triggered the language change.
+        """
         self.controller.set_language(self.idioma.get())
-        
 
     def cambiar_stt(self):
+        """
+        Change the speech-to-text (STT) setting.
+
+        This method retrieves the STT value from the user input and sets it in the controller.
+        """
         self.controller.set_stt(self.stt.get())
-        
 
     def cambiar_llm(self):
+        """
+        Change the large language model (LLM) setting.
+
+        This method retrieves the LLM value from the user input and sets it in the controller.
+        """
         self.controller.set_llm(self.llm.get())
-        
-        
 
     def cambiar_tts(self):
-        self.controller.set_tts(self.tts.get())
-        
+        """
+        Change the text-to-speech (TTS) setting.
 
-    def cambiar_puerto(self):
-        self.controller.set_port(self.puerto.get())
-        
-    
+        This method retrieves the TTS value from the user input and sets it in the controller.
+        """
+        self.controller.set_tts(self.tts.get())
+
     def on_whisper_size_change(self, value):
-        self.controller.set_whisper_size(self.whisperSize.get() )
-        
+        """
+        Handle the change event for the Whisper model size setting.
+
+        This method retrieves the Whisper model size value from the user input and sets it in the controller.
+
+        Args:
+            value (str): The new Whisper model size selected by the user.
+        """
+        self.controller.set_whisper_size(self.whisperSize.get())
 
     def on_modelos_change(self, value):
+        """
+        Handle the change event for the LLM models setting.
+
+        This method retrieves the LLM models value from the user input and sets it in the controller.
+
+        Args:
+            value (str): The new LLM model selected by the user.
+        """
         self.controller.set_llm_models(self.modelos.get())
 
 

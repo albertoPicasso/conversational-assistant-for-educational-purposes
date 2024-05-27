@@ -1,10 +1,10 @@
-from .audioInterface import AudioInterface
+from .STTInterface import STTInterface
 import os 
 import openai as OpenAI 
 ## Local Implementation of AudioInterface
 ## Uses the Whisper model from OpenAI locally
 
-class RemoteWhisper(AudioInterface):
+class RemoteWhisper(STTInterface):
     """
     This class implements the AudioInterface interface using the Whisper model
     from OpenAI locally.
