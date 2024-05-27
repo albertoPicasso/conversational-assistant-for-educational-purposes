@@ -29,7 +29,7 @@ class ConfigController:
         """
         # Add the path to sys.path
         path = os.getcwd()
-        module_path = os.path.join (path, "Servidor", "Modelo")
+        module_path = os.path.join (path, "Servidor")
         ##module_path = '/home/al/Escritorio/TFG/Servidor/Modelo'
         if module_path not in sys.path:
             sys.path.append(module_path)
