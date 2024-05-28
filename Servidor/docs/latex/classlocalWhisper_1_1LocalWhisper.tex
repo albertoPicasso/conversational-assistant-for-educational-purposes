@@ -1,0 +1,84 @@
+\hypertarget{classlocalWhisper_1_1LocalWhisper}{}\doxysection{Referencia de la Clase local\+Whisper.\+Local\+Whisper}
+\label{classlocalWhisper_1_1LocalWhisper}\index{localWhisper.LocalWhisper@{localWhisper.LocalWhisper}}
+
+
+Implementación local de Audio\+Interface Utiliza el modelo Whisper de Open\+AI localmente.  
+
+
+
+
+Diagrama de herencias de local\+Whisper.\+Local\+Whisper
+% FIG 0
+
+
+Diagrama de colaboración para local\+Whisper.\+Local\+Whisper\+:
+% FIG 1
+\doxysubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classlocalWhisper_1_1LocalWhisper_a52a89b083d95f12e4589363bf8639a48}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str model\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+str \mbox{\hyperlink{classlocalWhisper_1_1LocalWhisper_a918e7d0d97062699f9a4c5dd95e51f15}{transcribe}} (self, str filename)
+\end{DoxyCompactItemize}
+\doxysubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlocalWhisper_1_1LocalWhisper_a202acfa5de6759277af630691cfcc589}\label{classlocalWhisper_1_1LocalWhisper_a202acfa5de6759277af630691cfcc589}} 
+{\bfseries model}
+\item 
+\mbox{\Hypertarget{classlocalWhisper_1_1LocalWhisper_a9c7a5f460ca4525ff9d22a9e6e639e1e}\label{classlocalWhisper_1_1LocalWhisper_a9c7a5f460ca4525ff9d22a9e6e639e1e}} 
+{\bfseries device}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Implementación local de Audio\+Interface Utiliza el modelo Whisper de Open\+AI localmente. 
+
+\begin{DoxyVerb}Esta clase implementa la interfaz AudioInterface utilizando el modelo Whisper
+de OpenAI localmente.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classlocalWhisper_1_1LocalWhisper_a52a89b083d95f12e4589363bf8639a48}\label{classlocalWhisper_1_1LocalWhisper_a52a89b083d95f12e4589363bf8639a48}} 
+\index{localWhisper.LocalWhisper@{localWhisper.LocalWhisper}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!localWhisper.LocalWhisper@{localWhisper.LocalWhisper}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily  None local\+Whisper.\+Local\+Whisper.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{model\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+\begin{DoxyVerb}Inicializa el objeto LocalWhisper.
+
+Args:
+    model_size (str): El tamaño del modelo Whisper a utilizar. Puede ser
+"small", "base" o "tiny"; no se pueden usar modelos más grandes debido a limitaciones de VRAM.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classlocalWhisper_1_1LocalWhisper_a918e7d0d97062699f9a4c5dd95e51f15}\label{classlocalWhisper_1_1LocalWhisper_a918e7d0d97062699f9a4c5dd95e51f15}} 
+\index{localWhisper.LocalWhisper@{localWhisper.LocalWhisper}!transcribe@{transcribe}}
+\index{transcribe@{transcribe}!localWhisper.LocalWhisper@{localWhisper.LocalWhisper}}
+\doxysubsubsection{\texorpdfstring{transcribe()}{transcribe()}}
+{\footnotesize\ttfamily  str local\+Whisper.\+Local\+Whisper.\+transcribe (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{filename }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Transcribe un archivo de audio a texto usando el modelo Whisper.
+
+Args:
+    filename (str): La ruta al archivo de audio a transcribir.
+
+Returns:
+    str: El texto transcrito del archivo de audio.
+\end{DoxyVerb}
+ 
+
+Reimplementado de \mbox{\hyperlink{classSTTInterface_1_1STTInterface_a2c6c0e3c6c7c2ba927ea9258b0982917}{S\+T\+T\+Interface.\+S\+T\+T\+Interface}}.
+
+
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+Servidor/\+S\+T\+T\+Folder/local\+Whisper.\+py\end{DoxyCompactItemize}

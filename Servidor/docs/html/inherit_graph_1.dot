@@ -1,0 +1,28 @@
+digraph "Representación gráfica de la clase"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node3 [label="ABC",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node3 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="llmInterface.LlmInterface",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classllmInterface_1_1LlmInterface.html",tooltip=" "];
+  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 [label="openAIAPI.OpenAIAPI",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classopenAIAPI_1_1OpenAIAPI.html",tooltip="Implementación de LlmInterface usando la API de OpenAI."];
+  Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="STTInterface.STTInterface",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSTTInterface_1_1STTInterface.html",tooltip="Interfaz dedicada al manejo de reconocimiento de voz a texto (STT) Proporciona métodos abstractos."];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="localWhisper.LocalWhisper",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlocalWhisper_1_1LocalWhisper.html",tooltip="Implementación local de AudioInterface Utiliza el modelo Whisper de OpenAI localmente."];
+  Node6 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="remoteWhisper.RemoteWhisper",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classremoteWhisper_1_1RemoteWhisper.html",tooltip="Implementación remota de AudioInterface Utiliza el modelo Whisper de OpenAI de forma remota."];
+  Node3 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="teacherInterface.Teacher\lInterface",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classteacherInterface_1_1TeacherInterface.html",tooltip=" "];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="languageTeacher.Language\lTeacher",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlanguageTeacher_1_1LanguageTeacher.html",tooltip="Implementación de LlmInterface usando la API de OpenAI."];
+  Node3 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="ttsInterface.TtsInterface",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classttsInterface_1_1TtsInterface.html",tooltip=" "];
+  Node11 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="coquiTTS.CoquiTTS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcoquiTTS_1_1CoquiTTS.html",tooltip="Implementación de CoquiTTS para Texto a Voz (TTS)"];
+  Node11 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="openAITTS.OpenAITTS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classopenAITTS_1_1OpenAITTS.html",tooltip=" "];
+}

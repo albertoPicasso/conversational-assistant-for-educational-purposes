@@ -1,0 +1,97 @@
+\hypertarget{classlanguageTeacher_1_1LanguageTeacher}{}\doxysection{Referencia de la Clase language\+Teacher.\+Language\+Teacher}
+\label{classlanguageTeacher_1_1LanguageTeacher}\index{languageTeacher.LanguageTeacher@{languageTeacher.LanguageTeacher}}
+
+
+Implementación de Llm\+Interface usando la A\+PI de Open\+AI.  
+
+
+
+
+Diagrama de herencias de language\+Teacher.\+Language\+Teacher
+% FIG 0
+
+
+Diagrama de colaboración para language\+Teacher.\+Language\+Teacher\+:
+% FIG 1
+\doxysubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classlanguageTeacher_1_1LanguageTeacher_aeab0f7600732307cc04840b9c31d8c94}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, lang)
+\item 
+bool \mbox{\hyperlink{classlanguageTeacher_1_1LanguageTeacher_a0a39001552e72be4885173a773c8e8ef}{check\+End\+Chat}} (self, str message)
+\item 
+def \mbox{\hyperlink{classlanguageTeacher_1_1LanguageTeacher_a1760cbd6ec210c6028a1bb58a2ea7729}{evaluation}} (self, message\+\_\+list, last\+\_\+message, L\+LM)
+\end{DoxyCompactItemize}
+\doxysubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlanguageTeacher_1_1LanguageTeacher_a173f1aa6f48c8f2338395f6cb61beeaf}\label{classlanguageTeacher_1_1LanguageTeacher_a173f1aa6f48c8f2338395f6cb61beeaf}} 
+{\bfseries lang}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Implementación de Llm\+Interface usando la A\+PI de Open\+AI. 
+
+\doxysubsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classlanguageTeacher_1_1LanguageTeacher_aeab0f7600732307cc04840b9c31d8c94}\label{classlanguageTeacher_1_1LanguageTeacher_aeab0f7600732307cc04840b9c31d8c94}} 
+\index{languageTeacher.LanguageTeacher@{languageTeacher.LanguageTeacher}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!languageTeacher.LanguageTeacher@{languageTeacher.LanguageTeacher}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def language\+Teacher.\+Language\+Teacher.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{lang }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicializa el objeto LanguageTeacher con el idioma especificado.
+
+Args:
+    lang (str): El idioma en el que se realizará la evaluación.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classlanguageTeacher_1_1LanguageTeacher_a0a39001552e72be4885173a773c8e8ef}\label{classlanguageTeacher_1_1LanguageTeacher_a0a39001552e72be4885173a773c8e8ef}} 
+\index{languageTeacher.LanguageTeacher@{languageTeacher.LanguageTeacher}!checkEndChat@{checkEndChat}}
+\index{checkEndChat@{checkEndChat}!languageTeacher.LanguageTeacher@{languageTeacher.LanguageTeacher}}
+\doxysubsubsection{\texorpdfstring{checkEndChat()}{checkEndChat()}}
+{\footnotesize\ttfamily  bool language\+Teacher.\+Language\+Teacher.\+check\+End\+Chat (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{message }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Verifica si el mensaje indica el fin del chat basado en ciertos niveles.
+
+Args:
+    message (str): El mensaje a verificar para determinar si indica el fin del chat.
+
+Returns:
+    bool: True si el mensaje contiene alguno de los niveles predefinidos, False en caso contrario.
+\end{DoxyVerb}
+ 
+
+Reimplementado de \mbox{\hyperlink{classteacherInterface_1_1TeacherInterface_a0f815251d11479cc5f9ce68dab71ad2f}{teacher\+Interface.\+Teacher\+Interface}}.
+
+\mbox{\Hypertarget{classlanguageTeacher_1_1LanguageTeacher_a1760cbd6ec210c6028a1bb58a2ea7729}\label{classlanguageTeacher_1_1LanguageTeacher_a1760cbd6ec210c6028a1bb58a2ea7729}} 
+\index{languageTeacher.LanguageTeacher@{languageTeacher.LanguageTeacher}!evaluation@{evaluation}}
+\index{evaluation@{evaluation}!languageTeacher.LanguageTeacher@{languageTeacher.LanguageTeacher}}
+\doxysubsubsection{\texorpdfstring{evaluation()}{evaluation()}}
+{\footnotesize\ttfamily def language\+Teacher.\+Language\+Teacher.\+evaluation (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{message\+\_\+list,  }\item[{}]{last\+\_\+message,  }\item[{}]{L\+LM }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Evalúa un chat basado en los niveles de competencia lingüística del MCER y genera una respuesta utilizando un modelo de lenguaje.
+
+Este método procesa una lista de mensajes, añadiendo un mensaje generado por el sistema para guiar una evaluación
+de la conversación según criterios específicos: coherencia, variedad de vocabulario y precisión gramatical.
+La respuesta se ajusta en función de la configuración del idioma y luego se procesa mediante el modelo de lenguaje (LLM).
+
+Args:
+    message_list (List[List[str]]): La lista de mensajes previos en el chat.
+    last_message (str): El mensaje más reciente.
+    LLM (Any): El modelo de aprendizaje de lenguaje utilizado para procesar el chat.
+
+Returns:
+    str: La respuesta generada por el modelo de lenguaje tras evaluar la conversación.
+\end{DoxyVerb}
+ 
+
+Reimplementado de \mbox{\hyperlink{classteacherInterface_1_1TeacherInterface_a3339281d8fb5ed0ad776d672811cf069}{teacher\+Interface.\+Teacher\+Interface}}.
+
+
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+Servidor/\+Teacher\+Folder/language\+Teacher.\+py\end{DoxyCompactItemize}

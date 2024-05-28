@@ -1,0 +1,231 @@
+\hypertarget{classserverMain_1_1Servidor}{}\doxysection{Referencia de la Clase server\+Main.\+Servidor}
+\label{classserverMain_1_1Servidor}\index{serverMain.Servidor@{serverMain.Servidor}}
+\doxysubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classserverMain_1_1Servidor_a4f55444203f6101e7fe372d7b1258b4d}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classserverMain_1_1Servidor_a4092658fab5fdb52bb65c470e781756c}{run}} (self, language=\char`\"{}es\char`\"{}, stt=\char`\"{}local\char`\"{}, whisper\+Size=\char`\"{}small\char`\"{}, llm=\char`\"{}remoto\char`\"{}, local\+Models=\char`\"{}Gemma\char`\"{}, tts=\char`\"{}local\char`\"{}, port=5000)
+\item 
+def \mbox{\hyperlink{classserverMain_1_1Servidor_a61680534410880b65f1b672ba38822e1}{register\+\_\+new\+\_\+user}} (self)
+\item 
+def \mbox{\hyperlink{classserverMain_1_1Servidor_a241f87915fe02fbda12efde0a4bd9276}{log\+In}} (self)
+\item 
+def \mbox{\hyperlink{classserverMain_1_1Servidor_a66c047af2a78b2b9d5bc709b9b0c0f15}{register\+\_\+user\+\_\+session}} (self)
+\item 
+def \mbox{\hyperlink{classserverMain_1_1Servidor_a42a59d6db3f6d291501f981584ef7023}{upload\+\_\+wav}} (self)
+\item 
+def \mbox{\hyperlink{classserverMain_1_1Servidor_a339901e2d2880a8962fa6879c9affb8a}{logout}} (self)
+\item 
+def \mbox{\hyperlink{classserverMain_1_1Servidor_a4cb218eb7c1161702ee724ffa5584ac6}{delete\+\_\+user}} (self)
+\item 
+def \mbox{\hyperlink{classserverMain_1_1Servidor_a18e9d482cc108045fd6378b3a4d394db}{ping}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classserverMain_1_1Servidor_aa93280d9b91d2b099430e6c1707d7335}\label{classserverMain_1_1Servidor_aa93280d9b91d2b099430e6c1707d7335}} 
+\mbox{\hyperlink{classserverMain_1_1Servidor_aa93280d9b91d2b099430e6c1707d7335}{app}}
+\begin{DoxyCompactList}\small\item\em Server configs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classserverMain_1_1Servidor_aff063d208e1dfcffd8d4f6e9c7b93f8e}\label{classserverMain_1_1Servidor_aff063d208e1dfcffd8d4f6e9c7b93f8e}} 
+{\bfseries aux}
+\item 
+\mbox{\Hypertarget{classserverMain_1_1Servidor_a8a5be126b04423c43c6c77a2c55f0e1b}\label{classserverMain_1_1Servidor_a8a5be126b04423c43c6c77a2c55f0e1b}} 
+{\bfseries lang}
+\item 
+\mbox{\Hypertarget{classserverMain_1_1Servidor_a0f581e44f9ab20076664a965bf101e09}\label{classserverMain_1_1Servidor_a0f581e44f9ab20076664a965bf101e09}} 
+\mbox{\hyperlink{classserverMain_1_1Servidor_a0f581e44f9ab20076664a965bf101e09}{system\+Message}}
+\begin{DoxyCompactList}\small\item\em Interface Config. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classserverMain_1_1Servidor_a5c7e35aaf35ca76b449b7bcfeb06fae5}\label{classserverMain_1_1Servidor_a5c7e35aaf35ca76b449b7bcfeb06fae5}} 
+{\bfseries S\+TT}
+\item 
+\mbox{\Hypertarget{classserverMain_1_1Servidor_a4d14cebea944119ea8ba35026bb210a0}\label{classserverMain_1_1Servidor_a4d14cebea944119ea8ba35026bb210a0}} 
+{\bfseries L\+LM}
+\item 
+\mbox{\Hypertarget{classserverMain_1_1Servidor_aa277efb37b262d70ca89e8a85e4b085a}\label{classserverMain_1_1Servidor_aa277efb37b262d70ca89e8a85e4b085a}} 
+{\bfseries T\+TS}
+\item 
+\mbox{\Hypertarget{classserverMain_1_1Servidor_a940abd152e13dfa221d7d51cdd9d20dd}\label{classserverMain_1_1Servidor_a940abd152e13dfa221d7d51cdd9d20dd}} 
+{\bfseries teacher\+Mode}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classserverMain_1_1Servidor_a4f55444203f6101e7fe372d7b1258b4d}\label{classserverMain_1_1Servidor_a4f55444203f6101e7fe372d7b1258b4d}} 
+\index{serverMain.Servidor@{serverMain.Servidor}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!serverMain.Servidor@{serverMain.Servidor}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def server\+Main.\+Servidor.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicializa la configuración del servidor y configura las rutas y la base de datos.
+
+Este constructor realiza las siguientes acciones:
+- Inicializa una aplicación Flask.
+- Establece una clave secreta para la aplicación Flask.
+- Inicializa funciones auxiliares.
+- Agrega reglas de URL para varios endpoints.
+- Crea una carpeta para datos temporales de usuarios si no existe.
+- Crea una base de datos para datos de usuarios si no existe y agrega un usuario predeterminado.
+
+Atributos:
+    app (Flask): La instancia de la aplicación Flask.
+    aux (Aux_functions): Una instancia de funciones auxiliares para varias operaciones de utilidad.
+
+Raises:
+    sqlite3.Error: Si hay un error al agregar el usuario predeterminado a la base de datos.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classserverMain_1_1Servidor_a4cb218eb7c1161702ee724ffa5584ac6}\label{classserverMain_1_1Servidor_a4cb218eb7c1161702ee724ffa5584ac6}} 
+\index{serverMain.Servidor@{serverMain.Servidor}!delete\_user@{delete\_user}}
+\index{delete\_user@{delete\_user}!serverMain.Servidor@{serverMain.Servidor}}
+\doxysubsubsection{\texorpdfstring{delete\_user()}{delete\_user()}}
+{\footnotesize\ttfamily def server\+Main.\+Servidor.\+delete\+\_\+user (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Elimina un usuario basado en los datos JSON recibidos en la solicitud.
+
+Este método extrae el nombre de usuario y la contraseña de una carga útil JSON, intenta eliminar al usuario
+de la base de datos y maneja cualquier error potencial durante el proceso. También registra el éxito
+o fracaso del intento de eliminación.
+
+Returns:
+    tuple: Una tupla que contiene un mensaje y un código de estado HTTP.
+- "User deleted", 200: Si el usuario se elimina con éxito.
+- "User not found", 400: Si el usuario no se encuentra o la eliminación falla.
+- "An error occurred: {error_message}", 500: Si ocurre una excepción no manejada.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classserverMain_1_1Servidor_a241f87915fe02fbda12efde0a4bd9276}\label{classserverMain_1_1Servidor_a241f87915fe02fbda12efde0a4bd9276}} 
+\index{serverMain.Servidor@{serverMain.Servidor}!logIn@{logIn}}
+\index{logIn@{logIn}!serverMain.Servidor@{serverMain.Servidor}}
+\doxysubsubsection{\texorpdfstring{logIn()}{logIn()}}
+{\footnotesize\ttfamily def server\+Main.\+Servidor.\+log\+In (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Autentica a un usuario basado en los datos JSON recibidos en la solicitud.
+
+Este método extrae el nombre de usuario y la contraseña de una carga útil JSON, verifica las credenciales del usuario
+y maneja el proceso de inicio de sesión. También registra el éxito o fracaso del intento de inicio de sesión.
+
+Returns:
+    tuple: Una tupla que contiene un mensaje y un código de estado HTTP.
+- "Verifing user: OK", 200: Si el usuario se autentica con éxito.
+- "Verifing user: NOT OK", 401: Si la autenticación falla.
+- "something failed", 500: Si el formato de la solicitud es incorrecto o ocurre una excepción no manejada.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classserverMain_1_1Servidor_a339901e2d2880a8962fa6879c9affb8a}\label{classserverMain_1_1Servidor_a339901e2d2880a8962fa6879c9affb8a}} 
+\index{serverMain.Servidor@{serverMain.Servidor}!logout@{logout}}
+\index{logout@{logout}!serverMain.Servidor@{serverMain.Servidor}}
+\doxysubsubsection{\texorpdfstring{logout()}{logout()}}
+{\footnotesize\ttfamily def server\+Main.\+Servidor.\+logout (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Cierra la sesión del usuario eliminando el ID de usuario de la sesión y borrando el directorio de datos temporales del usuario.
+
+Este método realiza las siguientes acciones:
+- Verifica si el usuario está autenticado.
+- Elimina el ID de usuario de la sesión.
+- Borra el directorio de datos temporales del usuario.
+- Registra el cierre de sesión exitoso.
+
+Returns:
+    tuple: Una tupla que contiene un mensaje y un código de estado HTTP.
+- 'Logout successfully.', 200: Si el usuario cierra sesión con éxito.
+- 'An error occurred: {error_message}', 500: Si ocurre una excepción no manejada durante el cierre de sesión.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classserverMain_1_1Servidor_a18e9d482cc108045fd6378b3a4d394db}\label{classserverMain_1_1Servidor_a18e9d482cc108045fd6378b3a4d394db}} 
+\index{serverMain.Servidor@{serverMain.Servidor}!ping@{ping}}
+\index{ping@{ping}!serverMain.Servidor@{serverMain.Servidor}}
+\doxysubsubsection{\texorpdfstring{ping()}{ping()}}
+{\footnotesize\ttfamily def server\+Main.\+Servidor.\+ping (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Endpoint simple de verificación de estado que responde con 'pong'.
+
+Returns:
+    str: La cadena "pong".
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classserverMain_1_1Servidor_a61680534410880b65f1b672ba38822e1}\label{classserverMain_1_1Servidor_a61680534410880b65f1b672ba38822e1}} 
+\index{serverMain.Servidor@{serverMain.Servidor}!register\_new\_user@{register\_new\_user}}
+\index{register\_new\_user@{register\_new\_user}!serverMain.Servidor@{serverMain.Servidor}}
+\doxysubsubsection{\texorpdfstring{register\_new\_user()}{register\_new\_user()}}
+{\footnotesize\ttfamily def server\+Main.\+Servidor.\+register\+\_\+new\+\_\+user (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Registra un nuevo usuario basado en los datos JSON recibidos en la solicitud.
+
+Este método extrae la información del usuario de una carga útil JSON, intenta agregar al usuario
+a la base de datos y maneja cualquier error potencial durante el proceso. También registra
+el éxito o fracaso del intento de registro.
+
+Returns:
+    tuple: Una tupla que contiene un mensaje y un código de estado HTTP.
+- "ok", 200: Si el usuario se registra con éxito.
+- "User already exist", 409: Si se intenta registrar un usuario existente.
+- "Something gone wrong", 500: Si ocurre una excepción no manejada.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classserverMain_1_1Servidor_a66c047af2a78b2b9d5bc709b9b0c0f15}\label{classserverMain_1_1Servidor_a66c047af2a78b2b9d5bc709b9b0c0f15}} 
+\index{serverMain.Servidor@{serverMain.Servidor}!register\_user\_session@{register\_user\_session}}
+\index{register\_user\_session@{register\_user\_session}!serverMain.Servidor@{serverMain.Servidor}}
+\doxysubsubsection{\texorpdfstring{register\_user\_session()}{register\_user\_session()}}
+{\footnotesize\ttfamily def server\+Main.\+Servidor.\+register\+\_\+user\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Registra una nueva sesión de usuario e inicializa el estado de la sesión.
+
+Este método asigna un ID de usuario único a la sesión si aún no lo tiene,
+inicializa el estado de la sesión y los mensajes, agrega un mensaje del sistema al chat,
+crea un directorio de usuario y registra el éxito o fracaso del registro.
+
+Returns:
+    tuple: Una tupla que contiene un mensaje y un código de estado HTTP.
+- 'User {user_id} registered successfully.', 200: Si la sesión de usuario se registra con éxito.
+- 'Error registering user: {error_message}', 500: Si ocurre una excepción no manejada durante el registro.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classserverMain_1_1Servidor_a4092658fab5fdb52bb65c470e781756c}\label{classserverMain_1_1Servidor_a4092658fab5fdb52bb65c470e781756c}} 
+\index{serverMain.Servidor@{serverMain.Servidor}!run@{run}}
+\index{run@{run}!serverMain.Servidor@{serverMain.Servidor}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily def server\+Main.\+Servidor.\+run (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{language = {\ttfamily \char`\"{}es\char`\"{}},  }\item[{}]{stt = {\ttfamily \char`\"{}local\char`\"{}},  }\item[{}]{whisper\+Size = {\ttfamily \char`\"{}small\char`\"{}},  }\item[{}]{llm = {\ttfamily \char`\"{}remoto\char`\"{}},  }\item[{}]{local\+Models = {\ttfamily \char`\"{}Gemma\char`\"{}},  }\item[{}]{tts = {\ttfamily \char`\"{}local\char`\"{}},  }\item[{}]{port = {\ttfamily 5000} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Ejecuta el servidor Flask con las configuraciones especificadas.
+
+Este método configura el registro, inicializa varios componentes del sistema (como STT, LLM y TTS)
+y arranca el servidor Flask.
+
+Args:
+    language (str, optional): La configuración de idioma para el sistema. Por defecto es "es".
+    stt (str, optional): El servicio de reconocimiento de voz a texto a utilizar. Por defecto es "local".
+    whisperSize (str, optional): El tamaño del modelo Whisper a utilizar para STT. Por defecto es "small".
+    llm (str, optional): El modelo de lenguaje grande a utilizar. Por defecto es "remoto".
+    localModels (str, optional): Los modelos locales a utilizar. Por defecto es "Gemma".
+    tts (str, optional): El servicio de texto a voz a utilizar. Por defecto es "local".
+    port (int, optional): El puerto en el que se ejecutará el servidor Flask. Por defecto es 5000.
+
+Raises:
+    Exception: Si ocurre una excepción no manejada durante la inicialización de los componentes del sistema.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classserverMain_1_1Servidor_a42a59d6db3f6d291501f981584ef7023}\label{classserverMain_1_1Servidor_a42a59d6db3f6d291501f981584ef7023}} 
+\index{serverMain.Servidor@{serverMain.Servidor}!upload\_wav@{upload\_wav}}
+\index{upload\_wav@{upload\_wav}!serverMain.Servidor@{serverMain.Servidor}}
+\doxysubsubsection{\texorpdfstring{upload\_wav()}{upload\_wav()}}
+{\footnotesize\ttfamily def server\+Main.\+Servidor.\+upload\+\_\+wav (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Maneja la carga de un archivo WAV, transcribe su contenido, interactúa con el modelo de lenguaje
+y devuelve una respuesta sintetizada.
+
+Este método realiza las siguientes acciones:
+- Verifica si el usuario está autenticado.
+- Valida la presencia y selección de un archivo WAV en la solicitud.
+- Guarda el archivo WAV cargado en un directorio temporal.
+- Transcribe el archivo WAV a texto utilizando el sistema STT.
+- Agrega el texto transcrito al historial del chat.
+- Envía el historial del chat a un modelo de lenguaje y recibe una respuesta.
+- Verifica si la conversación ha terminado y prepara un mensaje de evaluación si es necesario.
+- Agrega la respuesta del asistente al historial del chat.
+- Convierte la respuesta a voz utilizando el sistema TTS.
+- Codifica la respuesta de audio en base64 y la devuelve junto con una bandera de fin de conversación.
+
+Returns:
+    Response: Una respuesta JSON que contiene el audio codificado y la bandera de fin de conversación, o un mensaje de error y un código de estado.
+\end{DoxyVerb}
+ 
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+Servidor/server\+Main.\+py\end{DoxyCompactItemize}

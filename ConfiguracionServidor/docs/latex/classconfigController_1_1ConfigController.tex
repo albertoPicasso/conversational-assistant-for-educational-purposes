@@ -1,0 +1,266 @@
+\hypertarget{classconfigController_1_1ConfigController}{}\doxysection{Referencia de la Clase config\+Controller.\+Config\+Controller}
+\label{classconfigController_1_1ConfigController}\index{configController.ConfigController@{configController.ConfigController}}
+\doxysubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a14fe7467b80801f832ff63153a47b155}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_ae4f85bbff49cde118b7e323c4155cdf5}{get\+\_\+language}} (self)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a07c8618148a4364894733c3f16c1e5f8}{set\+\_\+language}} (self, language)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a92235736decd82238d627174a9e8d146}{get\+\_\+stt}} (self)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a037e1e5939d01d9182a9368a511a56b1}{set\+\_\+stt}} (self, stt)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_aa379991de55b197e6e13111fd89b0ac5}{get\+\_\+whisper\+\_\+size}} (self)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a61cfd897dce3cfac857afe86b862fe0e}{set\+\_\+whisper\+\_\+size}} (self, whisper\+\_\+size)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a792e58f5ecb983e4042dbf059dbb9d70}{get\+\_\+llm}} (self)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_ab8b7c0d27f25964476564f2dde5a63fd}{set\+\_\+llm}} (self, llm)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a902dbe4962ea9fd5613e93632a71f8da}{get\+\_\+llm\+\_\+models}} (self)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_ac6b7cd4acf30be3964053340e1df277f}{set\+\_\+llm\+\_\+models}} (self, llm\+\_\+models)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_ad70580763359dbebefdaf3858555b650}{get\+\_\+tts}} (self)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a16aea41febbb2db902be44ecfd0ee87b}{set\+\_\+tts}} (self, tts)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a02940ab35aaa7e5b8e8d6b1713baa270}{get\+\_\+port}} (self)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a973e00aa540fd1e8f09a985d6df60d3d}{set\+\_\+port}} (self, port)
+\item 
+def \mbox{\hyperlink{classconfigController_1_1ConfigController_a4e81606330cc5149c90653dfb86768e1}{launch\+\_\+server}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classconfigController_1_1ConfigController_a174c343e21447f3abe850e0597613068}\label{classconfigController_1_1ConfigController_a174c343e21447f3abe850e0597613068}} 
+\mbox{\hyperlink{classconfigController_1_1ConfigController_a174c343e21447f3abe850e0597613068}{server\+Model}}
+\begin{DoxyCompactList}\small\item\em module\+\_\+path = \textquotesingle{}/home/al/\+Escritorio/\+T\+F\+G/\+Servidor/\+Modelo\textquotesingle{} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classconfigController_1_1ConfigController_a34d20bb13b2b1a2ff37e4492cc24e73d}\label{classconfigController_1_1ConfigController_a34d20bb13b2b1a2ff37e4492cc24e73d}} 
+{\bfseries model}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Clase controladora para la gestión de la configuración del servidor.
+
+Esta clase maneja la lógica para gestionar y actualizar la configuración del servidor, tales como 
+el idioma, el servicio de reconocimiento de voz (STT), el modelo de lenguaje grande (LLM), 
+el servicio de texto a voz (TTS), el tamaño del modelo Whisper y el puerto del servidor. 
+Interactúa con el modelo para recuperar y establecer estas configuraciones.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classconfigController_1_1ConfigController_a14fe7467b80801f832ff63153a47b155}\label{classconfigController_1_1ConfigController_a14fe7467b80801f832ff63153a47b155}} 
+\index{configController.ConfigController@{configController.ConfigController}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicializa la aplicación principal.
+
+Este constructor realiza las siguientes acciones:
+- Agrega el directorio de trabajo actual al path del sistema.
+- Agrega el path del módulo específico al path del sistema si aún no está presente.
+- Importa la clase `Servidor` del módulo `serverMain`.
+- Inicializa una instancia de la clase `Servidor` y la asigna a `self.serverModel`.
+- Inicializa una instancia de la clase `ConfigModel` y la asigna a `self.model`.
+
+Atributos:
+    serverModel (Servidor): Una instancia de la clase `Servidor`.
+    model (ConfigModel): Una instancia de la clase `ConfigModel`.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classconfigController_1_1ConfigController_ae4f85bbff49cde118b7e323c4155cdf5}\label{classconfigController_1_1ConfigController_ae4f85bbff49cde118b7e323c4155cdf5}} 
+\index{configController.ConfigController@{configController.ConfigController}!get\_language@{get\_language}}
+\index{get\_language@{get\_language}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{get\_language()}{get\_language()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+get\+\_\+language (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtener la configuración actual del idioma.
+
+Returns:
+    str: El idioma actual.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_a792e58f5ecb983e4042dbf059dbb9d70}\label{classconfigController_1_1ConfigController_a792e58f5ecb983e4042dbf059dbb9d70}} 
+\index{configController.ConfigController@{configController.ConfigController}!get\_llm@{get\_llm}}
+\index{get\_llm@{get\_llm}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{get\_llm()}{get\_llm()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+get\+\_\+llm (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtener la configuración actual del modelo de lenguaje grande (LLM).
+
+Returns:
+    str: La configuración actual de LLM.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_a902dbe4962ea9fd5613e93632a71f8da}\label{classconfigController_1_1ConfigController_a902dbe4962ea9fd5613e93632a71f8da}} 
+\index{configController.ConfigController@{configController.ConfigController}!get\_llm\_models@{get\_llm\_models}}
+\index{get\_llm\_models@{get\_llm\_models}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{get\_llm\_models()}{get\_llm\_models()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+get\+\_\+llm\+\_\+models (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtener la configuración actual de los modelos LLM.
+
+Returns:
+    str: Los modelos LLM actuales.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_a02940ab35aaa7e5b8e8d6b1713baa270}\label{classconfigController_1_1ConfigController_a02940ab35aaa7e5b8e8d6b1713baa270}} 
+\index{configController.ConfigController@{configController.ConfigController}!get\_port@{get\_port}}
+\index{get\_port@{get\_port}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{get\_port()}{get\_port()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+get\+\_\+port (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtener la configuración actual del puerto.
+
+Returns:
+    int: El puerto actual.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_a92235736decd82238d627174a9e8d146}\label{classconfigController_1_1ConfigController_a92235736decd82238d627174a9e8d146}} 
+\index{configController.ConfigController@{configController.ConfigController}!get\_stt@{get\_stt}}
+\index{get\_stt@{get\_stt}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{get\_stt()}{get\_stt()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+get\+\_\+stt (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtener la configuración actual del servicio de reconocimiento de voz (STT).
+
+Returns:
+    str: La configuración actual de STT.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_ad70580763359dbebefdaf3858555b650}\label{classconfigController_1_1ConfigController_ad70580763359dbebefdaf3858555b650}} 
+\index{configController.ConfigController@{configController.ConfigController}!get\_tts@{get\_tts}}
+\index{get\_tts@{get\_tts}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{get\_tts()}{get\_tts()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+get\+\_\+tts (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtener la configuración actual del servicio de texto a voz (TTS).
+
+Returns:
+    str: La configuración actual de TTS.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_aa379991de55b197e6e13111fd89b0ac5}\label{classconfigController_1_1ConfigController_aa379991de55b197e6e13111fd89b0ac5}} 
+\index{configController.ConfigController@{configController.ConfigController}!get\_whisper\_size@{get\_whisper\_size}}
+\index{get\_whisper\_size@{get\_whisper\_size}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{get\_whisper\_size()}{get\_whisper\_size()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+get\+\_\+whisper\+\_\+size (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtener la configuración actual del tamaño del modelo Whisper.
+
+Returns:
+    str: El tamaño actual del modelo Whisper.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_a4e81606330cc5149c90653dfb86768e1}\label{classconfigController_1_1ConfigController_a4e81606330cc5149c90653dfb86768e1}} 
+\index{configController.ConfigController@{configController.ConfigController}!launch\_server@{launch\_server}}
+\index{launch\_server@{launch\_server}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{launch\_server()}{launch\_server()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+launch\+\_\+server (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Lanza el servidor con las configuraciones actuales.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_a07c8618148a4364894733c3f16c1e5f8}\label{classconfigController_1_1ConfigController_a07c8618148a4364894733c3f16c1e5f8}} 
+\index{configController.ConfigController@{configController.ConfigController}!set\_language@{set\_language}}
+\index{set\_language@{set\_language}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{set\_language()}{set\_language()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+set\+\_\+language (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{language }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Establecer un nuevo idioma.
+
+Args:
+    language (str): El nuevo idioma a establecer.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_ab8b7c0d27f25964476564f2dde5a63fd}\label{classconfigController_1_1ConfigController_ab8b7c0d27f25964476564f2dde5a63fd}} 
+\index{configController.ConfigController@{configController.ConfigController}!set\_llm@{set\_llm}}
+\index{set\_llm@{set\_llm}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{set\_llm()}{set\_llm()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+set\+\_\+llm (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{llm }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Establecer una nueva configuración para el modelo de lenguaje grande (LLM).
+
+Args:
+    llm (str): La nueva configuración de LLM a establecer.
+
+Returns:
+    ConfigModel: El modelo de configuración actualizado.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_ac6b7cd4acf30be3964053340e1df277f}\label{classconfigController_1_1ConfigController_ac6b7cd4acf30be3964053340e1df277f}} 
+\index{configController.ConfigController@{configController.ConfigController}!set\_llm\_models@{set\_llm\_models}}
+\index{set\_llm\_models@{set\_llm\_models}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{set\_llm\_models()}{set\_llm\_models()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+set\+\_\+llm\+\_\+models (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{llm\+\_\+models }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Establecer nuevos modelos LLM.
+
+Args:
+    llm_models (str): Los nuevos modelos LLM a establecer.
+
+Returns:
+    ConfigModel: El modelo de configuración actualizado.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_a973e00aa540fd1e8f09a985d6df60d3d}\label{classconfigController_1_1ConfigController_a973e00aa540fd1e8f09a985d6df60d3d}} 
+\index{configController.ConfigController@{configController.ConfigController}!set\_port@{set\_port}}
+\index{set\_port@{set\_port}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{set\_port()}{set\_port()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+set\+\_\+port (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{port }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Establecer un nuevo puerto.
+
+Args:
+    port (int): El nuevo puerto a establecer.
+
+Returns:
+    ConfigModel: El modelo de configuración actualizado.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_a037e1e5939d01d9182a9368a511a56b1}\label{classconfigController_1_1ConfigController_a037e1e5939d01d9182a9368a511a56b1}} 
+\index{configController.ConfigController@{configController.ConfigController}!set\_stt@{set\_stt}}
+\index{set\_stt@{set\_stt}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{set\_stt()}{set\_stt()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+set\+\_\+stt (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{stt }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Establecer una nueva configuración para el servicio de reconocimiento de voz (STT).
+
+Args:
+    stt (str): La nueva configuración de STT a establecer.
+
+Returns:
+    ConfigModel: El modelo de configuración actualizado.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_a16aea41febbb2db902be44ecfd0ee87b}\label{classconfigController_1_1ConfigController_a16aea41febbb2db902be44ecfd0ee87b}} 
+\index{configController.ConfigController@{configController.ConfigController}!set\_tts@{set\_tts}}
+\index{set\_tts@{set\_tts}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{set\_tts()}{set\_tts()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+set\+\_\+tts (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{tts }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Establecer una nueva configuración para el servicio de texto a voz (TTS).
+
+Args:
+    tts (str): La nueva configuración de TTS a establecer.
+
+Returns:
+    ConfigModel: El modelo de configuración actualizado.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classconfigController_1_1ConfigController_a61cfd897dce3cfac857afe86b862fe0e}\label{classconfigController_1_1ConfigController_a61cfd897dce3cfac857afe86b862fe0e}} 
+\index{configController.ConfigController@{configController.ConfigController}!set\_whisper\_size@{set\_whisper\_size}}
+\index{set\_whisper\_size@{set\_whisper\_size}!configController.ConfigController@{configController.ConfigController}}
+\doxysubsubsection{\texorpdfstring{set\_whisper\_size()}{set\_whisper\_size()}}
+{\footnotesize\ttfamily def config\+Controller.\+Config\+Controller.\+set\+\_\+whisper\+\_\+size (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{whisper\+\_\+size }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Establecer un nuevo tamaño para el modelo Whisper.
+
+Args:
+    whisper_size (str): El nuevo tamaño del modelo Whisper a establecer.
+
+Returns:
+    ConfigModel: El modelo de configuración actualizado.
+\end{DoxyVerb}
+ 
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+Server\+Config/config\+Controller.\+py\end{DoxyCompactItemize}

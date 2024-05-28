@@ -1,0 +1,80 @@
+\hypertarget{classopenAIAPI_1_1OpenAIAPI}{}\doxysection{Referencia de la Clase open\+A\+I\+A\+P\+I.\+Open\+A\+I\+A\+PI}
+\label{classopenAIAPI_1_1OpenAIAPI}\index{openAIAPI.OpenAIAPI@{openAIAPI.OpenAIAPI}}
+
+
+Implementación de Llm\+Interface usando la A\+PI de Open\+AI.  
+
+
+
+
+Diagrama de herencias de open\+A\+I\+A\+P\+I.\+Open\+A\+I\+A\+PI
+% FIG 0
+
+
+Diagrama de colaboración para open\+A\+I\+A\+P\+I.\+Open\+A\+I\+A\+PI\+:
+% FIG 1
+\doxysubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classopenAIAPI_1_1OpenAIAPI_ae40a11eb2efa6eef6afe7cc27ed646bd}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, client, model)
+\item 
+str \mbox{\hyperlink{classopenAIAPI_1_1OpenAIAPI_a3379578630aaa3507efa569522c5b561}{request\+\_\+to\+\_\+llm}} (self, chat, temp=1)
+\end{DoxyCompactItemize}
+\doxysubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classopenAIAPI_1_1OpenAIAPI_a2c93882a12899704b087bc00a4533e34}\label{classopenAIAPI_1_1OpenAIAPI_a2c93882a12899704b087bc00a4533e34}} 
+{\bfseries model}
+\item 
+\mbox{\Hypertarget{classopenAIAPI_1_1OpenAIAPI_a1c5b28f903f115369ccadb4d63057e6e}\label{classopenAIAPI_1_1OpenAIAPI_a1c5b28f903f115369ccadb4d63057e6e}} 
+{\bfseries client}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Implementación de Llm\+Interface usando la A\+PI de Open\+AI. 
+
+\begin{DoxyVerb}Esta clase implementa LlmInterface para interactuar con la API de OpenAI.
+
+Toma un objeto cliente de OpenAI y un nombre de modelo LLM como argumentos en el 
+constructor. El método `request_to_llm` envía una solicitud de chat al modelo 
+especificado usando el cliente de OpenAI y devuelve la respuesta.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classopenAIAPI_1_1OpenAIAPI_ae40a11eb2efa6eef6afe7cc27ed646bd}\label{classopenAIAPI_1_1OpenAIAPI_ae40a11eb2efa6eef6afe7cc27ed646bd}} 
+\index{openAIAPI.OpenAIAPI@{openAIAPI.OpenAIAPI}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!openAIAPI.OpenAIAPI@{openAIAPI.OpenAIAPI}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def open\+A\+I\+A\+P\+I.\+Open\+A\+I\+A\+P\+I.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{client,  }\item[{}]{model }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicializa el objeto OpenAIAPI.
+
+Args:
+    client (OpenAI): Un objeto cliente de OpenAI utilizado para interactuar con la API.
+    model (str): El nombre del modelo LLM de OpenAI a usar (por ejemplo, "text-davinci-003").
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classopenAIAPI_1_1OpenAIAPI_a3379578630aaa3507efa569522c5b561}\label{classopenAIAPI_1_1OpenAIAPI_a3379578630aaa3507efa569522c5b561}} 
+\index{openAIAPI.OpenAIAPI@{openAIAPI.OpenAIAPI}!request\_to\_llm@{request\_to\_llm}}
+\index{request\_to\_llm@{request\_to\_llm}!openAIAPI.OpenAIAPI@{openAIAPI.OpenAIAPI}}
+\doxysubsubsection{\texorpdfstring{request\_to\_llm()}{request\_to\_llm()}}
+{\footnotesize\ttfamily  str open\+A\+I\+A\+P\+I.\+Open\+A\+I\+A\+P\+I.\+request\+\_\+to\+\_\+llm (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{chat,  }\item[{}]{temp = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Envía una solicitud de chat al LLM de OpenAI y devuelve la respuesta.
+
+Args:
+    chat (list): El texto a enviar al LLM en formato de lista de tuplas (rol, contenido).
+    temp (float): La temperatura para la generación del texto (opcional, por defecto es 1).
+
+Returns:
+    str: La respuesta del LLM.
+\end{DoxyVerb}
+ 
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+Servidor/\+L\+L\+M\+Folder/open\+A\+I\+A\+P\+I.\+py\end{DoxyCompactItemize}

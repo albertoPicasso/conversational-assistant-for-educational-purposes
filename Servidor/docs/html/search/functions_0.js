@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['_5f_5finit_5f_5f_53',['__init__',['../classopenAIAPI_1_1OpenAIAPI.html#ae40a11eb2efa6eef6afe7cc27ed646bd',1,'openAIAPI.OpenAIAPI.__init__()'],['../classserverMain_1_1Servidor.html#a4f55444203f6101e7fe372d7b1258b4d',1,'serverMain.Servidor.__init__()'],['../classlocalWhisper_1_1LocalWhisper.html#a52a89b083d95f12e4589363bf8639a48',1,'localWhisper.LocalWhisper.__init__()'],['../classremoteWhisper_1_1RemoteWhisper.html#adf30bab7171aaad3ff45aedca2945ac7',1,'remoteWhisper.RemoteWhisper.__init__()'],['../classlanguageTeacher_1_1LanguageTeacher.html#aeab0f7600732307cc04840b9c31d8c94',1,'languageTeacher.LanguageTeacher.__init__()'],['../classcoquiTTS_1_1CoquiTTS.html#a65737840a43b23a34e6473fc61a490ce',1,'coquiTTS.CoquiTTS.__init__()'],['../classopenAITTS_1_1OpenAITTS.html#ac3b3328c306073d47663127fab2f1be4',1,'openAITTS.OpenAITTS.__init__()']]]
+];

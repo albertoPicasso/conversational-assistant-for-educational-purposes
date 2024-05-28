@@ -1,0 +1,313 @@
+\hypertarget{classaux__functions_1_1Aux__functions}{}\doxysection{Referencia de la Clase aux\+\_\+functions.\+Aux\+\_\+functions}
+\label{classaux__functions_1_1Aux__functions}\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_afb6a82478cc19ac0058e06e3520bd83c}{add\+Message\+To\+Chat}} (self, str message, str role, state)
+\begin{DoxyCompactList}\small\item\em Add new messages to session\mbox{[}\textquotesingle{}mensajes\textquotesingle{}\mbox{]} whit format \mbox{[}role,message\mbox{]}. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_a241ad3f3e6289cedc16f9b7b74f0b26e}{print\+All\+Chat}} (state)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_a251bb467735db9c07fa58b5145b21fee}{create\+User\+Directory}} (self, str name)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_ab37e1872e8b7bac255f3faf387b108fb}{create\+S\+TT}} (str stt, str whisper\+Size)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_a0d37574ad77395b4268e6e05a6faef59}{create\+L\+LM}} (str llm)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_a4d7dabe27f861a3e6926b738ae917b1d}{create\+T\+TS}} (str tts, str lang)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_ae0f3cb9ee182238f073bfe2d53771608}{create\+Lenguage\+Teacher}} (str lang)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_a7c0d83777d4b6ab2d693f71f67d97943}{select\+Sys\+Message}} (str lang)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_a5bb925f3c9fa20453fe1a19dfa986ac2}{replace\+\_\+number}} (str text, lang)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_a7a7eaf822cc0a353bc8215091b7b6cf4}{create\+\_\+conexion}} (db\+\_\+file)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_a355a957d88689caa19aab3789f894ea5}{create\+\_\+table}} (conn)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_ac49f20612c8b72c14cb7e291f44ffb12}{add\+\_\+user}} (nombre, usuario, contrasena)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_abad33ff166997cd9f07d748ae1746559}{verify\+\_\+user}} (username, password)
+\item 
+def \mbox{\hyperlink{classaux__functions_1_1Aux__functions_a3bb925170477107247e3fe087c397354}{delete\+\_\+user}} (username, password)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classaux__functions_1_1Aux__functions_ac49f20612c8b72c14cb7e291f44ffb12}\label{classaux__functions_1_1Aux__functions_ac49f20612c8b72c14cb7e291f44ffb12}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!add\_user@{add\_user}}
+\index{add\_user@{add\_user}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_user()}{add\_user()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+add\+\_\+user (\begin{DoxyParamCaption}\item[{}]{nombre,  }\item[{}]{usuario,  }\item[{}]{contrasena }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Añade un nuevo usuario a la tabla 'usuarios' en la base de datos SQLite 'users.db'.
+
+Esta función se conecta a la base de datos SQLite 'users.db' e inserta un nuevo registro en la tabla 'usuarios'.
+La contraseña se cifra utilizando bcrypt antes de almacenarla en la base de datos.
+
+Args:
+    nombre (str): El nombre del usuario.
+    usuario (str): El nombre de usuario único del usuario.
+    contrasena (str): La contraseña en texto plano del usuario.
+
+Returns:
+    None
+
+Raises:
+    sqlite3.Error: Si ocurre un error al interactuar con la base de datos SQLite.
+    bcrypt.Error: Si ocurre un error al cifrar la contraseña.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_afb6a82478cc19ac0058e06e3520bd83c}\label{classaux__functions_1_1Aux__functions_afb6a82478cc19ac0058e06e3520bd83c}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!addMessageToChat@{addMessageToChat}}
+\index{addMessageToChat@{addMessageToChat}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{addMessageToChat()}{addMessageToChat()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+add\+Message\+To\+Chat (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{message,  }\item[{str }]{role,  }\item[{}]{state }\end{DoxyParamCaption})}
+
+
+
+Add new messages to session\mbox{[}\textquotesingle{}mensajes\textquotesingle{}\mbox{]} whit format \mbox{[}role,message\mbox{]}. 
+
+\begin{DoxyVerb}Añade un mensaje a la conversación.
+
+Args:
+    message (str): El mensaje a añadir a la conversación.
+    role (str): El rol del participante que envía el mensaje (por ejemplo, 'user', 'assistant', etc.).
+    state (session): El estado de este cliente en el servidor.
+
+Returns:
+    dict: El estado modificado.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_a7a7eaf822cc0a353bc8215091b7b6cf4}\label{classaux__functions_1_1Aux__functions_a7a7eaf822cc0a353bc8215091b7b6cf4}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!create\_conexion@{create\_conexion}}
+\index{create\_conexion@{create\_conexion}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{create\_conexion()}{create\_conexion()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+create\+\_\+conexion (\begin{DoxyParamCaption}\item[{}]{db\+\_\+file }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crea y devuelve una conexión al archivo de base de datos SQLite especificado.
+
+Esta función intenta establecer una conexión con la base de datos SQLite especificada por 'db_file'. 
+Si la conexión falla, captura la excepción sqlite3.Error e imprime un mensaje de error.
+
+Args:
+    db_file (str): La ruta al archivo de base de datos SQLite.
+
+Returns:
+    sqlite3.Connection or None: Un objeto de conexión a la base de datos SQLite, o None si la conexión falla.
+
+Raises:
+    sqlite3.Error: Si ocurre un error al intentar conectar a la base de datos.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_a355a957d88689caa19aab3789f894ea5}\label{classaux__functions_1_1Aux__functions_a355a957d88689caa19aab3789f894ea5}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!create\_table@{create\_table}}
+\index{create\_table@{create\_table}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{create\_table()}{create\_table()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+create\+\_\+table (\begin{DoxyParamCaption}\item[{}]{conn }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crea una tabla 'usuarios' en la base de datos SQLite especificada si no existe.
+
+Esta función utiliza la conexión de base de datos proporcionada para crear una tabla llamada 'usuarios' con 
+las siguientes columnas:
+    - id: Una clave primaria entera que se auto incrementa.
+    - nombre: Un campo de texto que no puede ser nulo.
+    - usuario: Un campo de texto único que no puede ser nulo.
+    - contrasena: Un campo de texto que no puede ser nulo.
+
+Args:
+    conn (sqlite3.Connection): El objeto de conexión a la base de datos SQLite.
+
+Returns:
+    None
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_ae0f3cb9ee182238f073bfe2d53771608}\label{classaux__functions_1_1Aux__functions_ae0f3cb9ee182238f073bfe2d53771608}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!createLenguageTeacher@{createLenguageTeacher}}
+\index{createLenguageTeacher@{createLenguageTeacher}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{createLenguageTeacher()}{createLenguageTeacher()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+create\+Lenguage\+Teacher (\begin{DoxyParamCaption}\item[{str}]{lang }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crea y devuelve una instancia de LanguageTeacher para el idioma especificado.
+
+Esta función inicializa un objeto LanguageTeacher utilizando el código de idioma proporcionado.
+
+Args:
+    lang (str): El código de idioma para el profesor de idiomas.
+
+Returns:
+    LanguageTeacher: Una instancia de la clase LanguageTeacher inicializada con el idioma especificado.
+
+Raises:
+    TypeError: Si el 'lang' proporcionado no es un código de idioma válido.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_a0d37574ad77395b4268e6e05a6faef59}\label{classaux__functions_1_1Aux__functions_a0d37574ad77395b4268e6e05a6faef59}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!createLLM@{createLLM}}
+\index{createLLM@{createLLM}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{createLLM()}{createLLM()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+create\+L\+LM (\begin{DoxyParamCaption}\item[{str}]{llm }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crea una instancia de un sistema de reconocimiento de voz a texto (STT), ya sea local o remoto, según el tipo especificado.
+
+Args:
+    stt (str): El tipo de sistema STT a crear, "local" para un sistema local o "remoto" para un sistema remoto.
+    whisperSize (str): El tamaño de configuración para el modelo Whisper si se elige un sistema STT local.
+
+Returns:
+    object: Una instancia de LocalWhisper o RemoteWhisper según el tipo especificado.
+
+Raises:
+    TypeError: Si se especifica un tipo de sistema STT no reconocido.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_ab37e1872e8b7bac255f3faf387b108fb}\label{classaux__functions_1_1Aux__functions_ab37e1872e8b7bac255f3faf387b108fb}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!createSTT@{createSTT}}
+\index{createSTT@{createSTT}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{createSTT()}{createSTT()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+create\+S\+TT (\begin{DoxyParamCaption}\item[{str}]{stt,  }\item[{str}]{whisper\+Size }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crea una instancia de un sistema de reconocimiento de voz a texto (STT), que puede ser local o remoto. El tipo de sistema STT
+se determina por el parámetro 'stt', y su configuración se influye por el 'whisperSize' o la configuración de la API.
+
+Args:
+    stt (str): Especifica el tipo de sistema STT a crear. Las opciones son "local" para un modelo Whisper ejecutado localmente o "remoto" para un servicio remoto.
+    whisperSize (str): Tamaño de configuración para el modelo Whisper si 'stt' es "local".
+
+Returns:
+    object: Una instancia de LocalWhisper o RemoteWhisper basada en el parámetro 'stt'.
+
+Raises:
+    TypeError: Si el parámetro 'stt' no es una de las opciones reconocidas.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_a4d7dabe27f861a3e6926b738ae917b1d}\label{classaux__functions_1_1Aux__functions_a4d7dabe27f861a3e6926b738ae917b1d}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!createTTS@{createTTS}}
+\index{createTTS@{createTTS}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{createTTS()}{createTTS()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+create\+T\+TS (\begin{DoxyParamCaption}\item[{str}]{tts,  }\item[{str}]{lang }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crea una instancia de un sistema de texto a voz (TTS), configurado según el tipo y el idioma especificados.
+
+Args:
+    tts (str): El tipo de sistema TTS a crear. Las opciones son "remoto" para un sistema remoto o "local" para un sistema local.
+    lang (str): El idioma para el sistema TTS. Las opciones válidas son "es" para español, "en" para inglés o "de" para alemán.
+
+Returns:
+    object: Una instancia de OpenAITTS o CoquiTTS según el tipo y el idioma especificados.
+
+Raises:
+    TypeError: Si se especifica un tipo de sistema TTS o un idioma no reconocido.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_a251bb467735db9c07fa58b5145b21fee}\label{classaux__functions_1_1Aux__functions_a251bb467735db9c07fa58b5145b21fee}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!createUserDirectory@{createUserDirectory}}
+\index{createUserDirectory@{createUserDirectory}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{createUserDirectory()}{createUserDirectory()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+create\+User\+Directory (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crea un nuevo directorio/carpeta con el nombre especificado.
+
+Args:
+    name (str): El nombre del directorio a crear.
+
+Returns:
+    None
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_a3bb925170477107247e3fe087c397354}\label{classaux__functions_1_1Aux__functions_a3bb925170477107247e3fe087c397354}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!delete\_user@{delete\_user}}
+\index{delete\_user@{delete\_user}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{delete\_user()}{delete\_user()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+delete\+\_\+user (\begin{DoxyParamCaption}\item[{}]{username,  }\item[{}]{password }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Elimina un usuario de la tabla 'usuarios' en la base de datos SQLite 'users.db' si las credenciales proporcionadas son válidas.
+
+Esta función se conecta a la base de datos SQLite 'users.db' y recupera la contraseña cifrada para el 
+nombre de usuario especificado. Luego verifica si la contraseña en texto plano proporcionada coincide 
+con la contraseña cifrada almacenada en la base de datos utilizando bcrypt. Si las credenciales son válidas, 
+elimina al usuario de la base de datos.
+
+Args:
+    username (str): El nombre de usuario del usuario a eliminar.
+    password (str): La contraseña en texto plano del usuario a verificar.
+
+Returns:
+    bool: True si el usuario fue eliminado, False en caso contrario.
+
+Raises:
+    sqlite3.Error: Si ocurre un error al interactuar con la base de datos SQLite.
+    bcrypt.Error: Si ocurre un error al verificar la contraseña cifrada.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_a241ad3f3e6289cedc16f9b7b74f0b26e}\label{classaux__functions_1_1Aux__functions_a241ad3f3e6289cedc16f9b7b74f0b26e}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!printAllChat@{printAllChat}}
+\index{printAllChat@{printAllChat}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{printAllChat()}{printAllChat()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+print\+All\+Chat (\begin{DoxyParamCaption}\item[{}]{state }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Imprime todo el historial de la conversación.
+
+Args:
+    state (session): Contiene el historial de la conversación a imprimir.
+
+Returns:
+    None
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_a5bb925f3c9fa20453fe1a19dfa986ac2}\label{classaux__functions_1_1Aux__functions_a5bb925f3c9fa20453fe1a19dfa986ac2}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!replace\_number@{replace\_number}}
+\index{replace\_number@{replace\_number}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{replace\_number()}{replace\_number()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+replace\+\_\+number (\begin{DoxyParamCaption}\item[{str}]{text,  }\item[{}]{lang }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reemplaza símbolos alfanuméricos específicos en un texto dado con sus equivalentes de pronunciación en el idioma especificado.
+Esta versión está configurada para español ('es'), inglés ('en') y alemán ('de'), reemplazando secuencias como 'B2' con 'be dos' 
+según cómo se pronuncian en el idioma.
+
+Args:
+    text (str): El texto original que contiene los símbolos alfanuméricos que deben ser reemplazados.
+    lang (str): El código de idioma que determina cómo se deben realizar los reemplazos. Actualmente solo se implementa 'es' (español).
+
+Returns:
+    str: El texto modificado con los símbolos reemplazados por su pronunciación en el idioma especificado.
+
+Raises:
+    ValueError: Si el 'lang' no es compatible o no está implementado.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_a7c0d83777d4b6ab2d693f71f67d97943}\label{classaux__functions_1_1Aux__functions_a7c0d83777d4b6ab2d693f71f67d97943}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!selectSysMessage@{selectSysMessage}}
+\index{selectSysMessage@{selectSysMessage}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{selectSysMessage()}{selectSysMessage()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+select\+Sys\+Message (\begin{DoxyParamCaption}\item[{str}]{lang }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Selecciona y devuelve un mensaje del sistema adaptado para una simulación de prueba de conversación específica del idioma.
+El mensaje instruye al usuario sobre cómo realizar la prueba como si fuera un profesor de idiomas, especificando el enfoque 
+para las preguntas, el método de calificación y la expectativa de retroalimentación detallada.
+
+Args:
+    lang (str): El idioma de la prueba de conversación. Las opciones válidas son "es" para español, "de" para alemán y "en" para inglés.
+
+Returns:
+    str: Un mensaje detallado que contiene instrucciones para realizar una prueba de conversación en el idioma especificado.
+
+Raises:
+    TypeError: Si el 'lang' proporcionado no es una de las opciones reconocidas.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classaux__functions_1_1Aux__functions_abad33ff166997cd9f07d748ae1746559}\label{classaux__functions_1_1Aux__functions_abad33ff166997cd9f07d748ae1746559}} 
+\index{aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}!verify\_user@{verify\_user}}
+\index{verify\_user@{verify\_user}!aux\_functions.Aux\_functions@{aux\_functions.Aux\_functions}}
+\doxysubsubsection{\texorpdfstring{verify\_user()}{verify\_user()}}
+{\footnotesize\ttfamily def aux\+\_\+functions.\+Aux\+\_\+functions.\+verify\+\_\+user (\begin{DoxyParamCaption}\item[{}]{username,  }\item[{}]{password }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Verifica las credenciales de un usuario contra la tabla 'usuarios' en la base de datos SQLite 'users.db'.
+
+Esta función se conecta a la base de datos SQLite 'users.db' y recupera la contraseña cifrada para el 
+nombre de usuario especificado. Luego verifica si la contraseña en texto plano proporcionada coincide 
+con la contraseña cifrada almacenada en la base de datos utilizando bcrypt.
+
+Args:
+    username (str): El nombre de usuario del usuario a verificar.
+    password (str): La contraseña en texto plano del usuario a verificar.
+
+Returns:
+    bool: True si las credenciales son válidas, False en caso contrario.
+
+Raises:
+    sqlite3.Error: Si ocurre un error al interactuar con la base de datos SQLite.
+    bcrypt.Error: Si ocurre un error al verificar la contraseña cifrada.
+\end{DoxyVerb}
+ 
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+Servidor/aux\+\_\+functions.\+py\end{DoxyCompactItemize}

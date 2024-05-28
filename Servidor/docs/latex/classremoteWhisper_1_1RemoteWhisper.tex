@@ -1,0 +1,84 @@
+\hypertarget{classremoteWhisper_1_1RemoteWhisper}{}\doxysection{Referencia de la Clase remote\+Whisper.\+Remote\+Whisper}
+\label{classremoteWhisper_1_1RemoteWhisper}\index{remoteWhisper.RemoteWhisper@{remoteWhisper.RemoteWhisper}}
+
+
+Implementación remota de Audio\+Interface Utiliza el modelo Whisper de Open\+AI de forma remota.  
+
+
+
+
+Diagrama de herencias de remote\+Whisper.\+Remote\+Whisper
+% FIG 0
+
+
+Diagrama de colaboración para remote\+Whisper.\+Remote\+Whisper\+:
+% FIG 1
+\doxysubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classremoteWhisper_1_1RemoteWhisper_adf30bab7171aaad3ff45aedca2945ac7}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str model, client)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+str \mbox{\hyperlink{classremoteWhisper_1_1RemoteWhisper_abf71ca213e7d71c933a23c52657de58a}{transcribe}} (self, str filename)
+\end{DoxyCompactItemize}
+\doxysubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classremoteWhisper_1_1RemoteWhisper_a4d40b0abd37e941bf5042b1b190f697c}\label{classremoteWhisper_1_1RemoteWhisper_a4d40b0abd37e941bf5042b1b190f697c}} 
+{\bfseries client}
+\item 
+\mbox{\Hypertarget{classremoteWhisper_1_1RemoteWhisper_a4d4e3a071bc347af423cf196c8a392c8}\label{classremoteWhisper_1_1RemoteWhisper_a4d4e3a071bc347af423cf196c8a392c8}} 
+{\bfseries model}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Implementación remota de Audio\+Interface Utiliza el modelo Whisper de Open\+AI de forma remota. 
+
+\begin{DoxyVerb}Esta clase implementa la interfaz AudioInterface utilizando el modelo Whisper
+de OpenAI de forma remota.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classremoteWhisper_1_1RemoteWhisper_adf30bab7171aaad3ff45aedca2945ac7}\label{classremoteWhisper_1_1RemoteWhisper_adf30bab7171aaad3ff45aedca2945ac7}} 
+\index{remoteWhisper.RemoteWhisper@{remoteWhisper.RemoteWhisper}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!remoteWhisper.RemoteWhisper@{remoteWhisper.RemoteWhisper}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def remote\+Whisper.\+Remote\+Whisper.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{model,  }\item[{}]{client }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+\begin{DoxyVerb}Inicializa el objeto RemoteWhisper.
+
+Args:
+    model (str): El modelo Whisper a utilizar, por ejemplo "whisper-1".
+    client (OpenAI): El cliente de OpenAI utilizado para interactuar con la API.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classremoteWhisper_1_1RemoteWhisper_abf71ca213e7d71c933a23c52657de58a}\label{classremoteWhisper_1_1RemoteWhisper_abf71ca213e7d71c933a23c52657de58a}} 
+\index{remoteWhisper.RemoteWhisper@{remoteWhisper.RemoteWhisper}!transcribe@{transcribe}}
+\index{transcribe@{transcribe}!remoteWhisper.RemoteWhisper@{remoteWhisper.RemoteWhisper}}
+\doxysubsubsection{\texorpdfstring{transcribe()}{transcribe()}}
+{\footnotesize\ttfamily  str remote\+Whisper.\+Remote\+Whisper.\+transcribe (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{filename }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Transcribe un archivo de audio a texto usando el modelo Whisper.
+
+Args:
+    filename (str): La ruta al archivo de audio a transcribir.
+
+Returns:
+    str: El texto transcrito del archivo de audio.
+\end{DoxyVerb}
+ 
+
+Reimplementado de \mbox{\hyperlink{classSTTInterface_1_1STTInterface_a2c6c0e3c6c7c2ba927ea9258b0982917}{S\+T\+T\+Interface.\+S\+T\+T\+Interface}}.
+
+
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+Servidor/\+S\+T\+T\+Folder/remote\+Whisper.\+py\end{DoxyCompactItemize}
