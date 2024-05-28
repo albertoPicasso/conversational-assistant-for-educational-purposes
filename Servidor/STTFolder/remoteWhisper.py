@@ -44,4 +44,4 @@ class RemoteWhisper(STTInterface):
             file=audio_file
         ) 
         # Devolver el texto transcrito
-        return transcription["text"]
+        return (transcription.text)

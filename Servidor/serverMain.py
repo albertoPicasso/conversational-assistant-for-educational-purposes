@@ -424,7 +424,7 @@ if __name__ == '__main__':
     arguments_number  = len(sys.argv) - 1
     if(arguments_number == 0): #When args not given
         servidor = Servidor()
-        servidor.run(debug=False)
+        servidor.run()
     elif(arguments_number == 7): #Args given
         servidor = Servidor(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])
         try:
