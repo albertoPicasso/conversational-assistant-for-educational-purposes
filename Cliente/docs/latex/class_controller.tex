@@ -1,0 +1,101 @@
+\doxysection{Referencia de la clase Controller}
+\hypertarget{class_controller}{}\label{class_controller}\index{Controller@{Controller}}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_controller_ab8d7a4ca16cb6b3adcfaefe45b6bafb4}\label{class_controller_ab8d7a4ca16cb6b3adcfaefe45b6bafb4} 
+string {\bfseries Getout\+File\+Path} ()
+\item 
+void \mbox{\hyperlink{class_controller_abd092bee183fa1cf547203c9a8010a44}{Clean\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Limpia los datos llamando al método Clean\+Data del modelo. \end{DoxyCompactList}\item 
+IEnumerator \mbox{\hyperlink{class_controller_a86209cee01b93d496923f79b983629b7}{Register\+User\+Session\+Coroutine}} ()
+\begin{DoxyCompactList}\small\item\em Coroutine para manejar el registro de una sesión de usuario. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_controller_a6bd845303ff447a39edf8f9f6ed0ed4a}{Spacepressed}} (Audio\+Source audio\+Source)
+\begin{DoxyCompactList}\small\item\em Maneja el estado de grabación cuando se presiona la tecla espacio. \end{DoxyCompactList}\item 
+IEnumerator \mbox{\hyperlink{class_controller_a2d7d94c1e4052e1b234996a6dd284e34}{Upload\+Wav\+Coroutine}} ()
+\begin{DoxyCompactList}\small\item\em Coroutine para manejar la subida de un archivo WAV. \end{DoxyCompactList}\item 
+IEnumerator \mbox{\hyperlink{class_controller_a6583391802b26afdde22cdebcae5e95e}{Logout\+Coroutine}} ()
+\begin{DoxyCompactList}\small\item\em Coroutine para manejar el proceso de cierre de sesión del usuario. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{class_controller_abd092bee183fa1cf547203c9a8010a44}\index{Controller@{Controller}!CleanData@{CleanData}}
+\index{CleanData@{CleanData}!Controller@{Controller}}
+\doxysubsubsection{\texorpdfstring{CleanData()}{CleanData()}}
+{\footnotesize\ttfamily \label{class_controller_abd092bee183fa1cf547203c9a8010a44} 
+void Controller.\+Clean\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Limpia los datos llamando al método Clean\+Data del modelo. 
+
+Este método delega la tarea de limpiar los datos al método Clean\+Data del modelo. Es una función simple que asegura que la lógica de limpieza de datos esté encapsulada dentro del modelo. \Hypertarget{class_controller_a6583391802b26afdde22cdebcae5e95e}\index{Controller@{Controller}!LogoutCoroutine@{LogoutCoroutine}}
+\index{LogoutCoroutine@{LogoutCoroutine}!Controller@{Controller}}
+\doxysubsubsection{\texorpdfstring{LogoutCoroutine()}{LogoutCoroutine()}}
+{\footnotesize\ttfamily \label{class_controller_a6583391802b26afdde22cdebcae5e95e} 
+IEnumerator Controller.\+Logout\+Coroutine (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Coroutine para manejar el proceso de cierre de sesión del usuario. 
+
+Esta coroutine inicia una tarea de cierre de sesión y espera a que se complete. Cede continuamente hasta que la tarea se complete. Al completarse, verifica si la tarea encontró algún fallo. Si ocurrió un error durante el proceso de cierre de sesión, registra una advertencia y lanza una excepción. Si el cierre de sesión es exitoso, registra un mensaje de éxito. En caso de cualquier excepción, registra el error y termina la aplicación.
+
+\begin{DoxyReturn}{Devuelve}
+Un IEnumerator que se puede usar para gestionar la ejecución de la coroutine. 
+\end{DoxyReturn}
+\Hypertarget{class_controller_a86209cee01b93d496923f79b983629b7}\index{Controller@{Controller}!RegisterUserSessionCoroutine@{RegisterUserSessionCoroutine}}
+\index{RegisterUserSessionCoroutine@{RegisterUserSessionCoroutine}!Controller@{Controller}}
+\doxysubsubsection{\texorpdfstring{RegisterUserSessionCoroutine()}{RegisterUserSessionCoroutine()}}
+{\footnotesize\ttfamily \label{class_controller_a86209cee01b93d496923f79b983629b7} 
+IEnumerator Controller.\+Register\+User\+Session\+Coroutine (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Coroutine para manejar el registro de una sesión de usuario. 
+
+Esta coroutine inicia una tarea asíncrona para registrar una sesión de usuario con el servidor. Comienza la tarea de registro y espera a que se complete. Al completarse, verifica si la tarea encontró algún fallo. Si ocurrió un error durante el proceso de registro, registra un mensaje de error y lanza una excepción. En caso de cualquier excepción, registra el error y termina la aplicación.
+
+\begin{DoxyReturn}{Devuelve}
+Un IEnumerator que se puede usar para gestionar la ejecución de la coroutine. 
+\end{DoxyReturn}
+\Hypertarget{class_controller_a6bd845303ff447a39edf8f9f6ed0ed4a}\index{Controller@{Controller}!Spacepressed@{Spacepressed}}
+\index{Spacepressed@{Spacepressed}!Controller@{Controller}}
+\doxysubsubsection{\texorpdfstring{Spacepressed()}{Spacepressed()}}
+{\footnotesize\ttfamily \label{class_controller_a6bd845303ff447a39edf8f9f6ed0ed4a} 
+bool Controller.\+Spacepressed (\begin{DoxyParamCaption}\item[{Audio\+Source}]{audio\+Source}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Maneja el estado de grabación cuando se presiona la tecla espacio. 
+
+Este método verifica si la grabación está actualmente en progreso. Si no está grabando, comienza la grabación de audio. Si ya está grabando, detiene la grabación de audio. El método devuelve un valor booleano que indica el nuevo estado de la grabación.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em audio\+Source} & El componente Audio\+Source utilizado para grabar o detener la grabación. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+True si la grabación se detuvo, false si la grabación comenzó. 
+\end{DoxyReturn}
+\Hypertarget{class_controller_a2d7d94c1e4052e1b234996a6dd284e34}\index{Controller@{Controller}!UploadWavCoroutine@{UploadWavCoroutine}}
+\index{UploadWavCoroutine@{UploadWavCoroutine}!Controller@{Controller}}
+\doxysubsubsection{\texorpdfstring{UploadWavCoroutine()}{UploadWavCoroutine()}}
+{\footnotesize\ttfamily \label{class_controller_a2d7d94c1e4052e1b234996a6dd284e34} 
+IEnumerator Controller.\+Upload\+Wav\+Coroutine (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Coroutine para manejar la subida de un archivo WAV. 
+
+Esta coroutine inicia una tarea asíncrona para subir un archivo WAV al servidor. Recupera las rutas de los archivos, comienza la tarea de subida y espera a que se complete. Al completarse, verifica si la tarea encontró algún fallo. Si ocurrió un error durante el proceso de subida, registra un mensaje de error y lanza una excepción. Si la subida es exitosa, procesa la respuesta del servidor, guarda los datos de audio y registra un mensaje de éxito. En caso de cualquier excepción, registra el error y termina la aplicación.
+
+\begin{DoxyReturn}{Devuelve}
+Un IEnumerator que se puede usar para gestionar la ejecución de la coroutine. 
+\end{DoxyReturn}
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+Profesor.\+cs\end{DoxyCompactItemize}

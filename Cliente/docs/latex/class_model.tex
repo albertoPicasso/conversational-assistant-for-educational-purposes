@@ -1,0 +1,135 @@
+\doxysection{Referencia de la clase Model}
+\hypertarget{class_model}{}\label{class_model}\index{Model@{Model}}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_model_a6ec4f0246520b8a811ecc3d2708fb763}{Get\+Is\+Recording}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene el estado de grabación. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_model_ac3d76ec4197aac738efec607c03dd99f}{Getfile\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene la ruta del archivo. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_model_adf98349cc9db591d8245709221c2ec8e}{Getout\+File\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene la ruta de salida del archivo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_model_a6dc5a949d2877e1e7f63907ba449a595}{Clean\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Limpia los datos eliminando un archivo especificado si existe. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_model_ac0f15b20bc84760560315da52cb56c4d}{Audio\+Record}} (Audio\+Source audio\+Source)
+\begin{DoxyCompactList}\small\item\em Comienza a grabar audio usando el componente Audio\+Source proporcionado. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_model_a516ea3e1cf202d7c7d8b0d924c6aedbd}{Stop\+Audio\+Record}} (Audio\+Source audio\+Source)
+\begin{DoxyCompactList}\small\item\em Detiene la grabación de audio y desencadena la guardado del audio grabado. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_model_a9d577ce66929090ce26a28b9e522064e}{Save\+Server\+Response}} (byte\mbox{[}$\,$\mbox{]} audio\+\_\+data, string audiopath)
+\begin{DoxyCompactList}\small\item\em Guarda la respuesta del servidor como un archivo de audio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{class_model_ac0f15b20bc84760560315da52cb56c4d}\index{Model@{Model}!AudioRecord@{AudioRecord}}
+\index{AudioRecord@{AudioRecord}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{AudioRecord()}{AudioRecord()}}
+{\footnotesize\ttfamily \label{class_model_ac0f15b20bc84760560315da52cb56c4d} 
+void Model.\+Audio\+Record (\begin{DoxyParamCaption}\item[{Audio\+Source}]{audio\+Source}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Comienza a grabar audio usando el componente Audio\+Source proporcionado. 
+
+Este método inicia una grabación de audio usando el Audio\+Source especificado. Verifica si un dispositivo de micrófono está disponible. Si no está disponible, registra una advertencia y sale de la función. Si hay un micrófono disponible, comienza a grabar un clip de audio con una duración y una tasa de muestreo predefinidas. La grabación no se repetirá.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em audio\+Source} & El componente Audio\+Source utilizado para grabar el audio. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_model_a6dc5a949d2877e1e7f63907ba449a595}\index{Model@{Model}!CleanData@{CleanData}}
+\index{CleanData@{CleanData}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{CleanData()}{CleanData()}}
+{\footnotesize\ttfamily \label{class_model_a6dc5a949d2877e1e7f63907ba449a595} 
+void Model.\+Clean\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Limpia los datos eliminando un archivo especificado si existe. 
+
+Este método verifica si existe un archivo en la ruta de salida especificada. Si el archivo existe, lo elimina. Esto es útil para asegurar que los archivos antiguos o temporales se eliminen antes de que se procesen o creen nuevos datos. \Hypertarget{class_model_ac3d76ec4197aac738efec607c03dd99f}\index{Model@{Model}!GetfilePath@{GetfilePath}}
+\index{GetfilePath@{GetfilePath}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{GetfilePath()}{GetfilePath()}}
+{\footnotesize\ttfamily \label{class_model_ac3d76ec4197aac738efec607c03dd99f} 
+string Model.\+Getfile\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Obtiene la ruta del archivo. 
+
+Este método devuelve una cadena que contiene la ruta del archivo.
+
+\begin{DoxyReturn}{Devuelve}
+La ruta del archivo como una cadena. 
+\end{DoxyReturn}
+\Hypertarget{class_model_a6ec4f0246520b8a811ecc3d2708fb763}\index{Model@{Model}!GetIsRecording@{GetIsRecording}}
+\index{GetIsRecording@{GetIsRecording}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{GetIsRecording()}{GetIsRecording()}}
+{\footnotesize\ttfamily \label{class_model_a6ec4f0246520b8a811ecc3d2708fb763} 
+bool Model.\+Get\+Is\+Recording (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Obtiene el estado de grabación. 
+
+Este método devuelve un valor booleano que indica si la grabación está en progreso.
+
+\begin{DoxyReturn}{Devuelve}
+True si la grabación está en progreso, false de lo contrario. 
+\end{DoxyReturn}
+\Hypertarget{class_model_adf98349cc9db591d8245709221c2ec8e}\index{Model@{Model}!GetoutFilePath@{GetoutFilePath}}
+\index{GetoutFilePath@{GetoutFilePath}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{GetoutFilePath()}{GetoutFilePath()}}
+{\footnotesize\ttfamily \label{class_model_adf98349cc9db591d8245709221c2ec8e} 
+string Model.\+Getout\+File\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Obtiene la ruta de salida del archivo. 
+
+Este método devuelve una cadena que contiene la ruta de salida del archivo.
+
+\begin{DoxyReturn}{Devuelve}
+La ruta de salida del archivo como una cadena. 
+\end{DoxyReturn}
+\Hypertarget{class_model_a9d577ce66929090ce26a28b9e522064e}\index{Model@{Model}!SaveServerResponse@{SaveServerResponse}}
+\index{SaveServerResponse@{SaveServerResponse}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{SaveServerResponse()}{SaveServerResponse()}}
+{\footnotesize\ttfamily \label{class_model_a9d577ce66929090ce26a28b9e522064e} 
+void Model.\+Save\+Server\+Response (\begin{DoxyParamCaption}\item[{byte\mbox{[}$\,$\mbox{]}}]{audio\+\_\+data}{, }\item[{string}]{audiopath}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Guarda la respuesta del servidor como un archivo de audio. 
+
+Este método guarda un arreglo de bytes de datos de audio en una ruta de archivo especificada. Escribe los datos de audio en el disco usando File.\+Write\+All\+Bytes y registra la ruta del archivo guardado. Esta función se utiliza típicamente para almacenar archivos de audio recibidos de respuestas del servidor.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em audio\+\_\+data} & El arreglo de bytes que contiene los datos de audio que se van a guardar. \\
+\hline
+{\em audiopath} & La ruta del archivo donde se deben guardar los datos de audio. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_model_a516ea3e1cf202d7c7d8b0d924c6aedbd}\index{Model@{Model}!StopAudioRecord@{StopAudioRecord}}
+\index{StopAudioRecord@{StopAudioRecord}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{StopAudioRecord()}{StopAudioRecord()}}
+{\footnotesize\ttfamily \label{class_model_a516ea3e1cf202d7c7d8b0d924c6aedbd} 
+void Model.\+Stop\+Audio\+Record (\begin{DoxyParamCaption}\item[{Audio\+Source}]{audio\+Source}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Detiene la grabación de audio y desencadena la guardado del audio grabado. 
+
+Este método finaliza la sesión de grabación de audio usando el Audio\+Source dado. Verifica si la grabación está actualmente activa con Microphone.\+Is\+Recording(). Si la grabación no está activa, se registra una advertencia. Si la grabación está activa y el clip de audio ha capturado datos (longitud \texorpdfstring{$>$}{>} 0), detiene la grabación y llama a un método para guardar el audio. Si no se capturan datos de audio (longitud del clip de audio es 0), se registra un mensaje de error.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em audio\+Source} & El componente Audio\+Source del cual se detiene la grabación de audio. \\
+\hline
+\end{DoxyParams}
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+Profesor.\+cs\end{DoxyCompactItemize}
