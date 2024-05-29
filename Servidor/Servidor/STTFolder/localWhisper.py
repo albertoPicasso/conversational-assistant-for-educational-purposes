@@ -41,7 +41,7 @@ class LocalWhisper(STTInterface):
         model = whisper.load_model(self.model, self.device)
 
         # Transcribir el archivo de audio
-        result = model.transcribe(audio=filename)
+        result = model.transcribe(audio=filename, no_speech_threshold=1.5)
 
         # Devolver el texto transcrito
         return result["text"]

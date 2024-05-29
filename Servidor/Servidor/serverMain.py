@@ -274,9 +274,12 @@ class Servidor:
             # Get session state
             state = session.get('estado', {})
 
-            # Transcribe the WAV file
+            #Remove Silences
+            Aux_functions.remove_silence(path)
 
+            # Transcribe the WAV file
             text = self.STT.transcribe(path)
+
             state = self.aux.addMessageToChat(text, "user", state)
             
 

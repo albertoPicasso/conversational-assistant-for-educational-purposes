@@ -8,6 +8,9 @@ from TeacherFolder.languageTeacher import LanguageTeacher
 
 import os
 from openai import OpenAI
+from pydub import AudioSegment
+from pydub.silence import detect_nonsilent
+
 
 import sqlite3
 import bcrypt
@@ -114,7 +117,7 @@ class Aux_functions:
             return llm
         elif (llm == "remoto"): 
             client = OpenAI(api_key=os.getenv("OPENAIKEY"), base_url="https://api.openai.com/v1")
-            model = "gpt-3.5-turbo-0125"
+            model ="gpt-3.5-turbo-0125"#"gpt-4o"#
             llm = OpenAIAPI(client, model)
             print("Remoto")
             return llm
@@ -196,13 +199,13 @@ class Aux_functions:
         """
 
         if (lang == "es"):
-            esMessage = "You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 3 questions. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Look the tenses, the complexity of the phrases. Please be more accurate. Speak every time in spanish."
+            esMessage = "You are an Spanish teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. Ask for each one in one verb tense. You should do 3 questions. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Look the tenses, the complexity of the phrases. Please be more accurate. Speak every time in spanish."
             return esMessage 
         elif (lang == "de"): 
-            deMessage = "You are an German teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 3 questions. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Look the tenses, the complexity of the phrases. Please be more accurate. Speak every time in german."
+            deMessage = "You are an German teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. Ask for each one in one verb tense. You should do 3 questions. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Look the tenses, the complexity of the phrases. Please be more accurate. Speak every time in german."
             return deMessage
         elif (lang == "en"):
-            enMessage ="You are an English teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. You should do 3 questions. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Look the tenses, the complexity of the phrases. Please be more accurate. Speak every time in English."
+            enMessage ="You are an English teacher doing a speaking test. You must to act like a teacher, dont say that you are chatgpt. Do questions one by one and wait to my anwser. Ask for each one in one verb tense. You should do 3 questions. At the end you send me a message whith a score using MCER levels and finally why i have this level and how to improve it . Remember that you only have 3 questions so choose wisely, dont do silly questions.I need that you more accurate whit scores. Look the tenses, the complexity of the phrases. Please be more accurate. Speak every time in English."
             return enMessage
         else: 
             raise TypeError("Not valid language")
@@ -251,6 +254,41 @@ class Aux_functions:
             return new_text
     
     
+    def remove_silence(input_file, silence_thresh=-50, min_silence_len=500, padding=300):
+        """
+        Transcribe un archivo de audio usando el modelo Whisper y elimina silencios absolutos.
+
+        Args:
+            filename (str): La ruta del archivo de audio a transcribir.
+            logprob_threshold (float): Si la probabilidad logarítmica promedio sobre los tokens muestreados es inferior a este valor, se considera fallido. Valores más bajos hacen que el modelo sea más permisivo.
+            no_speech_threshold (float): Si la probabilidad de no-habla es mayor que este valor Y la probabilidad logarítmica promedio sobre los tokens muestreados es inferior a logprob_threshold, se considera el segmento como silencioso. Valores más bajos hacen que el modelo sea más estricto en la identificación de silencios.
+
+        Returns:
+            dict: Un diccionario que contiene los resultados de la transcripción.
+
+        Raises:
+            FileNotFoundError: Si el archivo especificado no se encuentra.
+            ValueError: Si los parámetros logprob_threshold o no_speech_threshold son inválidos.
+        """
+
+        # Cargar el archivo de audio
+        audio = AudioSegment.from_file(input_file)
+        
+        # Detectar segmentos no silenciosos
+        non_silent_ranges = detect_nonsilent(audio, min_silence_len=min_silence_len, silence_thresh=silence_thresh)
+        
+        # Recortar y combinar segmentos no silenciosos
+        chunks = [audio[start-padding:end+padding] for start, end in non_silent_ranges]
+        output_audio = AudioSegment.empty()
+        for chunk in chunks:
+            output_audio += chunk
+        
+        # Exportar el archivo de audio resultante
+        os.remove(input_file)
+        output_audio.export(input_file, format="wav")
+        
+
+
     def create_conexion(db_file):
         """
         Crea y devuelve una conexión al archivo de base de datos SQLite especificado.
