@@ -2,6 +2,7 @@ from .ttsInterface import TtsInterface
 import torch
 from TTS.api import TTS
 import os 
+import wave
 
 ## Implementación de CoquiTTS para Texto a Voz (TTS)
 
@@ -44,8 +45,58 @@ class CoquiTTS(TtsInterface):
         nombre = "output.wav"  
         ruta = os.path.join(os.getcwd(), "tempUserData", uid, nombre)
         
-        # Realizar la síntesis de texto a voz y guardar el audio
-        self.TTS.tts_to_file(text=text, file_path=ruta, speed=1.2, split_sentences=False)
+
+        ##Se divide la respuesta en una cantidad de palabras que la memoria del ordenador sea capaz de manejar
+        chunk_length = 150
+
+        # Split the text into words
+        words = text.split()
+
+        # Initialize the list of chunks
+        chunks = []
+
+        # Iterate over the words
+        for i in range(0, len(words), chunk_length):
+            # Get a chunk of words
+            chunk_words = words[i:i + chunk_length]
+
+            # Join the words into a string
+            chunk_text = ' '.join(chunk_words)
+
+            # Add the chunk to the list
+            chunks.append(chunk_text)
+
+        
+        if os.path.exists(ruta):
+            os.remove(ruta)
+        
+        i= 0
+        namelist = []
+        for chunk in chunks:
+            #Calcular Ruta temporal
+            nombrealt = "output"+str(i)+".wav"
+            rutaAlt = os.path.join(os.getcwd(), "tempUserData", uid, nombrealt)
+            namelist.append(rutaAlt)
+            # Realizar la síntesis de texto a voz y guardar el audio
+            self.TTS.tts_to_file(text=chunk, file_path=rutaAlt, speed=1.2, split_sentences=False)
+            i = i+1
+        
+
+        data= []
+        for name in namelist:
+            w = wave.open(name, 'rb')
+            data.append( [w.getparams(), w.readframes(w.getnframes())] )
+            os.remove(name)
+            w.close()
+            
+        output = wave.open(ruta, 'wb')
+        output.setparams(data[0][0])
+        for i in range(len(data)):
+            output.writeframes(data[i][1])
+        output.close()
+
+        
+        
 
         # Devolver el nombre del archivo de audio generado
         return ruta
