@@ -286,7 +286,6 @@ class Servidor:
             # Ask to language model
             messages_list = state['mensajes']
             response = self.LLM.request_to_llm(messages_list)
-            
             #Check if isEnd, if its True , prepare the message to TTS
             #If is teacher or some 
             isEnd = self.teacherMode.checkEndChat(response)
