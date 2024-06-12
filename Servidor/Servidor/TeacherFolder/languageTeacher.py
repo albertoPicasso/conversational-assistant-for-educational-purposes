@@ -50,14 +50,15 @@ class LanguageTeacher(TeacherInterface):
             "Evaluate the following transcribed conversation from a speaking test according to the "
             "Common European Framework of Reference (CEFR) language proficiency levels. Focus on the following aspects, "
             "which are assessable from a written transcript: "
-            "1. Coherence: Assess how logically ideas are connected and if the conversation flows logically from one point to another. "
+
+            "1. Coherence: Assess the logical flow of ideas and transitions between points. "
             "2. Range of Vocabulary: Evaluate the variety and appropriateness of the vocabulary used. "
-            #"3. Grammatical Accuracy: Determine the correctness of the grammar used throughout the conversation. "
-            "Please provide an assessment considering these aspects and indicate the approximate CEFR level (A1, A2, B1, B2, C1, C2) "
-            "And how to improve it. "
-            "Don't forget to indicate the approximate CEFR level."
-            "Keep in mind that this is a transcription so there may be minor errors in gender and number, as well as with similar sounding words. "
-            "be short please"
+            "3. Grammatical Accuracy: Determine the correctness of the grammar throughout the conversation. "
+
+            "Provide an assessment considering these aspects and indicate the approximate CEFR level (A1, A2, B1, B2, C1, C2). "
+            "Include suggestions for improvement. Note that this is a transcription, so there may be minor errors in gender, number, or similar-sounding words. "
+            "Be concise."
+            "Dont use special characters like *, just writte Coherence, Range of vocabulary ..."
         )
 
         if self.lang == "es":
