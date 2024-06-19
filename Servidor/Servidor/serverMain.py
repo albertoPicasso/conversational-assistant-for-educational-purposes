@@ -135,7 +135,7 @@ class Servidor:
                     return "User already exist", 409
                 
                 
-                self.app.logger.info (f'- User Register Succsessfully ip {ip_address} ')
+                self.app.logger.info (f'- User Register Successfully ip {ip_address} ')
                 return "ok", 200
                 
 
@@ -167,7 +167,7 @@ class Servidor:
                 ip_address = request.remote_addr
 
                 if (flag):
-                    self.app.logger.info (f'- User Logged Succsessfully ip {ip_address} ')
+                    self.app.logger.info (f'- User Logged Successfully ip {ip_address} ')
                     return "Verifing user: OK", 200
                 else:
                     self.app.logger.info (f'- User attemped to log ip {ip_address} ')
@@ -219,7 +219,7 @@ class Servidor:
 
             ip_address = request.remote_addr
 
-            self.app.logger.info (f'- User Register Succsessfully id {user_id} / ip {ip_address} ')
+            self.app.logger.info (f'- User Register Successfully id {user_id} / ip {ip_address} ')
             return 'User {} registered successfully.'.format(user_id), 200
 
         except Exception as e:
@@ -345,7 +345,7 @@ class Servidor:
             # Remove client directory 
             path = os.path.join(os.getcwd(), "tempUserData",user_id)
             os.system(f'rm -rf {path}')
-            self.app.logger.info (f'- Logout user Succsessfully - id {user_id} /  ')
+            self.app.logger.info (f'- Logout user Successfully - id {user_id} /  ')
             return 'Logout successfully.', 200
                 
         except Exception as e:
