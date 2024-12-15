@@ -1,10 +1,10 @@
 
-from STTFolder.localWhisper import LocalWhisper
-from STTFolder.remoteWhisper import RemoteWhisper
-from LLMFolder.openAIAPI import OpenAIAPI
-from TTSFolder.coquiTTS import CoquiTTS
-from TTSFolder.openAITTS import OpenAITTS
-from TeacherFolder.languageTeacher import LanguageTeacher
+from STTs.localWhisper import LocalWhisper
+from STTs.remoteWhisper import RemoteWhisper
+from LLMs.openAIAPI import OpenAIAPI
+from TTSs.coquiTTS import CoquiTTS
+from TTSs.openAITTS import OpenAITTS
+from Teachersubject.languageTeacher import LanguageTeacher
 
 import os
 from openai import OpenAI

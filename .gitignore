@@ -1,0 +1,5 @@
+.venv
+Servidor/__pycache__
+Servidor/*/__pycache__
+tempUserData
+.vscode
