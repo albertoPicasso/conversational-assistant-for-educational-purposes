@@ -37,7 +37,13 @@ de los mensajes de voz y poder contestar en el mismo formato.</p>
 <h2>Demo</h2> 
 <p>Se incluyen scripts para el uso del servidor desde C#, idean para unity</p>
 <p>A continuacion se muestra un programa de prueba que hace uso del servidor que se encuentra en este repositorio</p>
-<a href="https://youtu.be/EMhxT9yai94" target="_blank">
-    <img src="https://img.youtube.com/vi/EMhxT9yai94/maxresdefault.jpg" alt="Mira mi video" style="max-width: 100%; height: auto;">
-</a>
+<table style="width: 100%; text-align: center;">
+  <tr>
+    <td>
+      <a href="https://youtu.be/EMhxT9yai94" target="_blank">
+        <img src="https://img.youtube.com/vi/EMhxT9yai94/0.jpg" alt="Mira mi video" style="max-width: 100%; height: auto;">
+      </a>
+    </td>
+  </tr>
+</table>
 
